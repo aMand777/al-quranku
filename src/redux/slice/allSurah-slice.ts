@@ -1,17 +1,39 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import getAllSurah from '@/services/getAllSurah.services';
-import { Surah } from '@/interface';
+import { AllSurah } from '@/interface';
 
-const initialState = {
-  data: [] as Surah[],
+interface InitialStateDetailSurah {
+  data: AllSurah;
+}
+
+const initialState: InitialStateDetailSurah = {
+  data: [
+    {
+      nomor: 0,
+      nama: '',
+      namaLatin: '',
+      jumlahAyat: 0,
+      tempatTurun: '',
+      arti: '',
+      deskripsi: '',
+      audioFull: {
+        '01': '',
+        '02': '',
+        '03': '',
+        '04': '',
+        '05': '',
+      },
+    },
+  ],
 };
+
 
 const allSurahSlice = createSlice({
   name: 'allSurah',
   initialState,
   reducers: {
-    setData(state, action: PayloadAction<Surah[]>) {
+    setData(state, action: PayloadAction<AllSurah>) {
       state.data = action.payload;
     },
   },
