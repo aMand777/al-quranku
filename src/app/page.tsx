@@ -1,4 +1,5 @@
 'use client';
+import { Button } from '@chakra-ui/react'
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/redux/store';
 import { getAllSurahAsync } from '@/redux/slice/allSurah-slice';
@@ -26,6 +27,7 @@ export default function Home() {
   return (
     <>
       <main>
+        <Button colorScheme='blue'>Button</Button>
         {data.map((d) => (
           <h1 key={d.nama} className='text-2xl bold'>{d.nama}</h1>
         ))}
