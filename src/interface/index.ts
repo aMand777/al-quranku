@@ -6,8 +6,15 @@ interface AudioFull {
   '05': string;
 }
 
-export interface Surah {
-  nomor: 1;
+interface nextPrevSurah {
+  nomor: number;
+  nama: string;
+  namaLatin: string;
+  jumlahAyat: number;
+}
+
+interface Surah {
+  nomor: number;
   nama: string;
   namaLatin: string;
   jumlahAyat: number;
@@ -15,4 +22,46 @@ export interface Surah {
   arti: string;
   deskripsi: string;
   audioFull: AudioFull;
+}
+
+interface Ayat {
+  nomorAyat: string;
+  teksArab: string;
+  teksLatin: string;
+  teksIndonesia: string;
+}
+
+interface Tafsir {
+  ayat: string;
+  teks: string;
+}
+
+export interface AllSurah extends Array<Surah> {}
+
+export interface DetailSurah {
+  nomor: number;
+  nama: string;
+  namaLatin: string;
+  jumlahAyat: number;
+  tempatTurun: string;
+  arti: string;
+  deskripsi: string;
+  audioFull: AudioFull;
+  ayat: Ayat[];
+  suratSelanjutnya: nextPrevSurah;
+  suratSebelumnya: nextPrevSurah;
+}
+
+export interface TafsirSurah {
+  nomor: number;
+  nama: string;
+  namaLatin: string;
+  jumlahAyat: number;
+  tempatTurun: string;
+  arti: string;
+  deskripsi: string;
+  audioFull: AudioFull;
+  tafsir: Tafsir[];
+  suratSelanjutnya: nextPrevSurah;
+  suratSebelumnya: nextPrevSurah;
 }
