@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import StoreProvider from '@/redux/StoreProvider';
 import ChakraProvider from '@/app/ChakraProvider';
+import OpenSurahProvider from '@/context/OpenSurah';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,9 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
-          <ChakraProvider>
-            {children}
-          </ChakraProvider>
+          <OpenSurahProvider>
+            <ChakraProvider>{children}</ChakraProvider>
+          </OpenSurahProvider>
         </StoreProvider>
       </body>
     </html>
