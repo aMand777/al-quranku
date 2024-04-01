@@ -4,6 +4,7 @@ import './globals.css';
 import StoreProvider from '@/redux/StoreProvider';
 import ChakraProvider from '@/app/ChakraProvider';
 import OpenSurahProvider from '@/context/OpenSurah';
+import Navbar from '@/components/navigation/Navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +23,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <StoreProvider>
           <OpenSurahProvider>
-            <ChakraProvider>{children}</ChakraProvider>
+            <ChakraProvider>
+              <Navbar />
+              {children}
+            </ChakraProvider>
           </OpenSurahProvider>
         </StoreProvider>
       </body>

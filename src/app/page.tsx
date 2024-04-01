@@ -12,14 +12,14 @@ export default function Home() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getAllSurahAsync());
+    // dispatch(getAllSurahAsync());
     dispatch(getDetailSurahAsync('1'));
     dispatch(getTafsirSurahAsync('1'));
     router.push('/surah/1');
   }, [dispatch, router]);
 
   return (
-    <Center className="w-screen h-screen">
+    <Center className="w-screen h-screen absolute top-0 -z-10">
       <Spinner
         boxShadow="dark-lg"
         thickness="4px"
