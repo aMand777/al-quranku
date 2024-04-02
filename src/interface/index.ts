@@ -25,7 +25,7 @@ interface Surah {
 }
 
 interface Ayat {
-  nomorAyat: string;
+  nomorAyat: number;
   teksArab: string;
   teksLatin: string;
   teksIndonesia: string;

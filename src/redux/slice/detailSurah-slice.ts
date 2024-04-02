@@ -25,7 +25,7 @@ const initialState: InitialStateDetailSurah = {
     },
     ayat: [
       {
-        nomorAyat: '',
+        nomorAyat: 0,
         teksArab: '',
         teksLatin: '',
         teksIndonesia: '',

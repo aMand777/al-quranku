@@ -20,7 +20,7 @@ function SurahLayout({ children }: { children: ReactNode }) {
     <>
       <div className="flex mx-auto h-screen absolute top-0 left-0 right-0 -z-10 pt-16">
         <div
-          className={`hidden bg-base-100 md:block transition duration-500 overflow-y-scroll ${
+          className={`hidden bg-base-100 md:block transition duration-500 overflow-y-scroll border-2 border-base-300 ${
             isOpenSurah ? 'w-1/3' : '-translate-x-full'
           }`}
         >
@@ -31,7 +31,7 @@ function SurahLayout({ children }: { children: ReactNode }) {
                 nomor={surah.nomor}
                 namaLatin={surah.namaLatin}
                 arti={surah.arti}
-                jumlahAyat={ surah.jumlahAyat }
+                jumlahAyat={surah.jumlahAyat}
                 nama={surah.nama}
                 deskripsi={surah.deskripsi}
                 tempatTurun={surah.tempatTurun}
