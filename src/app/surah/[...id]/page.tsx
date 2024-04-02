@@ -1,27 +1,37 @@
-'use client'
-import React from 'react';
+'use client';
+import { useEffect } from 'react';
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { getDetailSurahAsync } from '@/redux/slice/detailSurah-slice';
+import { useAppDispatch } from '@/redux/store';
 import useOpenSurah from '@/hook/useOpenSurah';
-import useAllSurah from '@/hook/useAllSurah';
+import useDetailSurah from '@/hook/useDetailSurah';
+import CardSurah from '@/components/card/CardSurah';
 
-function Surah({params}: {params: {id: string}}) {
-  const { data } = useAllSurah()
-  console.log('surah nomor', params.id)
-  console.log('data===>', data)
+function Surah({ params }: { params: { id: string } }) {
+  const dispatch = useAppDispatch();
+  const { data } = useDetailSurah();
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
 
+  useEffect(() => {
+    dispatch(getDetailSurahAsync(params.id));
+  }, [dispatch, params.id]);
+
   return (
-    <div className={`bg-green-500 w-full ${isOpenSurah ? 'md:w-2/3' : 'w-full'}`}>
-      <button className="hidden md:block tooltip tooltip-right pt-3"
-        data-tip={isOpenSurah ? "Close list" : "Open list"}
-        onClick={ () => setIsOpenSurah(!isOpenSurah) }>
+    <div className={`${isOpenSurah ? 'md:w-2/3' : 'w-full'} overflow-y-scroll`}>
+      <button
+        className="hidden md:block tooltip tooltip-right pt-3 absolute"
+        data-tip={isOpenSurah ? 'Close list' : 'Open list'}
+        onClick={() => setIsOpenSurah(!isOpenSurah)}
+      >
         {isOpenSurah ? (
           <MdKeyboardDoubleArrowLeft size={25} />
         ) : (
           <MdKeyboardDoubleArrowRight size={25} />
         )}
       </button>
-      Detail Surah {params.id}
+      {data.ayat.map((ayat) => (
+        <CardSurah key={ayat.nomorAyat} arabic={ayat.teksArab} translate={ayat.teksIndonesia} />
+      ))}
     </div>
   );
 }
