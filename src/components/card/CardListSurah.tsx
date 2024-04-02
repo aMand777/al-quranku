@@ -25,17 +25,19 @@ function CardListSurah({
   deskripsi,
 }: CardListSurahProps) {
   const pathname = usePathname()
-  console.log('pathname==>', pathname.includes(nomor.toString()))
+
   return (
     <Link
       href={`/surah/${nomor}`}
       className={`${
-        pathname.includes(nomor.toString()) ? 'ring-offset-2 ring-2 ring-primary' : ''
+        pathname.includes(nomor.toString())
+          ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
+          : ''
       } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
     >
       <div className="w-full flex gap-3 items-center">
-        <Center className="w-1/4 h-10 border-base-300 border-r-2">
-          <Number number={nomor} size="10" />
+        <Center className="w-1/4 h-10">
+          <Number number={nomor} size="10" text='lg' />
         </Center>
         <div className="w-3/4 flex flex-col justify-center gap-2">
           <h2 className="card-title">{namaLatin}</h2>

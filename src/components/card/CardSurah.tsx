@@ -1,15 +1,21 @@
 import React from 'react';
 
 interface CardSurahProps {
-  arabic: string;
-  translate: string;
+  teksArab: string;
+  arti: string;
+  ayat: number;
 }
 
-function CardSurah({arabic, translate}: CardSurahProps) {
+function CardSurah({ teksArab, arti, ayat }: CardSurahProps) {
   return (
-    <div className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3">
-      <h2 className="text-2xl font-semibold text-right">{arabic}</h2>
-      <p className="text-sm">{translate}</p>
+    <div id={ayat.toString()} className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3">
+      <div className="text-2xl font-semibold text-end">
+        {teksArab}
+        <span className="mr-3 p-1 text-sm ring ring-accent ring-offset-base-100 ring-offset-2 rounded-full">
+          {ayat.toString().length === 1 ? `0${ayat}` : ayat}
+        </span>
+      </div>
+      <p className="text-sm my-2">{arti}</p>
     </div>
   );
 }

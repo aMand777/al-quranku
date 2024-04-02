@@ -3,7 +3,7 @@ import React from 'react';
 
 function Navbar() {
   return (
-    <div className="navbar bg-accent z-50">
+    <div className="navbar bg-accent z-50 hidden md:flex">
       <div className="flex-1">
         <Link href="/" className="text-xl bold cursor-default">Al-Quranku</Link>
       </div>
