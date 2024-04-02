@@ -28,10 +28,13 @@ function SurahLayout({ children }: { children: ReactNode }) {
             {data.map((surah) => (
               <CardListSurah
                 key={surah.nomor}
-                number={surah.nomor}
-                title={surah.namaLatin}
-                translate={surah.arti}
-                ayat={ surah.jumlahAyat }
+                nomor={surah.nomor}
+                namaLatin={surah.namaLatin}
+                arti={surah.arti}
+                jumlahAyat={ surah.jumlahAyat }
+                nama={surah.nama}
+                deskripsi={surah.deskripsi}
+                tempatTurun={surah.tempatTurun}
               />
             ))}
           </div>

@@ -26,3 +26,7 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-700 rounded-full;
 }
+
+.text-highlight {
+  @apply bg-base-300 rounded-md mx-2;
+}
