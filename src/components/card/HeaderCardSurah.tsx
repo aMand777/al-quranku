@@ -1,16 +1,22 @@
 import React from 'react';
-import IconNumber from '@/components/card/IconNumber';
-import { Ayat } from '@/interface';
 import { useRouter } from 'next/navigation';
+import { Ayat } from '@/interface';
+import IconNumber from '@/components/card/IconNumber';
+import DetailSurah from '../popover/DetailSurah';
+import SwitchLang from '../toggle/SwitchLang';
 
 interface HeaderCardSurah {
   ayat: Ayat[];
+  nomor: number;
+  nama: string;
   namaLatin: string;
-  namaSurah: string;
-  nomorSurah: string;
+  jumlahAyat: number;
+  tempatTurun: string;
+  arti: string;
+  deskripsi: string;
 }
 
-function HeaderCardSurah({ nomorSurah, namaSurah, namaLatin, ayat }: HeaderCardSurah) {
+function HeaderCardSurah({ ayat, nomor, nama, namaLatin, jumlahAyat, tempatTurun, arti, deskripsi }: HeaderCardSurah) {
   const router = useRouter();
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -20,14 +26,24 @@ function HeaderCardSurah({ nomorSurah, namaSurah, namaLatin, ayat }: HeaderCardS
 
   return (
     <div className="mx-auto bg-secondary w-11/12 h-full rounded-lg flex justify-around items-center">
-      <div className="flex items-center gap-3">
-        <IconNumber title={nomorSurah} size="40" />
-        <h2 className="text-xl font-semibold">
-          {namaLatin} | {namaSurah}
+      <div className="flex items-center">
+        <IconNumber number={nomor.toString()} />
+        <h2 className="text-base md:text-xl font-semibold flex items-center gap-1">
+          {namaLatin} <span className="hidden md:block">| {nama}</span>
         </h2>
+        <DetailSurah
+          nomor={nomor}
+          nama={nama}
+          namaLatin={namaLatin}
+          jumlahAyat={jumlahAyat}
+          tempatTurun={tempatTurun}
+          arti={arti}
+          deskripsi={deskripsi}
+        />
+        <SwitchLang />
       </div>
-      <div data-tip="Go to ayat" className="tooltip tooltip-right flex items-center gap-5">
-        <span className="text-xl font-semibold">Ayat:</span>
+      <div className="flex items-center">
+        <span className="text-base md:text-xl font-semibold">Ayat:</span>
         <select onChange={handleChangeSelect} className="select select-accent w-full max-w-xs">
           {ayat.map((ayat) => (
             <option key={ayat.nomorAyat}>{ayat.nomorAyat}</option>

@@ -68,7 +68,9 @@ function DetailSurah({
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-            <AccordionPanel pb={4}>{parse(deskripsi)}</AccordionPanel>
+            <AccordionPanel pb={4} className="overflow-y-scroll h-64">
+              {parse(deskripsi)}
+            </AccordionPanel>
           </AccordionItem>
         </Accordion>
       </PopoverContent>

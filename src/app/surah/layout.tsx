@@ -30,11 +30,9 @@ function SurahLayout({ children }: { children: ReactNode }) {
                 key={surah.nomor}
                 nomor={surah.nomor}
                 namaLatin={surah.namaLatin}
-                arti={surah.arti}
+                tempatTurun={surah.tempatTurun}
                 jumlahAyat={surah.jumlahAyat}
                 nama={surah.nama}
-                deskripsi={surah.deskripsi}
-                tempatTurun={surah.tempatTurun}
               />
             ))}
           </div>

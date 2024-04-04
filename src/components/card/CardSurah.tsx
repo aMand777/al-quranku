@@ -1,4 +1,7 @@
 import React from 'react';
+import useLanguage from '@/hook/useLanguage';
+import IconNumber from './IconNumber';
+import { Button, useDisclosure } from '@chakra-ui/react';
 
 interface CardSurahProps {
   teksArab: string;
@@ -7,15 +10,21 @@ interface CardSurahProps {
 }
 
 function CardSurah({ teksArab, arti, ayat }: CardSurahProps) {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isArabicOnly } = useLanguage();
+
   return (
     <div id={ayat.toString()} className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3">
-      <div className="text-2xl font-semibold text-end">
+      <div dir="rtl" className="text-2xl font-semibold">
         {teksArab}
-        <span className="mr-3 p-1 text-sm ring ring-accent ring-offset-base-100 ring-offset-2 rounded-full">
-          {ayat.toString().length === 1 ? `0${ayat}` : ayat}
+        <span className="inline-block -mb-3 text-xs">
+          <IconNumber number={ayat.toString()} size="40" />
         </span>
       </div>
-      <p className="text-sm my-2">{arti}</p>
+      { !isArabicOnly && <p className="text-sm my-2">{ arti }</p> }
+      <div>
+      <Button onClick={onOpen}>Open Modal</Button>
+      </div>
     </div>
   );
 }
