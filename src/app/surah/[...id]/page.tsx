@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
-// import { useRouter } from 'next/navigation';
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import { getDetailSurahAsync } from '@/redux/slice/detailSurah-slice';
 import { useAppDispatch } from '@/redux/store';
@@ -10,12 +9,11 @@ import CardSurah from '@/components/card/CardSurah';
 import HeaderCardSurah from '@/components/card/HeaderCardSurah';
 
 function Surah({ params }: { params: { id: string } }) {
-  // const router = useRouter();
   const dispatch = useAppDispatch();
   const { data } = useDetailSurah();
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
   const [lastScrollTop, setLastScrollTop] = useState<number>(0);
-  const [scrollUp, setScrollUp] = useState<boolean>(false);
+  const [scrollUp, setScrollUp] = useState<boolean>(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,11 +41,6 @@ function Surah({ params }: { params: { id: string } }) {
     }
   }, [dispatch, lastScrollTop, params.id]);
 
-  // const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   const ayat = event.target.value;
-  //   router.push(`#${ayat}`);
-  // };
-
   return (
     <>
       <div
@@ -60,22 +53,25 @@ function Surah({ params }: { params: { id: string } }) {
           onClick={() => setIsOpenSurah(!isOpenSurah)}
         >
           {isOpenSurah ? (
-            <MdKeyboardDoubleArrowLeft size={25} />
+            <MdKeyboardDoubleArrowLeft size={30} />
           ) : (
-            <MdKeyboardDoubleArrowRight size={25} />
+            <MdKeyboardDoubleArrowRight size={30} />
           )}
         </button>
-        {/* <div className={`h-10 c z-50 transition duration-500 ${scrollUp ? 'top-0' : '-top-10'}`}> */}
         <div
-          className={`h-16 sticky top-2 z-40 transition duration-500 delay-300 ${
+          className={`h-16 sticky top-0 z-40 transition duration-500 delay-100 ${
             scrollUp ? '-translate-y-0' : '-translate-y-full'
           }`}
         >
           <HeaderCardSurah
             ayat={data.ayat}
-            namaSurah={data.nama}
+            nomor={data.nomor}
+            nama={data.nama}
             namaLatin={data.namaLatin}
-            nomorSurah={data.nomor.toString()}
+            jumlahAyat={data.jumlahAyat}
+            tempatTurun={data.tempatTurun}
+            arti={data.arti}
+            deskripsi={data.deskripsi}
           />
         </div>
         {data.ayat.map((ayat) => (
