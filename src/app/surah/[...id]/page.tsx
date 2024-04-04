@@ -1,33 +1,61 @@
 'use client';
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState, useRef } from 'react';
+// import { useRouter } from 'next/navigation';
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import { getDetailSurahAsync } from '@/redux/slice/detailSurah-slice';
 import { useAppDispatch } from '@/redux/store';
 import useOpenSurah from '@/hook/useOpenSurah';
 import useDetailSurah from '@/hook/useDetailSurah';
 import CardSurah from '@/components/card/CardSurah';
+import HeaderCardSurah from '@/components/card/HeaderCardSurah';
 
 function Surah({ params }: { params: { id: string } }) {
-  const router = useRouter()
+  // const router = useRouter();
   const dispatch = useAppDispatch();
   const { data } = useDetailSurah();
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
+  const [lastScrollTop, setLastScrollTop] = useState<number>(0);
+  const [scrollUp, setScrollUp] = useState<boolean>(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     dispatch(getDetailSurahAsync(params.id));
-  }, [dispatch, params.id]);
 
-  const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const ayat = event.target.value
-    router.push(`#${ayat}`)
-  }
+    function handleScroll() {
+      if (scrollRef.current) {
+        const currentScrollTop = scrollRef.current.scrollTop;
+        if (currentScrollTop > lastScrollTop) {
+          setScrollUp(false);
+        } else if (currentScrollTop < lastScrollTop) {
+          setScrollUp(true);
+        }
+        setLastScrollTop(currentScrollTop);
+      }
+    }
+
+    const element = scrollRef.current;
+    if (element) {
+      element.addEventListener('scroll', handleScroll);
+
+      return () => {
+        element.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [dispatch, lastScrollTop, params.id]);
+
+  // const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const ayat = event.target.value;
+  //   router.push(`#${ayat}`);
+  // };
 
   return (
-    <div className={`${isOpenSurah ? 'md:w-2/3' : 'w-full'} overflow-y-scroll scroll-smooth`}>
-      <div className="absolute flex flex-col gap-2">
+    <>
+      <div
+        ref={scrollRef}
+        className={`${isOpenSurah ? 'md:w-2/3' : 'w-full'} overflow-y-scroll scroll-smooth`}
+      >
         <button
-          className="hidden md:block tooltip tooltip-right pt-3"
+          className="hidden md:block tooltip tooltip-right absolute z-50"
           data-tip={isOpenSurah ? 'Close list' : 'Open list'}
           onClick={() => setIsOpenSurah(!isOpenSurah)}
         >
@@ -37,23 +65,29 @@ function Surah({ params }: { params: { id: string } }) {
             <MdKeyboardDoubleArrowRight size={25} />
           )}
         </button>
-        <div data-tip="Go to ayat" className="tooltip tooltip-bottom z-50">
-        <select onChange={handleChangeSelect} className="outline outline-accent rounded-md">
-          {data.ayat.map((ayat) =>(
-            <option key={ayat.nomorAyat}>{ayat.nomorAyat}</option>
-          ))}
-        </select>
+        {/* <div className={`h-10 c z-50 transition duration-500 ${scrollUp ? 'top-0' : '-top-10'}`}> */}
+        <div
+          className={`h-16 sticky top-2 z-40 transition duration-500 delay-300 ${
+            scrollUp ? '-translate-y-0' : '-translate-y-full'
+          }`}
+        >
+          <HeaderCardSurah
+            ayat={data.ayat}
+            namaSurah={data.nama}
+            namaLatin={data.namaLatin}
+            nomorSurah={data.nomor.toString()}
+          />
         </div>
+        {data.ayat.map((ayat) => (
+          <CardSurah
+            key={ayat.nomorAyat}
+            teksArab={ayat.teksArab}
+            arti={ayat.teksIndonesia}
+            ayat={ayat.nomorAyat}
+          />
+        ))}
       </div>
-      {data.ayat.map((ayat) => (
-        <CardSurah
-          key={ayat.nomorAyat}
-          teksArab={ayat.teksArab}
-          arti={ayat.teksIndonesia}
-          ayat={ayat.nomorAyat}
-        />
-      ))}
-    </div>
+    </>
   );
 }
 

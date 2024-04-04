@@ -24,7 +24,7 @@ interface Surah {
   audioFull: AudioFull;
 }
 
-interface Ayat {
+export interface Ayat {
   nomorAyat: number;
   teksArab: string;
   teksLatin: string;
