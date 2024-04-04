@@ -1,19 +1,41 @@
-import React from 'react'
+import React from 'react';
+import IconNumber from '@/components/card/IconNumber';
+import { Ayat } from '@/interface';
+import { useRouter } from 'next/navigation';
 
-function HeaderCardSurah() {
+interface HeaderCardSurah {
+  ayat: Ayat[];
+  namaLatin: string;
+  namaSurah: string;
+  nomorSurah: string;
+}
+
+function HeaderCardSurah({ nomorSurah, namaSurah, namaLatin, ayat }: HeaderCardSurah) {
+  const router = useRouter();
+
+  const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const ayat = event.target.value;
+    router.push(`#${ayat}`);
+  };
+
   return (
-    <div className="hero h-20 bg-base-200">
-      <div className="hero-content text-center">
-        <div className="max-w-md">
-          <h1 className="text-5xl font-bold">Hello there</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-            exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
-          </p>
-        </div>
+    <div className="mx-auto bg-secondary w-11/12 h-full rounded-lg flex justify-around items-center">
+      <div className="flex items-center gap-3">
+        <IconNumber title={nomorSurah} size="40" />
+        <h2 className="text-xl font-semibold">
+          {namaLatin} | {namaSurah}
+        </h2>
+      </div>
+      <div data-tip="Go to ayat" className="tooltip tooltip-right flex items-center gap-5">
+        <span className="text-xl font-semibold">Ayat:</span>
+        <select onChange={handleChangeSelect} className="select select-accent w-full max-w-xs">
+          {ayat.map((ayat) => (
+            <option key={ayat.nomorAyat}>{ayat.nomorAyat}</option>
+          ))}
+        </select>
       </div>
     </div>
   );
 }
 
-export default HeaderCardSurah
+export default HeaderCardSurah;
