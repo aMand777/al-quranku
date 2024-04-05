@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
 import { BiDetail } from 'react-icons/bi';
-import { CgPlayButtonO, CgPlayPauseO } from 'react-icons/cg';
-import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
+import { CgPlayButtonO } from 'react-icons/cg';
+import { MdBookmarkAdd } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
 import useLanguage from '@/hook/useLanguage';
 import IconNumber from './IconNumber';
@@ -22,22 +21,14 @@ function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
   const { data } = useTafsirSurah();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isArabicOnly } = useLanguage();
-  // const [selectedAyat, setSelectedAyat] = useState<number>(0);
-
-  // useEffect(() => {
-  //   dispatch(getTafsirSurahAsync(nomorSurah.toString()));
-  // }, [dispatch, nomorSurah]);
 
   const onClick = () => {
-    // console.log(ayat);
     dispatch(getTafsirSurahAsync(nomorSurah.toString()));
-    // setSelectedAyat(ayat);
     onOpen();
   };
 
   const tafsirAyat = data.tafsir.find((tafsir) => tafsir.ayat === ayat)?.teks;
-  // console.log('tafsirAyat==>', tafsirAyat);
-  // console.log('data==>', data.tafsir.filter((tafsir) => tafsir.ayat === 1))
+
   return (
     <div id={ayat.toString()} className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3">
       <div dir="rtl" className="text-2xl font-semibold">
@@ -49,9 +40,13 @@ function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
       {!isArabicOnly && <p className="text-sm my-2">{arti}</p>}
       {!isArabicOnly && (
         <div className="flex gap-3 items-center">
-          <CgPlayButtonO size={30} />
-          <MdBookmarkAdd size={30} />
-          <button onClick={onClick}>
+          <button data-tip="Audio" onClick={onClick} className="tooltip">
+            <CgPlayButtonO size={30} />
+          </button>
+          <button data-tip="Bookmark" onClick={onClick} className="tooltip">
+            <MdBookmarkAdd size={30} />
+          </button>
+          <button data-tip="Tafsir" onClick={onClick} className="tooltip">
             <BiDetail size={30} />
           </button>
           <TafsirAyat
