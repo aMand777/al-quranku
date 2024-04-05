@@ -2,7 +2,6 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import useOpenSurah from '@/hook/useOpenSurah';
-import Number from './Number';
 import { Center } from '@chakra-ui/react';
 import IconNumber from './IconNumber';
 
