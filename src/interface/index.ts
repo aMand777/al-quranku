@@ -32,7 +32,7 @@ export interface Ayat {
 }
 
 interface Tafsir {
-  ayat: string;
+  ayat: number;
   teks: string;
 }
 

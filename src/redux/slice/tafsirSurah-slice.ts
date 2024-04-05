@@ -25,7 +25,7 @@ const initialState: InitialStateDetailSurah = {
     },
     tafsir: [
       {
-        ayat: '',
+        ayat: 0,
         teks: '',
       },
     ],

@@ -18,7 +18,10 @@ function Surah({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     dispatch(getDetailSurahAsync(params.id));
+    document.title = data.namaLatin
+  },[data.namaLatin, dispatch, params.id])
 
+  useEffect(() => {
     function handleScroll() {
       if (scrollRef.current) {
         const currentScrollTop = scrollRef.current.scrollTop;
@@ -39,7 +42,7 @@ function Surah({ params }: { params: { id: string } }) {
         element.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [dispatch, lastScrollTop, params.id]);
+  }, [lastScrollTop]);
 
   return (
     <>
@@ -76,7 +79,8 @@ function Surah({ params }: { params: { id: string } }) {
         </div>
         {data.ayat.map((ayat) => (
           <CardSurah
-            key={ayat.nomorAyat}
+            key={ ayat.nomorAyat }
+            nomorSurah={data.nomor}
             teksArab={ayat.teksArab}
             arti={ayat.teksIndonesia}
             ayat={ayat.nomorAyat}
