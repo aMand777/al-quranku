@@ -26,7 +26,7 @@ function TafsirAyat({ tafsir, namaLatin, ayat, isOpen, onClose }: TafsirAyatProp
         <ModalOverlay />
         <ModalContent>
           <ModalHeader className="text-center">
-            Tafsir {namaLatin} ayat {ayat}
+            Tafsir {namaLatin} Ayat {ayat}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>

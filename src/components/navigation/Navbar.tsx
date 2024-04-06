@@ -1,20 +1,88 @@
+'use client';
+import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import React from 'react';
+import useAllSurah from '@/hook/useAllSurah';
+import { Surah } from '@/interface';
 
 function Navbar() {
+  const router = useRouter();
+  const { data } = useAllSurah();
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const [inputFocused, setInputFocused] = useState<boolean>(false);
+  const [searchResult, setSearchResult] = useState<Surah[]>([]);
+  const [value, setValue] = useState<string>('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+    const querySearch = event.target.value.toLowerCase();
+    const result = data.filter(
+      (surah) =>
+        surah.namaLatin.toLowerCase().includes(querySearch) ||
+        surah.nomor.toString().toLowerCase().includes(querySearch),
+    );
+    setSearchResult(result);
+  };
+  const handleClickSurah = (nomorSurah: string, namaLatin: string) => {
+    router.push(`/surah/${nomorSurah}`);
+    setInputFocused(false);
+    setValue(namaLatin);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
+        setInputFocused(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="navbar bg-accent z-50 hidden md:flex">
       <div className="flex-1">
-        <Link href="/" className="text-xl bold cursor-default">Al-Quranku</Link>
+        <Link href="/" className="text-xl bold cursor-default">
+          Al-Quranku
+        </Link>
       </div>
       <div className="gap-5 mx-5">
-        <Link className="text-base hover:text-success" href="/">Home</Link>
-        <Link className="text-base hover:text-success" href="#">Bookmarks</Link>
-        <Link className="text-base hover:text-success" href="#">Jadwal Sholat</Link>
+        <Link className="text-base hover:text-success" href="#">
+          Bookmarks
+        </Link>
+        <Link className="text-base hover:text-success" href="#">
+          Jadwal Sholat
+        </Link>
       </div>
       <div className="flex-none gap-2">
-        <div className="form-control">
-          <input type="text" placeholder="Search" className="input input-bordered w-56" />
+        <div ref={searchContainerRef} className="form-control relative">
+          <input
+            onFocus={() => setInputFocused(true)}
+            value={value}
+            onChange={handleChange}
+            type="search"
+            placeholder="Search surah"
+            className="input input-bordered w-56"
+          />
+          {inputFocused && (
+            <div className="absolute top-14 max-h-44 rounded-lg w-56 bg-base-100 overflow-y-auto p-3">
+              {searchResult.map((surah) => (
+                <div
+                  onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
+                  key={surah.nomor}
+                  className="p-1 rounded-md cursor-pointer hover:bg-base-300"
+                >
+                  {surah.namaLatin}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
