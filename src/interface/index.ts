@@ -13,7 +13,7 @@ interface nextPrevSurah {
   jumlahAyat: number;
 }
 
-interface Surah {
+export interface Surah {
   nomor: number;
   nama: string;
   namaLatin: string;

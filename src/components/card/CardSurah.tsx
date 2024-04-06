@@ -1,6 +1,6 @@
 import { BiDetail } from 'react-icons/bi';
-import { CgPlayButtonO } from 'react-icons/cg';
-import { MdBookmarkAdd } from 'react-icons/md';
+import { CgPlayButtonO, CgPlayPauseO } from 'react-icons/cg';
+import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
 import useLanguage from '@/hook/useLanguage';
 import IconNumber from './IconNumber';
