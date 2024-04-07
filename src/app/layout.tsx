@@ -7,6 +7,7 @@ import ChakraProvider from '@/app/ChakraProvider';
 import OpenSurahProvider from '@/context/OpenSurah';
 import LanguageProvider from '@/context/Language';
 import Navbar from '@/components/navigation/Navbar';
+import NavMobile from '@/components/navigation/NavMobile';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,7 +29,8 @@ export default function RootLayout({
             <OpenSurahProvider>
               <ChakraProvider>
                 <ThemeProvider>
-                <Navbar />
+                  <Navbar />
+                  <NavMobile />
                 {children}
                 </ThemeProvider>
               </ChakraProvider>

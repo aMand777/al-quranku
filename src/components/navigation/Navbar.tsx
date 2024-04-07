@@ -54,7 +54,7 @@ function Navbar() {
         </Link>
       </div>
       <div className="gap-5 mx-5 text-white">
-        <SwitchTheme />
+        <SwitchTheme className="hover:text-secondary" />
         <Link className="text-base hover:text-secondary" href="#">
           Bookmarks
         </Link>
@@ -69,11 +69,11 @@ function Navbar() {
             value={value}
             onChange={handleChange}
             type="search"
-            placeholder="Search by surah or number"
+            placeholder="Search surah"
             className="input input-bordered w-72"
           />
           {inputFocused && searchResult.length > 0 && (
-            <div className="absolute top-14 max-h-44 rounded-lg w-56 bg-base-100 overflow-y-auto p-3">
+            <div className="absolute top-14 max-h-44 rounded-lg w-72 bg-base-100 overflow-y-auto p-3">
               {searchResult.map((surah) => (
                 <div
                   onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
