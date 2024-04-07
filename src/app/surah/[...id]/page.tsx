@@ -7,6 +7,7 @@ import useOpenSurah from '@/hook/useOpenSurah';
 import useDetailSurah from '@/hook/useDetailSurah';
 import CardSurah from '@/components/card/CardSurah';
 import HeaderCardSurah from '@/components/card/HeaderCardSurah';
+import CardSurahSkeleton from '@/components/skeleton/CardSurahSkeleton';
 
 function Surah({ params }: { params: { id: string } }) {
   const dispatch = useAppDispatch();
@@ -17,9 +18,9 @@ function Surah({ params }: { params: { id: string } }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    dispatch(getDetailSurahAsync(params.id));
-    document.title = data.namaLatin
-  },[data.namaLatin, dispatch, params.id])
+    // dispatch(getDetailSurahAsync(params.id));
+    document.title = data.namaLatin;
+  }, [data.namaLatin, dispatch, params.id]);
 
   useEffect(() => {
     function handleScroll() {
@@ -77,15 +78,19 @@ function Surah({ params }: { params: { id: string } }) {
             deskripsi={data.deskripsi}
           />
         </div>
-        {data.ayat.map((ayat) => (
-          <CardSurah
-            key={ ayat.nomorAyat }
-            nomorSurah={data.nomor}
-            teksArab={ayat.teksArab}
-            arti={ayat.teksIndonesia}
-            ayat={ayat.nomorAyat}
-          />
-        ))}
+        {data.ayat.length > 1 ? (
+          data.ayat.map((ayat) => (
+            <CardSurah
+              key={ayat.nomorAyat}
+              nomorSurah={data.nomor}
+              teksArab={ayat.teksArab}
+              arti={ayat.teksIndonesia}
+              ayat={ayat.nomorAyat}
+            />
+          ))
+        ) : (
+          <CardSurahSkeleton />
+        )}
       </div>
     </>
   );

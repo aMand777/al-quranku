@@ -34,10 +34,10 @@ function CardListSurah({ nomor, nama, namaLatin, jumlahAyat, tempatTurun }: Card
         </Center>
         <div className="w-3/4 flex flex-col justify-center gap-2">
           <h2 className="text-xl">
-            {namaLatin} - {nama}
+            {namaLatin} | {nama}
           </h2>
           <p className="text-sm">
-            {tempatTurun} - {jumlahAyat} ayat
+            {tempatTurun} • {jumlahAyat} ayat
           </p>
         </div>
         <Image src="/icon-lampion.png" width={50} height={50} alt="icon-lampion" />

@@ -37,9 +37,12 @@ function HeaderCardSurah({
     <div className="mx-auto bg-accent w-11/12 h-full rounded-lg flex justify-around items-center">
       <div className="flex items-center">
         <IconNumber number={nomor.toString()} className="text-black" />
-        <h2 className="text-base md:text-xl font-semibold flex items-center gap-1 text-black">
-          {namaLatin || <div className="skeleton h-4 w-20" />} |{' '}
-          <span className={`hidden md:block ${nama.length < 1 ? 'skeleton w-16 h-4' : ''}`}>
+        <h2 className="text-base md:text-xl flex items-center gap-1 text-black">
+          {namaLatin || <div className="skeleton h-4 w-16 bg-secondary" />}{' '}
+          <span className="hidden md:block">|</span>
+          <span
+            className={`hidden md:block ${nama.length < 1 ? 'skeleton w-16 h-4 bg-secondary' : ''}`}
+          >
             {nama}
           </span>
         </h2>
@@ -55,7 +58,7 @@ function HeaderCardSurah({
         <SwitchLang />
       </div>
       <div className="flex items-center">
-        <span className="text-base md:text-xl font-semibold text-black mr-1">Ayat:</span>
+        <span className="text-base md:text-lg text-black mr-1">Ayat:</span>
         <select onChange={handleChangeSelect} className="select select-secondary w-full max-w-xs">
           {ayat.map((ayat) => (
             <option key={ayat.nomorAyat}>{ayat.nomorAyat}</option>

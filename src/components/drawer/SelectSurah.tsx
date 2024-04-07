@@ -18,8 +18,8 @@ function SelectSurah() {
 
   return (
     <>
-      <button onClick={() => setIsOpenSurah(!isOpenSurah)} className="z-50 fixed bottom-5 right-5 block md:hidden">
-        <TbCardsFilled size={40} className="text-accent" />
+      <button onClick={() => setIsOpenSurah(!isOpenSurah)} className="z-50 fixed bottom-5 right-5 block md:hidden duration-500 hover:rotate-12">
+        <TbCardsFilled size={40} className="text-primary" />
       </button>
       <Slide direction="bottom" in={isOpenSurah} style={{ zIndex: 10 }} className="block md:hidden">
         <Box rounded="md" shadow="md" className="h-screen overflow-y-scroll bg-base-100">
