@@ -1,7 +1,11 @@
 import React from 'react';
 import { useTheme } from 'next-themes';
 
-function SwitchTheme() {
+interface SwitchThemeProps {
+  className?: string;
+}
+
+function SwitchTheme({ className }: SwitchThemeProps) {
   const { theme, setTheme } = useTheme();
   const handleInputCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -11,7 +15,7 @@ function SwitchTheme() {
     }
   };
   return (
-    <label className="swap swap-rotate hover:text-secondary">
+    <label className={`swap swap-rotate ${className}`}>
       <input type="checkbox" checked={theme === 'light'} onChange={handleInputCheckbox} />
       <svg
         className="swap-on fill-current w-10 h-10"

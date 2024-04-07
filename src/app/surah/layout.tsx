@@ -9,13 +9,13 @@ import CardListSurah from '@/components/card/CardListSurah';
 import CardListSkeleton from '@/components/skeleton/CardListSkeleton';
 
 function SurahLayout({ children }: { children: ReactNode }) {
-  const dispatch = useAppDispatch()
-  const { data } = useAllSurah()
+  const dispatch = useAppDispatch();
+  const { data } = useAllSurah();
   const { isOpenSurah } = useOpenSurah();
 
-  //   useEffect(() => {
-  //   dispatch(getAllSurahAsync());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllSurahAsync());
+  }, [dispatch]);
 
   return (
     <>
@@ -26,16 +26,20 @@ function SurahLayout({ children }: { children: ReactNode }) {
           }`}
         >
           <div className={`${isOpenSurah ? 'block' : ' w-0 translate-x-full'} my-5`}>
-            {data.length > 1 ? data.map((surah) => (
-              <CardListSurah
-                key={surah.nomor}
-                nomor={surah.nomor}
-                namaLatin={surah.namaLatin}
-                tempatTurun={surah.tempatTurun}
-                jumlahAyat={surah.jumlahAyat}
-                nama={surah.nama}
-              />
-            )) : <CardListSkeleton /> }
+            {data.length > 1 ? (
+              data.map((surah) => (
+                <CardListSurah
+                  key={surah.nomor}
+                  nomor={surah.nomor}
+                  namaLatin={surah.namaLatin}
+                  tempatTurun={surah.tempatTurun}
+                  jumlahAyat={surah.jumlahAyat}
+                  nama={surah.nama}
+                />
+              ))
+            ) : (
+              <CardListSkeleton />
+            )}
           </div>
         </div>
         {children}

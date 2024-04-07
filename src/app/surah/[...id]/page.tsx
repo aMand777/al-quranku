@@ -18,7 +18,7 @@ function Surah({ params }: { params: { id: string } }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // dispatch(getDetailSurahAsync(params.id));
+    dispatch(getDetailSurahAsync(params.id));
     document.title = data.namaLatin;
   }, [data.namaLatin, dispatch, params.id]);
 
@@ -49,7 +49,7 @@ function Surah({ params }: { params: { id: string } }) {
     <>
       <div
         ref={scrollRef}
-        className={`${isOpenSurah ? 'md:w-2/3' : 'w-full'} overflow-y-scroll scroll-smooth`}
+        className={`${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-y-scroll scroll-smooth`}
       >
         <button
           className="hidden md:block tooltip tooltip-right absolute z-50 text-primary"
