@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from 'next-themes';
 import StoreProvider from '@/redux/StoreProvider';
 import ChakraProvider from '@/app/ChakraProvider';
 import OpenSurahProvider from '@/context/OpenSurah';
@@ -20,14 +21,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <StoreProvider>
           <LanguageProvider>
             <OpenSurahProvider>
               <ChakraProvider>
+                <ThemeProvider>
                 <Navbar />
                 {children}
+                </ThemeProvider>
               </ChakraProvider>
             </OpenSurahProvider>
           </LanguageProvider>

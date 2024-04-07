@@ -16,7 +16,16 @@ interface HeaderCardSurah {
   deskripsi: string;
 }
 
-function HeaderCardSurah({ ayat, nomor, nama, namaLatin, jumlahAyat, tempatTurun, arti, deskripsi }: HeaderCardSurah) {
+function HeaderCardSurah({
+  ayat,
+  nomor,
+  nama,
+  namaLatin,
+  jumlahAyat,
+  tempatTurun,
+  arti,
+  deskripsi,
+}: HeaderCardSurah) {
   const router = useRouter();
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -25,11 +34,14 @@ function HeaderCardSurah({ ayat, nomor, nama, namaLatin, jumlahAyat, tempatTurun
   };
 
   return (
-    <div className="mx-auto bg-secondary w-11/12 h-full rounded-lg flex justify-around items-center">
+    <div className="mx-auto bg-accent w-11/12 h-full rounded-lg flex justify-around items-center">
       <div className="flex items-center">
-        <IconNumber number={nomor.toString()} />
-        <h2 className="text-base md:text-xl font-semibold flex items-center gap-1">
-          {namaLatin} <span className="hidden md:block">| {nama}</span>
+        <IconNumber number={nomor.toString()} className="text-black" />
+        <h2 className="text-base md:text-xl font-semibold flex items-center gap-1 text-black">
+          {namaLatin || <div className="skeleton h-4 w-20" />} |{' '}
+          <span className={`hidden md:block ${nama.length < 1 ? 'skeleton w-16 h-4' : ''}`}>
+            {nama}
+          </span>
         </h2>
         <DetailSurah
           nomor={nomor}
@@ -43,8 +55,8 @@ function HeaderCardSurah({ ayat, nomor, nama, namaLatin, jumlahAyat, tempatTurun
         <SwitchLang />
       </div>
       <div className="flex items-center">
-        <span className="text-base md:text-xl font-semibold">Ayat:</span>
-        <select onChange={handleChangeSelect} className="select select-accent w-full max-w-xs">
+        <span className="text-base md:text-xl font-semibold text-black mr-1">Ayat:</span>
+        <select onChange={handleChangeSelect} className="select select-secondary w-full max-w-xs">
           {ayat.map((ayat) => (
             <option key={ayat.nomorAyat}>{ayat.nomorAyat}</option>
           ))}

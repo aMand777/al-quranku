@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import useAllSurah from '@/hook/useAllSurah';
 import { Surah } from '@/interface';
+import SwitchTheme from '../toggle/SwitchTheme';
 
 function Navbar() {
   const router = useRouter();
@@ -46,17 +47,18 @@ function Navbar() {
   }, []);
 
   return (
-    <div className="navbar bg-accent z-50 hidden md:flex">
-      <div className="flex-1">
+    <div className="navbar bg-primary z-50 hidden md:flex">
+      <div className="flex-1 text-white">
         <Link href="/" className="text-xl bold cursor-default">
           Al-Quranku
         </Link>
       </div>
-      <div className="gap-5 mx-5">
-        <Link className="text-base hover:text-success" href="#">
+      <div className="gap-5 mx-5 text-white">
+        <SwitchTheme />
+        <Link className="text-base hover:text-secondary" href="#">
           Bookmarks
         </Link>
-        <Link className="text-base hover:text-success" href="#">
+        <Link className="text-base hover:text-secondary" href="#">
           Jadwal Sholat
         </Link>
       </div>
@@ -67,10 +69,10 @@ function Navbar() {
             value={value}
             onChange={handleChange}
             type="search"
-            placeholder="Search surah"
-            className="input input-bordered w-56"
+            placeholder="Search by surah or number"
+            className="input input-bordered w-72"
           />
-          {inputFocused && (
+          {inputFocused && searchResult.length > 0 && (
             <div className="absolute top-14 max-h-44 rounded-lg w-56 bg-base-100 overflow-y-auto p-3">
               {searchResult.map((surah) => (
                 <div
