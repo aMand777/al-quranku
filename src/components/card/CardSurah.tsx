@@ -31,7 +31,7 @@ function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
 
   return (
     <div id={ayat.toString()} className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3">
-      <div dir="rtl" className="text-2xl font-semibold">
+      <div dir="rtl" className="text-2xl leading-loose">
         {teksArab}
         <span className="inline-block -mb-3 text-xs">
           <IconNumber number={ayat.toString()} size="40" />
@@ -40,13 +40,13 @@ function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
       {!isArabicOnly && <p className="text-sm my-2">{arti}</p>}
       {!isArabicOnly && (
         <div className="flex gap-3 items-center">
-          <button data-tip="Audio" onClick={onClick} className="tooltip">
+          <button data-tip="Audio" onClick={onClick} className="tooltip hover:text-primary">
             <CgPlayButtonO size={30} />
           </button>
-          <button data-tip="Bookmark" onClick={onClick} className="tooltip">
+          <button data-tip="Bookmark" onClick={onClick} className="tooltip hover:text-primary">
             <MdBookmarkAdd size={30} />
           </button>
-          <button data-tip="Tafsir" onClick={onClick} className="tooltip">
+          <button data-tip="Tafsir" onClick={onClick} className="tooltip hover:text-primary">
             <BiDetail size={30} />
           </button>
           <TafsirAyat

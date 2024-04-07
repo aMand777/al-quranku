@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import useOpenSurah from '@/hook/useOpenSurah';
@@ -14,7 +15,7 @@ interface CardListSurahProps {
 }
 
 function CardListSurah({ nomor, nama, namaLatin, jumlahAyat, tempatTurun }: CardListSurahProps) {
-    const { isOpenSurah, setIsOpenSurah } = useOpenSurah()
+  const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
   const pathname = usePathname();
 
   return (
@@ -32,13 +33,14 @@ function CardListSurah({ nomor, nama, namaLatin, jumlahAyat, tempatTurun }: Card
           <IconNumber number={nomor.toString()} size="70" />
         </Center>
         <div className="w-3/4 flex flex-col justify-center gap-2">
-          <h2 className="card-title">
+          <h2 className="text-xl">
             {namaLatin} - {nama}
           </h2>
           <p className="text-sm">
             {tempatTurun} - {jumlahAyat} ayat
           </p>
         </div>
+        <Image src="/icon-lampion.png" width={50} height={50} alt="icon-lampion" />
       </div>
     </Link>
   );

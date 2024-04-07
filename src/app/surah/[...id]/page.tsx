@@ -51,7 +51,7 @@ function Surah({ params }: { params: { id: string } }) {
         className={`${isOpenSurah ? 'md:w-2/3' : 'w-full'} overflow-y-scroll scroll-smooth`}
       >
         <button
-          className="hidden md:block tooltip tooltip-right absolute z-50"
+          className="hidden md:block tooltip tooltip-right absolute z-50 text-primary"
           data-tip={isOpenSurah ? 'Close list' : 'Open list'}
           onClick={() => setIsOpenSurah(!isOpenSurah)}
         >

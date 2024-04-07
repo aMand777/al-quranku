@@ -46,7 +46,7 @@ function DetailSurah({
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton />
-        <PopoverHeader className="text-xl font-semibold text-center">
+        <PopoverHeader className="text-xl text-center">
           {namaLatin} | {nama}
         </PopoverHeader>
         <PopoverBody>
