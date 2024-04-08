@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
+import NextTopLoader from 'nextjs-toploader';
 import StoreProvider from '@/redux/StoreProvider';
 import ChakraProvider from '@/app/ChakraProvider';
 import OpenSurahProvider from '@/context/OpenSurah';
@@ -27,13 +28,14 @@ export default function RootLayout({
         <StoreProvider>
           <LanguageProvider>
             <OpenSurahProvider>
-              <ChakraProvider>
-                <ThemeProvider>
+              <ThemeProvider>
+                <ChakraProvider>
+                  <NextTopLoader color="#FEB714" height={4} showSpinner={false} />
                   <Navbar />
                   <NavMobile />
-                {children}
-                </ThemeProvider>
-              </ChakraProvider>
+                  {children}
+                </ChakraProvider>
+              </ThemeProvider>
             </OpenSurahProvider>
           </LanguageProvider>
         </StoreProvider>

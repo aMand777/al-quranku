@@ -44,7 +44,7 @@ function SurahLayout({ children }: { children: ReactNode }) {
         </div>
         {children}
       </div>
-      <SelectSurah />
+      <SelectSurah data={data} />
     </>
   );
 }

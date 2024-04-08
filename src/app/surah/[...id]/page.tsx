@@ -19,7 +19,7 @@ function Surah({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     dispatch(getDetailSurahAsync(params.id));
-    document.title = data.namaLatin;
+    document.title = `${data.namaLatin} | Al-Quranku`;
   }, [data.namaLatin, dispatch, params.id]);
 
   useEffect(() => {
