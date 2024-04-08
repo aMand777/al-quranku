@@ -31,6 +31,7 @@ function SelectSurah({ data }: SelectSurahProps) {
                 jumlahAyat={surah.jumlahAyat}
                 nama={surah.nama}
                 tempatTurun={surah.tempatTurun}
+                audio={surah.audioFull["05"]}
               />
             ))
           ) : (

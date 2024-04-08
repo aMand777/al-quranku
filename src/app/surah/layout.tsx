@@ -35,6 +35,7 @@ function SurahLayout({ children }: { children: ReactNode }) {
                   tempatTurun={surah.tempatTurun}
                   jumlahAyat={surah.jumlahAyat}
                   nama={surah.nama}
+                  audio={surah.audioFull['05']}
                 />
               ))
             ) : (

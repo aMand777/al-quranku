@@ -1,6 +1,5 @@
 import React from 'react';
 import IconNumber from '../card/IconNumber';
-import { CgPlayButtonO } from 'react-icons/cg';
 import { MdBookmarkAdd } from 'react-icons/md';
 import { BiDetail } from 'react-icons/bi';
 
@@ -24,9 +23,6 @@ function CardSurahSkeleton() {
             <div className="skeleton my-2 w-3/4 h-4 bg-base-200" />
           </div>
           <div className="flex gap-3 items-center">
-            <button className="skeleton">
-              <CgPlayButtonO size={30} className="skeleton text-base-200" />
-            </button>
             <button className="skeleton">
               <MdBookmarkAdd size={30} className="skeleton text-base-200" />
             </button>
