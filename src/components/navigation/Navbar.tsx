@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from 'react-icons/fa';
 import useAllSurah from '@/hook/useAllSurah';
 import { Surah } from '@/interface';
 import SwitchTheme from '../toggle/SwitchTheme';
@@ -52,12 +52,14 @@ function Navbar() {
   return (
     <div className="navbar bg-primary z-50 hidden md:flex">
       <div className="flex-1 text-white">
-        <Link href="/" className="text-xl bold cursor-default">
+        <Link href="/" className="text-2xl font-bold cursor-default">
           Al-Quranku
         </Link>
+        <div data-tip="Switch Theme" className="tooltip tooltip-right ml-3">
+          <SwitchTheme className="hover:text-secondary" />
+        </div>
       </div>
       <div className="gap-5 mx-5 text-white">
-        <SwitchTheme className="hover:text-secondary" />
         <Link className="text-base hover:text-secondary" href="#">
           Bookmarks
         </Link>
@@ -106,7 +108,7 @@ function Navbar() {
           >
             <li>
               <a className="justify-between">
-                Guest
+                Visit as Guest
                 <FaUserCircle size={20} className="text-primary" />
               </a>
             </li>

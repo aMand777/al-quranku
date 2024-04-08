@@ -41,7 +41,7 @@ function HamburgerMenu() {
               <div className="w-16 rounded-full">
                 <Image src="https://ui-avatars.com/api/?name=Guest&background=random" alt="avatar" width={100} height={100}/>
               </div>
-              <span className="text-xl font-semibold">Guest</span>
+              <span className="text-xl font-semibold">Visit as Guest</span>
             </div>
             <div className="divider" />
             <div className="flex flex-col gap-3 text-xl font-semibold">
