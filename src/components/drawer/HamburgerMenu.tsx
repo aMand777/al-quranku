@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
+import Image from 'next/image';
 import { FiMenu } from 'react-icons/fi';
-import { RiLoginCircleLine ,RiLogoutCircleRLine } from 'react-icons/ri';
+import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
 import {
   Drawer,
   DrawerBody,
@@ -38,10 +39,7 @@ function HamburgerMenu() {
           <DrawerBody>
             <div className="avatar flex gap-5 items-center">
               <div className="w-16 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+                <Image src="https://ui-avatars.com/api/?name=Guest&background=random" alt="avatar" width={100} height={100}/>
               </div>
               <span className="text-xl font-semibold">Guest</span>
             </div>

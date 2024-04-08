@@ -2,6 +2,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
+import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
+import { FaUserCircle } from "react-icons/fa";
 import useAllSurah from '@/hook/useAllSurah';
 import { Surah } from '@/interface';
 import SwitchTheme from '../toggle/SwitchTheme';
@@ -89,9 +92,11 @@ function Navbar() {
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+              <Image
+                src="https://ui-avatars.com/api/?name=Guest&background=random"
+                alt="avatar"
+                width={100}
+                height={100}
               />
             </div>
           </div>
@@ -101,15 +106,15 @@ function Navbar() {
           >
             <li>
               <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
+                Guest
+                <FaUserCircle size={20} className="text-primary" />
               </a>
             </li>
             <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
+              <a className="justify-between">
+                Login
+                <RiLoginCircleLine size={20} className="text-info" />
+              </a>
             </li>
           </ul>
         </div>
