@@ -113,10 +113,10 @@ function Navbar() {
               </a>
             </li>
             <li>
-              <a className="justify-between">
+              <button onClick={() => router.push("/")} className="justify-between">
                 Login
                 <RiLoginCircleLine size={20} className="text-info" />
-              </a>
+              </button>
             </li>
           </ul>
         </div>
