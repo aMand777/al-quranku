@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTheme } from 'next-themes';
 
 interface SwitchThemeProps {
@@ -14,6 +13,7 @@ function SwitchTheme({ className }: SwitchThemeProps) {
       setTheme('dark');
     }
   };
+
   return (
     <label className={`swap swap-rotate ${className}`}>
       <input type="checkbox" checked={theme === 'light'} onChange={handleInputCheckbox} />

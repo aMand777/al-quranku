@@ -12,9 +12,9 @@ function SelectSurah() {
   const { data } = useAllSurah();
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah()
 
-  useEffect(() => {
-    dispatch(getAllSurahAsync());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllSurahAsync());
+  // }, [dispatch]);
 
   return (
     <>

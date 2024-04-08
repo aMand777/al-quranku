@@ -13,9 +13,9 @@ function SurahLayout({ children }: { children: ReactNode }) {
   const { data } = useAllSurah();
   const { isOpenSurah } = useOpenSurah();
 
-  useEffect(() => {
-    dispatch(getAllSurahAsync());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllSurahAsync());
+  // }, [dispatch]);
 
   return (
     <>
