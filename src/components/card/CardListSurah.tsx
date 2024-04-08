@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { CgPlayButtonO, CgPlayPauseO } from 'react-icons/cg';
 import useOpenSurah from '@/hook/useOpenSurah';
 import { Center } from '@chakra-ui/react';
 import IconNumber from './IconNumber';
@@ -17,13 +16,19 @@ interface CardListSurahProps {
   audio: string;
 }
 
-function CardListSurah({ nomor, nama, namaLatin, jumlahAyat, tempatTurun, audio }: CardListSurahProps) {
+function CardListSurah({
+  nomor,
+  nama,
+  namaLatin,
+  jumlahAyat,
+  tempatTurun,
+  audio,
+}: CardListSurahProps) {
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
   const pathname = usePathname();
 
   return (
     <Link
-      // onClick={() => setIsOpenSurah(!isOpenSurah)}
       href={`/surah/${nomor}`}
       className={`${
         pathname.includes(nomor.toString())
@@ -36,19 +41,16 @@ function CardListSurah({ nomor, nama, namaLatin, jumlahAyat, tempatTurun, audio 
           <IconNumber number={nomor.toString()} size="70" />
         </Center>
         <div className="w-3/4 flex flex-col gap-2">
-          {/* <div className="flex flex-col"> */}
           <h2 className="text-xl">
             {namaLatin} | {nama}
           </h2>
           <p className="text-sm">
             {tempatTurun} • {jumlahAyat} ayat
           </p>
-          {/* </div> */}
-          {/* <AudioPlayer src={audio} /> */}
         </div>
         <Image src="/icon-lampion.png" width={50} height={50} alt="icon-lampion" />
       </div>
-          <AudioPlayer src={audio} />
+      <AudioPlayer src={audio} />
     </Link>
   );
 }
