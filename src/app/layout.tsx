@@ -13,7 +13,7 @@ import NavMobile from '@/components/navigation/NavMobile';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'al-quranku',
+  title: 'Al-Quranku',
   description: 'Mari membaca al-quran',
 };
 

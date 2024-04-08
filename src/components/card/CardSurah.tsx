@@ -1,5 +1,4 @@
 import { BiDetail } from 'react-icons/bi';
-import { CgPlayButtonO, CgPlayPauseO } from 'react-icons/cg';
 import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
 import useLanguage from '@/hook/useLanguage';
@@ -40,9 +39,6 @@ function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
       {!isArabicOnly && <p className="text-sm my-2">{arti}</p>}
       {!isArabicOnly && (
         <div className="flex gap-3 items-center">
-          <button data-tip="Audio" onClick={onClick} className="tooltip hover:text-primary">
-            <CgPlayButtonO size={30} />
-          </button>
           <button data-tip="Bookmark" onClick={onClick} className="tooltip hover:text-primary">
             <MdBookmarkAdd size={30} />
           </button>
