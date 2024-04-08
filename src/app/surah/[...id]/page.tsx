@@ -17,10 +17,10 @@ function Surah({ params }: { params: { id: string } }) {
   const [scrollUp, setScrollUp] = useState<boolean>(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   dispatch(getDetailSurahAsync(params.id));
-  //   document.title = data.namaLatin;
-  // }, [data.namaLatin, dispatch, params.id]);
+  useEffect(() => {
+    dispatch(getDetailSurahAsync(params.id));
+    document.title = `${data.namaLatin} | Al-Quranku`;
+  }, [data.namaLatin, dispatch, params.id]);
 
   useEffect(() => {
     function handleScroll() {

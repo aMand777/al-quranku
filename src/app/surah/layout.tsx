@@ -13,9 +13,9 @@ function SurahLayout({ children }: { children: ReactNode }) {
   const { data } = useAllSurah();
   const { isOpenSurah } = useOpenSurah();
 
-  // useEffect(() => {
-  //   dispatch(getAllSurahAsync());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllSurahAsync());
+  }, [dispatch]);
 
   return (
     <>
@@ -44,7 +44,7 @@ function SurahLayout({ children }: { children: ReactNode }) {
         </div>
         {children}
       </div>
-      <SelectSurah />
+      <SelectSurah data={data} />
     </>
   );
 }
