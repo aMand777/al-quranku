@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { BiDetail } from 'react-icons/bi';
 import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
@@ -16,12 +17,13 @@ interface CardSurahProps {
 }
 
 function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const { data } = useTafsirSurah();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isArabicOnly } = useLanguage();
 
-  const onClick = () => {
+  const handleClickTafsir = () => {
     dispatch(getTafsirSurahAsync(nomorSurah.toString()));
     onOpen();
   };
@@ -39,10 +41,14 @@ function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
       {!isArabicOnly && <p className="text-sm my-2">{arti}</p>}
       {!isArabicOnly && (
         <div className="flex gap-3 items-center">
-          <button data-tip="Bookmark" onClick={onClick} className="tooltip hover:text-primary">
+          <button
+            data-tip="Bookmark"
+            onClick={() => router.push("/")}
+            className="tooltip hover:text-primary"
+          >
             <MdBookmarkAdd size={30} />
           </button>
-          <button data-tip="Tafsir" onClick={onClick} className="tooltip hover:text-primary">
+          <button data-tip="Tafsir" onClick={handleClickTafsir} className="tooltip hover:text-primary">
             <BiDetail size={30} />
           </button>
           <TafsirAyat

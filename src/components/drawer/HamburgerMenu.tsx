@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image';
 import { FiMenu } from 'react-icons/fi';
 import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
@@ -17,6 +17,7 @@ import {
 
 function HamburgerMenu() {
   const pathname = usePathname()
+  const router = useRouter()
     const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef(null)
   return (
@@ -68,7 +69,7 @@ function HamburgerMenu() {
             </div>
           </DrawerBody>
           <DrawerFooter>
-            <button className="btn btn-primary w-full">
+            <button onClick={() => router.push("/")} className="btn btn-primary w-full">
               <span className="text-xl font-semibold text-white">Login</span>
               <RiLoginCircleLine size={30} className="text-white" />
             </button>
