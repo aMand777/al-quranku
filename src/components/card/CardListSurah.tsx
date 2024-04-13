@@ -30,13 +30,14 @@ function CardListSurah({
   return (
     <Link
       href={`/surah/${nomor}`}
+      onClick={() => setIsOpenSurah(!isOpenSurah)}
       className={`${
         pathname.includes(nomor.toString())
           ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
           : ''
       } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
     >
-      <div onClick={() => setIsOpenSurah(!isOpenSurah)} className="w-full flex gap-3 items-center">
+      <div className="w-full flex gap-3 items-center">
         <Center className="w-1/4 h-10 text-xl">
           <IconNumber number={nomor.toString()} size="70" />
         </Center>
@@ -50,7 +51,7 @@ function CardListSurah({
         </div>
         <Image src="/icon-lampion.png" width={50} height={50} alt="icon-lampion" />
       </div>
-      <AudioPlayer src={audio} />
+      {pathname.includes(nomor.toString()) && <AudioPlayer src={audio} />}
     </Link>
   );
 }

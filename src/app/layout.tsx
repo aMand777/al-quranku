@@ -30,7 +30,7 @@ export default function RootLayout({
             <OpenSurahProvider>
               <ThemeProvider>
                 <ChakraProvider>
-                  <NextTopLoader color="#FEB714" height={4} showSpinner={false} />
+                  <NextTopLoader color="#FEB714" height={4} />
                   <Navbar />
                   <NavMobile />
                   {children}
