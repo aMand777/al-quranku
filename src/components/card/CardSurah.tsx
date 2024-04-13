@@ -31,11 +31,11 @@ function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
   const tafsirAyat = data.tafsir.find((tafsir) => tafsir.ayat === ayat)?.teks;
 
   return (
-    <div id={ayat.toString()} className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3">
+    <div id={`ayat-${ayat.toString()}`} className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3">
       <div dir="rtl" className="text-2xl leading-loose">
         {teksArab}
         <span className="inline-block -mb-3 text-xs">
-          <IconNumber number={ayat.toString()} size="40" />
+          <IconNumber number={`${ayat.toString()}`} size="40" />
         </span>
       </div>
       {!isArabicOnly && <p className="text-sm my-2">{arti}</p>}

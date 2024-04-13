@@ -16,34 +16,34 @@ function Surah({ params }: { params: { id: string } }) {
   const [lastScrollTop, setLastScrollTop] = useState<number>(0);
   const [scrollUp, setScrollUp] = useState<boolean>(true);
   const scrollRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     dispatch(getDetailSurahAsync(params.id));
-    document.title = `${data.namaLatin} | Al-Quranku`;
+    document.title = `${`${data.namaLatin} |`} Al-Quranku`;
   }, [data.namaLatin, dispatch, params.id]);
+  
+  // useEffect(() => {
+  //   function handleScroll() {
+  //     if (scrollRef.current) {
+  //       const currentScrollTop = scrollRef.current.scrollTop;
+  //       if (currentScrollTop > lastScrollTop) {
+  //         setScrollUp(false);
+  //       } else if (currentScrollTop < lastScrollTop) {
+  //         setScrollUp(true);
+  //       }
+  //       setLastScrollTop(currentScrollTop);
+  //     }
+  //   }
 
-  useEffect(() => {
-    function handleScroll() {
-      if (scrollRef.current) {
-        const currentScrollTop = scrollRef.current.scrollTop;
-        if (currentScrollTop > lastScrollTop) {
-          setScrollUp(false);
-        } else if (currentScrollTop < lastScrollTop) {
-          setScrollUp(true);
-        }
-        setLastScrollTop(currentScrollTop);
-      }
-    }
+  //   const element = scrollRef.current;
+  //   if (element) {
+  //     element.addEventListener('scroll', handleScroll);
 
-    const element = scrollRef.current;
-    if (element) {
-      element.addEventListener('scroll', handleScroll);
-
-      return () => {
-        element.removeEventListener('scroll', handleScroll);
-      };
-    }
-  }, [lastScrollTop]);
+  //     return () => {
+  //       element.removeEventListener('scroll', handleScroll);
+  //     };
+  //   }
+  // }, [lastScrollTop]);
 
   return (
     <>
@@ -62,10 +62,13 @@ function Surah({ params }: { params: { id: string } }) {
             <MdKeyboardDoubleArrowRight size={30} />
           )}
         </button>
-        <div
+        {/* <div
           className={`h-16 sticky top-0 z-40 transition duration-500 delay-100 ${
             scrollUp ? '-translate-y-0' : '-translate-y-full'
           }`}
+        > */}
+        <div
+          className={`h-16 sticky top-0 z-40 transition duration-500 delay-100`}
         >
           <HeaderCardSurah
             ayat={data.ayat}
