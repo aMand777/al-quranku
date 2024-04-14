@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect } from 'react';
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import { getDetailSurahAsync } from '@/redux/slice/detailSurah-slice';
 import { useAppDispatch } from '@/redux/store';
@@ -13,42 +13,15 @@ function Surah({ params }: { params: { id: string } }) {
   const dispatch = useAppDispatch();
   const { data } = useDetailSurah();
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
-  const [lastScrollTop, setLastScrollTop] = useState<number>(0);
-  const [scrollUp, setScrollUp] = useState<boolean>(true);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     dispatch(getDetailSurahAsync(params.id));
     document.title = `${`${data.namaLatin} |`} Al-Quranku`;
   }, [data.namaLatin, dispatch, params.id]);
-  
-  // useEffect(() => {
-  //   function handleScroll() {
-  //     if (scrollRef.current) {
-  //       const currentScrollTop = scrollRef.current.scrollTop;
-  //       if (currentScrollTop > lastScrollTop) {
-  //         setScrollUp(false);
-  //       } else if (currentScrollTop < lastScrollTop) {
-  //         setScrollUp(true);
-  //       }
-  //       setLastScrollTop(currentScrollTop);
-  //     }
-  //   }
-
-  //   const element = scrollRef.current;
-  //   if (element) {
-  //     element.addEventListener('scroll', handleScroll);
-
-  //     return () => {
-  //       element.removeEventListener('scroll', handleScroll);
-  //     };
-  //   }
-  // }, [lastScrollTop]);
 
   return (
     <>
       <div
-        ref={scrollRef}
         className={`${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-y-scroll scroll-smooth`}
       >
         <button
@@ -62,14 +35,7 @@ function Surah({ params }: { params: { id: string } }) {
             <MdKeyboardDoubleArrowRight size={30} />
           )}
         </button>
-        {/* <div
-          className={`h-16 sticky top-0 z-40 transition duration-500 delay-100 ${
-            scrollUp ? '-translate-y-0' : '-translate-y-full'
-          }`}
-        > */}
-        <div
-          className={`h-16 sticky top-0 z-40 transition duration-500 delay-100`}
-        >
+        <div className="h-16 sticky top-0 z-40 transition duration-500 delay-100">
           <HeaderCardSurah
             ayat={data.ayat}
             nomor={data.nomor}

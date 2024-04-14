@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { BiDetail } from 'react-icons/bi';
+import { TbReportSearch } from 'react-icons/tb';
 import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
 import useLanguage from '@/hook/useLanguage';
@@ -43,13 +43,13 @@ function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
         <div className="flex gap-3 items-center">
           <button
             data-tip="Bookmark"
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/feature")}
             className="tooltip hover:text-primary"
           >
             <MdBookmarkAdd size={30} />
           </button>
           <button data-tip="Tafsir" onClick={handleClickTafsir} className="tooltip hover:text-primary">
-            <BiDetail size={30} />
+            <TbReportSearch size={30} />
           </button>
           <TafsirAyat
             tafsir={tafsirAyat}

@@ -30,7 +30,7 @@ function TafsirAyat({ tafsir, namaLatin, ayat, isOpen, onClose }: TafsirAyatProp
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <div className="whitespace-break-spaces">{tafsir}</div>
+            <div className="whitespace-break-spaces lg:px-16 text-justify">{tafsir}</div>
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
