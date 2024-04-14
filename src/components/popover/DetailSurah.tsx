@@ -51,9 +51,8 @@ function DetailSurah({
         </PopoverHeader>
         <PopoverBody>
           <p>
-            Merupakan <span className="text-highlight">surah ke {nomor}</span>dalam al-quran yang
-            diturunkan di
-            <span className="text-highlight">{tempatTurun}</span>dengan jumlah
+            Merupakan <span className="text-highlight">surah ke {nomor}</span>dalam alquran <br/> yang
+            diturunkan di<span className="text-highlight">{tempatTurun}</span>dengan jumlah
             <span className="text-highlight">{jumlahAyat} ayat </span>yang memiliki arti
             <span className="text-highlight">{arti}</span>
           </p>
@@ -68,7 +67,7 @@ function DetailSurah({
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-            <AccordionPanel pb={4} className="overflow-y-scroll h-64">
+            <AccordionPanel pb={4} className="overflow-y-scroll h-64 text-justify whitespace-break-spaces">
               {parse(deskripsi)}
             </AccordionPanel>
           </AccordionItem>
