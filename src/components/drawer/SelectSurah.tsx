@@ -20,24 +20,27 @@ function SelectSurah({ data }: SelectSurahProps) {
       >
         <TbCardsFilled size={40} className="text-primary" />
       </button>
-      <Slide direction="bottom" in={isOpenSurah} style={{ zIndex: 10 }} className="block md:hidden">
-        <Box rounded="md" shadow="md" className="h-screen overflow-y-scroll bg-base-100">
-          {data.length > 1 ? (
-            data.map((surah) => (
-              <CardListSurah
-                key={surah.nomor}
-                nomor={surah.nomor}
-                namaLatin={surah.namaLatin}
-                jumlahAyat={surah.jumlahAyat}
-                nama={surah.nama}
-                tempatTurun={surah.tempatTurun}
-                audio={surah.audioFull["05"]}
-              />
-            ))
-          ) : (
-            <CardListSkeleton />
-          )}
-        </Box>
+      <Slide
+        direction="bottom"
+        in={isOpenSurah}
+        style={{ zIndex: 10 }}
+        className="block md:hidden h-screen bg-base-100 overflow-auto py-[42]"
+      >
+        {data.length > 1 ? (
+          data.map((surah) => (
+            <CardListSurah
+              key={surah.nomor}
+              nomor={surah.nomor}
+              namaLatin={surah.namaLatin}
+              jumlahAyat={surah.jumlahAyat}
+              nama={surah.nama}
+              tempatTurun={surah.tempatTurun}
+              audio={surah.audioFull['05']}
+            />
+          ))
+        ) : (
+          <CardListSkeleton />
+        )}
       </Slide>
     </>
   );
