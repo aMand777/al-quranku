@@ -77,17 +77,17 @@ function Navbar() {
             placeholder="Search surah"
             className="input input-bordered w-72"
           />
-          {inputFocused && searchResult.length > 0 && (
+          {inputFocused && (
             <div className="absolute top-14 max-h-44 rounded-lg w-72 bg-base-100 overflow-y-auto p-3">
-              {searchResult.map((surah) => (
-                <div
-                  onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
-                  key={surah.nomor}
-                  className="p-1 rounded-md cursor-pointer hover:bg-base-300"
-                >
-                  {surah.namaLatin}
-                </div>
-              ))}
+              {searchResult.length > 0 ? searchResult.map((surah) => (
+                  <div
+                    onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
+                    key={surah.nomor}
+                    className="p-1 rounded-md cursor-pointer hover:bg-base-300"
+                  >
+                    {surah.namaLatin}
+                  </div>
+                )) : <div>No Result</div>}
             </div>
           )}
         </div>
@@ -113,7 +113,7 @@ function Navbar() {
               </a>
             </li>
             <li>
-              <button onClick={() => router.push("/feature")} className="justify-between">
+              <button onClick={() => router.push('/feature')} className="justify-between">
                 Login
                 <RiLoginCircleLine size={20} className="text-info" />
               </button>
