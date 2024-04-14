@@ -2,27 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Mengubah lebar scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
 }
 
-/* Mengubah tinggi scrollbar (untuk scrollbar horizontal) */
 ::-webkit-scrollbar {
   height: 10px;
 }
 
-/* Mengubah warna track scrollbar */
 ::-webkit-scrollbar-track {
   @apply bg-base-100;
 }
 
-/* Mengubah warna handle scrollbar */
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-500 rounded-full;
 }
 
-/* Mengubah warna handle scrollbar saat dihover */
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-700 rounded-full;
 }

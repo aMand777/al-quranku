@@ -21,7 +21,7 @@ function SurahLayout({ children }: { children: ReactNode }) {
     <>
       <div className="flex mx-auto h-screen absolute top-0 left-0 right-0 -z-10 pt-16">
         <div
-          className={`bg-base-100 md:block transition duration-500 overflow-y-scroll border-2 border-base-300 ${
+          className={`hidden bg-base-100 md:block transition duration-500 overflow-y-scroll border-2 border-base-300 ${
             isOpenSurah ? 'w-1/3 translate-x-0' : '-translate-x-full'
           }`}
         >

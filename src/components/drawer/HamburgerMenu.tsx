@@ -53,13 +53,13 @@ function HamburgerMenu() {
                 Home
               </Link>
               <Link
-                href="#"
+                href="/feature"
                 className={`btn btn-ghost ${pathname.includes('/bookmarks') ? 'bg-base-300' : ''}`}
               >
                 Bookmarks
               </Link>
               <Link
-                href="#"
+                href="/feature"
                 className={`btn btn-ghost ${
                   pathname.includes('/jadwalsholat') ? 'bg-base-300' : ''
                 }`}
@@ -69,7 +69,7 @@ function HamburgerMenu() {
             </div>
           </DrawerBody>
           <DrawerFooter>
-            <button onClick={() => router.push("/")} className="btn btn-primary w-full">
+            <button onClick={() => router.push("/feature")} className="btn btn-primary w-full">
               <span className="text-xl font-semibold text-white">Login</span>
               <RiLoginCircleLine size={30} className="text-white" />
             </button>
