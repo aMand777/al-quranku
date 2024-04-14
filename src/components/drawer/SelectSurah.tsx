@@ -1,5 +1,5 @@
 import { TbCardsFilled } from 'react-icons/tb';
-import { Box, Slide } from '@chakra-ui/react';
+import { Slide } from '@chakra-ui/react';
 import useOpenSurah from '@/hook/useOpenSurah';
 import CardListSurah from '../card/CardListSurah';
 import { AllSurah } from '@/interface';
