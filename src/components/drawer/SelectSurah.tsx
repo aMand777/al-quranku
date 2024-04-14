@@ -24,7 +24,7 @@ function SelectSurah({ data }: SelectSurahProps) {
         direction="bottom"
         in={isOpenSurah}
         style={{ zIndex: 10 }}
-        className="block md:hidden h-screen bg-base-100 overflow-auto py-[42]"
+        className="block md:hidden h-screen bg-base-100 overflow-auto py-14"
       >
         {data.length > 1 ? (
           data.map((surah) => (
