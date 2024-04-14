@@ -32,7 +32,7 @@ function CardListSurah({
       href={`/surah/${nomor}`}
       onClick={() => setIsOpenSurah(!isOpenSurah)}
       className={`${
-        pathname.includes(nomor.toString())
+        pathname.substring(7) === nomor.toString()
           ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
           : ''
       } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
@@ -51,7 +51,7 @@ function CardListSurah({
         </div>
         <Image src="/icon-lampion.png" width={50} height={50} alt="icon-lampion" />
       </div>
-      {pathname.includes(nomor.toString()) && <AudioPlayer src={audio} />}
+      {pathname.substring(7) === nomor.toString() && <AudioPlayer src={audio} />}
     </Link>
   );
 }

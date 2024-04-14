@@ -56,9 +56,9 @@ function NavMobile() {
           placeholder="Search surah"
           className="input input-bordered w-64"
         />
-        {inputFocused && searchResult.length > 0 && (
+        {inputFocused && (
           <div className="absolute top-14 max-h-44 rounded-lg w-64 bg-base-100 overflow-y-auto p-3">
-            {searchResult.map((surah) => (
+            {searchResult.length > 0 ? searchResult.map((surah) => (
               <div
                 onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
                 key={surah.nomor}
@@ -66,7 +66,7 @@ function NavMobile() {
               >
                 {surah.namaLatin}
               </div>
-            ))}
+            )) : <div>No Result</div>}
           </div>
         )}
       </div>
