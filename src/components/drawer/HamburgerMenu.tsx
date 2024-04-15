@@ -22,8 +22,8 @@ function HamburgerMenu() {
   const btnRef = React.useRef(null);
 
   const handleClickButtonLogin = () => {
+    onClose();
     router.push('/feature');
-    onClose;
   };
   return (
     <>
