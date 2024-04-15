@@ -12,7 +12,7 @@ function Window() {
       </div>
       <div className="flex flex-col gap-5 justify-center bg-base-200 items-center py-32">
         <p className="text-6xl text-bold">Coming Soon</p>
-        <p onClick={() => router.back()} className="link link-info">Back</p>
+        <p onClick={() => router.back()} className="link link-info">Back to home</p>
       </div>
       <div className="bg-base-200">
         <Image src="/icon-lampion-100.png" alt="icon-lampion" width={70} height={70} />
