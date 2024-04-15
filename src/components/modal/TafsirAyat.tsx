@@ -7,7 +7,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
 } from '@chakra-ui/react';
 
 interface TafsirAyatProps {
@@ -33,9 +32,9 @@ function TafsirAyat({ tafsir, namaLatin, ayat, isOpen, onClose }: TafsirAyatProp
             <div className="whitespace-break-spaces lg:px-16 text-justify">{tafsir}</div>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <button onClick={onClose} className="btn btn-primary btn-outline">
               Close
-            </Button>
+            </button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -50,10 +50,10 @@ function DetailSurah({
           {namaLatin} | {nama}
         </PopoverHeader>
         <PopoverBody>
-          <p>
-            Merupakan <span className="text-highlight">surah ke {nomor}</span>dalam alquran <br/> yang
-            diturunkan di<span className="text-highlight">{tempatTurun}</span>dengan jumlah
-            <span className="text-highlight">{jumlahAyat} ayat </span>yang memiliki arti
+          <p className="text-center">
+            Surah ke <span className="text-highlight">{nomor}</span>dalam al-quran<br />yang
+            diturunkan di<span className="text-highlight">{tempatTurun}</span><br/>dengan jumlah
+            <span className="text-highlight">{jumlahAyat} ayat</span><br/>memiliki arti
             <span className="text-highlight">{arti}</span>
           </p>
         </PopoverBody>

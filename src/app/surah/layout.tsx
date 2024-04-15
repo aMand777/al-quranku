@@ -1,4 +1,6 @@
 'use client';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation'
 import { ReactNode, useEffect } from 'react';
 import { getAllSurahAsync } from '@/redux/slice/allSurah-slice';
 import { useAppDispatch } from '@/redux/store';
@@ -9,6 +11,7 @@ import CardListSurah from '@/components/card/CardListSurah';
 import CardListSkeleton from '@/components/skeleton/CardListSkeleton';
 
 function SurahLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
   const { data } = useAllSurah();
   const { isOpenSurah } = useOpenSurah();
@@ -28,8 +31,16 @@ function SurahLayout({ children }: { children: ReactNode }) {
           <div className={`${isOpenSurah ? 'block' : ' w-0 translate-x-full'} my-5`}>
             {data.length > 1 ? (
               data.map((surah) => (
-                <CardListSurah
+                <Link
                   key={surah.nomor}
+                  href={`/surah/${surah.nomor}`}
+                  className={`${
+                  pathname.substring(7) === surah.nomor.toString()
+                    ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
+                    : ''
+                } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
+                >
+                <CardListSurah
                   nomor={surah.nomor}
                   namaLatin={surah.namaLatin}
                   tempatTurun={surah.tempatTurun}
@@ -37,6 +48,7 @@ function SurahLayout({ children }: { children: ReactNode }) {
                   nama={surah.nama}
                   audio={surah.audioFull["05"]}
                 />
+                </Link>
               ))
             ) : (
               <CardListSkeleton />

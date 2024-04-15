@@ -48,20 +48,20 @@ function HamburgerMenu() {
             <div className="flex flex-col gap-3 text-xl font-semibold">
               <Link
                 href="/"
-                className={`btn btn-ghost ${pathname.includes('/') ? 'bg-base-300' : ''}`}
+                className={`btn btn-ghost ${pathname.includes('surah') ? 'bg-primary' : ''}`}
               >
                 Home
               </Link>
               <Link
                 href="/feature"
-                className={`btn btn-ghost ${pathname.includes('/bookmarks') ? 'bg-base-300' : ''}`}
+                className={`btn btn-ghost ${pathname.includes('bookmarks') ? 'bg-primary' : ''}`}
               >
                 Bookmarks
               </Link>
               <Link
                 href="/feature"
                 className={`btn btn-ghost ${
-                  pathname.includes('/jadwalsholat') ? 'bg-base-300' : ''
+                  pathname.includes('jadwalsholat') ? 'bg-primary' : ''
                 }`}
               >
                 Jadwal Sholat
@@ -69,7 +69,7 @@ function HamburgerMenu() {
             </div>
           </DrawerBody>
           <DrawerFooter>
-            <button onClick={() => router.push("/feature")} className="btn btn-primary w-full">
+            <button onClick={() => router.push("/feature")} className="btn btn-info w-full">
               <span className="text-xl font-semibold text-white">Login</span>
               <RiLoginCircleLine size={30} className="text-white" />
             </button>
