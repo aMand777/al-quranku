@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 function Window() {
   const router = useRouter();
   return (
-    <div className="mockup-window border bg-base-300 h-screen hidden md:block">
+    <div className="mockup-window border bg-base-300 h-screen">
       <div className="flex justify-end bg-base-200">
         <Image src="/mosque-icon-100.png" alt="icon-mosque" width={100} height={100} />
       </div>
