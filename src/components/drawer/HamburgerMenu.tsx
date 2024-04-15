@@ -39,7 +39,12 @@ function HamburgerMenu() {
           <DrawerBody>
             <div className="avatar flex gap-5 items-center">
               <div className="w-16 rounded-full">
-                <Image src="https://ui-avatars.com/api/?name=Guest&background=random" alt="avatar" width={100} height={100}/>
+                <Image
+                  src="https://ui-avatars.com/api/?name=Guest&background=random"
+                  alt="avatar"
+                  width={100}
+                  height={100}
+                />
               </div>
               <span className="text-xl font-semibold">Visit as Guest</span>
             </div>
@@ -47,28 +52,29 @@ function HamburgerMenu() {
             <div className="flex flex-col gap-3 text-xl font-semibold">
               <Link
                 href="/"
+                onClick={onClose}
                 className={`btn btn-ghost ${pathname.includes('surah') ? 'bg-primary' : ''}`}
               >
                 Home
               </Link>
               <Link
                 href="/feature"
+                onClick={onClose}
                 className={`btn btn-ghost ${pathname.includes('bookmarks') ? 'bg-primary' : ''}`}
               >
                 Bookmarks
               </Link>
               <Link
                 href="/feature"
-                className={`btn btn-ghost ${
-                  pathname.includes('jadwalsholat') ? 'bg-primary' : ''
-                }`}
+                onClick={onClose}
+                className={`btn btn-ghost ${pathname.includes('jadwalsholat') ? 'bg-primary' : ''}`}
               >
                 Jadwal Sholat
               </Link>
             </div>
           </DrawerBody>
           <DrawerFooter>
-            <button onClick={() => router.push("/feature")} className="btn btn-info w-full">
+            <button onClick={() => router.push('/feature')} className="btn btn-info w-full">
               <span className="text-xl font-semibold text-white">Login</span>
               <RiLoginCircleLine size={30} className="text-white" />
             </button>
