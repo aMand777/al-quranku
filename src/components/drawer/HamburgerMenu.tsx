@@ -33,10 +33,9 @@ function HamburgerMenu() {
         size="full"
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent className="pb-12">
           <DrawerCloseButton />
           <DrawerHeader>Al-Quranku</DrawerHeader>
-
           <DrawerBody>
             <div className="avatar flex gap-5 items-center">
               <div className="w-16 rounded-full">
