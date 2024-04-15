@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { TbCardsFilled } from 'react-icons/tb';
 import { Slide } from '@chakra-ui/react';
 import useOpenSurah from '@/hook/useOpenSurah';
@@ -9,7 +11,9 @@ interface SelectSurahProps {
   data: AllSurah;
 }
 
-function SelectSurah({ data }: SelectSurahProps) {
+function SelectSurah({ data }: SelectSurahProps)
+{
+  const pathname = usePathname();
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
 
   return (
@@ -28,15 +32,25 @@ function SelectSurah({ data }: SelectSurahProps) {
       >
         {data.length > 1 ? (
           data.map((surah) => (
-            <CardListSurah
+            <Link
               key={surah.nomor}
-              nomor={surah.nomor}
-              namaLatin={surah.namaLatin}
-              jumlahAyat={surah.jumlahAyat}
-              nama={surah.nama}
-              tempatTurun={surah.tempatTurun}
-              audio={surah.audioFull['05']}
-            />
+              href={ `/surah/${surah.nomor}` }
+              onClick={() => setIsOpenSurah(!isOpenSurah)}
+              className={`${
+                pathname.substring(7) === surah.nomor.toString()
+                  ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
+                  : ''
+              } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
+            >
+              <CardListSurah
+                nomor={surah.nomor}
+                namaLatin={surah.namaLatin}
+                jumlahAyat={surah.jumlahAyat}
+                nama={surah.nama}
+                tempatTurun={surah.tempatTurun}
+                audio={surah.audioFull['05']}
+              />
+            </Link>
           ))
         ) : (
           <CardListSkeleton />
