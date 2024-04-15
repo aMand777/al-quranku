@@ -4,7 +4,7 @@ import { Center } from '@chakra-ui/react';
 import IconNumber from '../card/IconNumber';
 
 function CardListSkeleton() {
-  const loop = new Array(114).fill(null);
+  const loop = new Array(7).fill(null);
   return (
     <>
       {loop.map((_, index) => (
