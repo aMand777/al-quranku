@@ -6,7 +6,7 @@ function FeatureLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push('/');
+      router.back();
     }, 5000);
     return () => clearTimeout(timer);
   }, [router]);
