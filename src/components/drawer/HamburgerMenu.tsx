@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FiMenu } from 'react-icons/fi';
 import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
@@ -16,10 +16,15 @@ import {
 } from '@chakra-ui/react';
 
 function HamburgerMenu() {
-  const pathname = usePathname()
-  const router = useRouter()
-    const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef(null)
+  const pathname = usePathname();
+  const router = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef(null);
+
+  const handleClickButtonLogin = () => {
+    router.push('/feature');
+    onClose;
+  };
   return (
     <>
       <button className="btn btn-circle" ref={btnRef} onClick={onOpen}>
@@ -74,7 +79,7 @@ function HamburgerMenu() {
             </div>
           </DrawerBody>
           <DrawerFooter>
-            <button onClick={() => router.push('/feature')} className="btn btn-info w-full">
+            <button onClick={handleClickButtonLogin} className="btn btn-info w-full">
               <span className="text-xl font-semibold text-white">Login</span>
               <RiLoginCircleLine size={30} className="text-white" />
             </button>
@@ -85,4 +90,4 @@ function HamburgerMenu() {
   );
 }
 
-export default HamburgerMenu
+export default HamburgerMenu;
