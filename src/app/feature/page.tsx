@@ -3,7 +3,7 @@ import Window from '@/components/mockup/Window'
 
 function Feature() {
   return (
-    <div>
+    <div className="h-screen w-screen flex flex-col justify-center items-center">
       <Window />
     </div>
   )
