@@ -15,7 +15,11 @@ function CardSurahSkeleton() {
               <div className="skeleton my-2 w-3/4 h-4 bg-base-200" />
             </div>
             <span className="inline-block -mb-3 text-xs">
-              <IconNumber number="0" size="40" className="skeleton text-base-200" />
+              <IconNumber
+                number={(index + 1).toString()}
+                size="40"
+                className="skeleton text-base-200"
+              />
             </span>
           </div>
           <div className="w-full">
