@@ -79,7 +79,8 @@ function Navbar() {
           />
           {inputFocused && (
             <div className="absolute top-14 max-h-44 rounded-lg w-72 bg-base-100 overflow-y-auto p-3">
-              {searchResult.length > 0 ? searchResult.map((surah) => (
+              {searchResult.length > 0 ? (
+                searchResult.map((surah) => (
                   <div
                     onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
                     key={surah.nomor}
@@ -87,7 +88,10 @@ function Navbar() {
                   >
                     {surah.namaLatin}
                   </div>
-                )) : <div>No Result</div>}
+                ))
+              ) : (
+                <div>No Result</div>
+              )}
             </div>
           )}
         </div>
@@ -107,10 +111,10 @@ function Navbar() {
             className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
           >
             <li>
-              <a className="justify-between">
+              <div className="justify-between hover:bg-base-100">
                 Visit as Guest
                 <FaUserCircle size={20} className="text-primary" />
-              </a>
+              </div>
             </li>
             <li>
               <button onClick={() => router.push('/feature')} className="justify-between">
