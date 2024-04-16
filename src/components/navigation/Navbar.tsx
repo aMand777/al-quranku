@@ -60,10 +60,10 @@ function Navbar() {
         </div>
       </div>
       <div className="gap-5 mx-5 text-white">
-        <Link className="text-base hover:text-secondary" href="#">
+        <Link className="text-base hover:text-secondary" href="/feature">
           Bookmarks
         </Link>
-        <Link className="text-base hover:text-secondary" href="#">
+        <Link className="text-base hover:text-secondary" href="/feature">
           Jadwal Sholat
         </Link>
       </div>
