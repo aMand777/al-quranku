@@ -8,7 +8,7 @@ function SwitchLang() {
   };
 
   return (
-    <div data-tip="Arabic only" className="tooltip tooltip-right -mb-2 text-black">
+    <div data-tip="Arabic only" className="tooltip tooltip-bottom -mb-2 text-black">
       <label className="swap">
         <input type="checkbox" onChange={handleInputCheckbox} />
         <div className="swap-on">ON</div>
