@@ -9,6 +9,7 @@ import OpenSurahProvider from '@/context/OpenSurah';
 import LanguageProvider from '@/context/Language';
 import Navbar from '@/components/navigation/Navbar';
 import NavMobile from '@/components/navigation/NavMobile';
+import LoadingApp from '@/components/loading/LoadingApp';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,18 +27,19 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <StoreProvider>
-          <LanguageProvider>
-            <OpenSurahProvider>
-              <ThemeProvider>
-                <ChakraProvider>
-                  <NextTopLoader color="#FEB714" height={ 4 } showSpinner={ false } />
-                  <Navbar />
-                  <NavMobile />
-                  {children}
-                </ChakraProvider>
-              </ThemeProvider>
-            </OpenSurahProvider>
-          </LanguageProvider>
+            <LanguageProvider>
+              <OpenSurahProvider>
+                <ThemeProvider>
+                  <ChakraProvider>
+                    <NextTopLoader color="#FEB714" height={4} showSpinner={false} />
+                    <LoadingApp />
+                    <Navbar />
+                    <NavMobile />
+                    {children}
+                  </ChakraProvider>
+                </ThemeProvider>
+              </OpenSurahProvider>
+            </LanguageProvider>
         </StoreProvider>
       </body>
     </html>
