@@ -7,7 +7,7 @@ interface LanguageContext {
 }
 
 const initialLanguageContext: LanguageContext = {
-  isArabicOnly: true,
+  isArabicOnly: false,
   setIsArabicOnly: () => {},
 };
 

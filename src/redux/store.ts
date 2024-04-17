@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import preloadReducer from '@/redux/slice/preload-slice';
 import allSurahReducer from '@/redux/slice/allSurah-slice';
 import detailSurahReducer from '@/redux/slice/detailSurah-slice';
 import tafsirSurahReducer from '@/redux/slice/tafsirSurah-slice';
 
 const store = configureStore({
   reducer: {
+    preload: preloadReducer,
     allSurah: allSurahReducer,
     detailSurah: detailSurahReducer,
     tafsirSurah: tafsirSurahReducer,

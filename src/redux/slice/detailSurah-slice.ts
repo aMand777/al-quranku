@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import getDetailSurah from '@/services/getDetailSurah.services';
 import { DetailSurah } from '@/interface';
 
@@ -61,15 +60,12 @@ export const { setData } = detailSurahSlice.actions;
 export const getDetailSurahAsync = createAsyncThunk(
   'allSurah',
   async (surah: string, { dispatch }) => {
-    dispatch(showLoading());
     try {
       const response = await getDetailSurah(surah);
       if (response.code === 200) {
-        dispatch(hideLoading());
         dispatch(setData(response.data));
       }
     } catch (error) {
-      dispatch(hideLoading());
       return error;
     }
   },
