@@ -4,7 +4,6 @@ import { Ayat } from '@/interface';
 import IconNumber from '@/components/card/IconNumber';
 import DetailSurah from '../popover/DetailSurah';
 import SwitchLang from '../toggle/SwitchLang';
-import AudioPlayer from '@/components/audio/AudioPlayer';
 
 interface HeaderCardSurah {
   ayat: Ayat[];

@@ -14,19 +14,19 @@ interface SelectSurahProps {
 function SelectSurah({ data }: SelectSurahProps)
 {
   const pathname = usePathname();
-  const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
+  const { isOpenSurahOnMobile, setIsOpenSurahOnMobile } = useOpenSurah();
 
   return (
     <>
       <button
-        onClick={() => setIsOpenSurah(!isOpenSurah)}
+        onClick={() => setIsOpenSurahOnMobile(!isOpenSurahOnMobile)}
         className="z-50 fixed bottom-5 right-5 block md:hidden duration-500 hover:rotate-12"
       >
         <TbCardsFilled size={40} className="text-primary" />
       </button>
       <Slide
         direction="bottom"
-        in={isOpenSurah}
+        in={isOpenSurahOnMobile}
         style={{ zIndex: 10 }}
         className="block md:hidden h-screen bg-base-100 overflow-auto py-14"
       >
@@ -34,8 +34,8 @@ function SelectSurah({ data }: SelectSurahProps)
           data.map((surah) => (
             <Link
               key={surah.nomor}
-              href={ `/surah/${surah.nomor}` }
-              onClick={() => setIsOpenSurah(!isOpenSurah)}
+              href={`/surah/${surah.nomor}`}
+              onClick={() => setIsOpenSurahOnMobile(!isOpenSurahOnMobile)}
               className={`${
                 pathname.substring(7) === surah.nomor.toString()
                   ? 'ring ring-primary ring-offset-base-100 ring-offset-2'

@@ -3,10 +3,12 @@ import getDetailSurah from '@/services/getDetailSurah.services';
 import { DetailSurah } from '@/interface';
 
 interface InitialStateDetailSurah {
+  isLoading: boolean;
   data: DetailSurah;
 }
 
 const initialState: InitialStateDetailSurah = {
+  isLoading: false,
   data: {
     nomor: 0,
     nama: '',
@@ -52,20 +54,26 @@ const detailSurahSlice = createSlice({
     setData(state, action: PayloadAction<DetailSurah>) {
       state.data = action.payload;
     },
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { setData } = detailSurahSlice.actions;
+export const { setLoading, setData } = detailSurahSlice.actions;
 
 export const getDetailSurahAsync = createAsyncThunk(
   'allSurah',
   async (surah: string, { dispatch }) => {
+    dispatch(setLoading(true));
     try {
       const response = await getDetailSurah(surah);
       if (response.code === 200) {
+        dispatch(setLoading(false));
         dispatch(setData(response.data));
       }
     } catch (error) {
+      dispatch(setLoading(false));
       return error;
     }
   },
