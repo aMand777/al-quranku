@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import useDetailSurah from '@/hook/useDetailSurah';
 import { Ayat } from '@/interface';
 import IconNumber from '@/components/card/IconNumber';
 import DetailSurah from '../popover/DetailSurah';
@@ -26,6 +27,7 @@ function HeaderCardSurah({
   arti,
   deskripsi,
 }: HeaderCardSurah) {
+  const { isLoading } = useDetailSurah();
   const router = useRouter();
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -37,16 +39,14 @@ function HeaderCardSurah({
     <div className="w-full">
       <div className="mx-auto bg-accent w-11/12 h-full rounded-lg flex justify-around items-center">
         <div className="flex items-center">
-          <IconNumber number={nomor.toString()} className="text-black" />
+          {!isLoading && <IconNumber number={nomor.toString()} className="text-black" />}
           <h2 className="text-base md:text-xl flex items-center gap-1 text-black">
-            {namaLatin || <div className="skeleton h-4 w-16 bg-secondary" />}{' '}
+            {isLoading ? <div className="skeleton h-4 w-16 bg-secondary" /> : namaLatin}{' '}
             <span className="hidden md:block">|</span>
             <span
-              className={`hidden md:block ${
-                nama.length < 1 ? 'skeleton w-16 h-4 bg-secondary' : ''
-              }`}
+              className={`hidden md:block ${isLoading ? 'skeleton w-16 h-4 bg-secondary' : ''}`}
             >
-              {nama}
+              {isLoading ? '' : nama}
             </span>
           </h2>
           <DetailSurah
