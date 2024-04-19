@@ -1,9 +1,9 @@
 import { useAppSelector } from '@/redux/store';
 
 const useDetailSurah = () => {
-  const { data } = useAppSelector(({ detailSurah }) => detailSurah);
+  const { isLoading, data } = useAppSelector(({ detailSurah }) => detailSurah);
 
-  return { data };
+  return { isLoading, data };
 };
 
 export default useDetailSurah;

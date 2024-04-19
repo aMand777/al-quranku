@@ -8,10 +8,11 @@ import useDetailSurah from '@/hook/useDetailSurah';
 import CardSurah from '@/components/card/CardSurah';
 import HeaderCardSurah from '@/components/card/HeaderCardSurah';
 import CardSurahSkeleton from '@/components/skeleton/CardSurahSkeleton';
+import NotFoundSurah from '@/components/notFound/NotFoundSurah';
 
 function Surah({ params }: { params: { id: string } }) {
   const dispatch = useAppDispatch();
-  const { data } = useDetailSurah();
+  const { isLoading, data } = useDetailSurah();
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
 
   useEffect(() => {
@@ -47,19 +48,18 @@ function Surah({ params }: { params: { id: string } }) {
             deskripsi={data.deskripsi}
           />
         </div>
-        {data.ayat.length > 1 ? (
-          data.ayat.map((ayat) => (
-            <CardSurah
-              key={ayat.nomorAyat}
-              nomorSurah={data.nomor}
-              teksArab={ayat.teksArab}
-              arti={ayat.teksIndonesia}
-              ayat={ayat.nomorAyat}
-            />
-          ))
-        ) : (
-          <CardSurahSkeleton />
-        )}
+        {data.ayat.length > 1 && !isLoading
+          ? data.ayat.map((ayat) => (
+              <CardSurah
+                key={ayat.nomorAyat}
+                nomorSurah={data.nomor}
+                teksArab={ayat.teksArab}
+                arti={ayat.teksIndonesia}
+                ayat={ayat.nomorAyat}
+              />
+            ))
+          : isLoading && <CardSurahSkeleton />}
+        {!isLoading && data.ayat.length === 1 && <NotFoundSurah />}
       </div>
     </>
   );
