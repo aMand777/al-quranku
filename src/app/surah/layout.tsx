@@ -1,9 +1,10 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
 import { getAllSurahAsync } from '@/redux/slice/allSurah-slice';
 import { useAppDispatch } from '@/redux/store';
+import { setLoading } from '@/redux/slice/detailSurah-slice';
 import useOpenSurah from '@/hook/useOpenSurah';
 import useAllSurah from '@/hook/useAllSurah';
 import SelectSurah from '@/components/drawer/SelectSurah';
@@ -20,6 +21,10 @@ function SurahLayout({ children }: { children: ReactNode }) {
     dispatch(getAllSurahAsync());
   }, [dispatch]);
 
+  const handleClickSelectSurah = () => {
+    dispatch(setLoading(true));
+  };
+
   return (
     <>
       <div className="flex mx-auto h-screen absolute top-0 left-0 right-0 -z-10 pt-16">
@@ -34,20 +39,21 @@ function SurahLayout({ children }: { children: ReactNode }) {
                 <Link
                   key={surah.nomor}
                   href={`/surah/${surah.nomor}`}
+                  onClick={handleClickSelectSurah}
                   className={`${
-                  pathname.substring(7) === surah.nomor.toString()
-                    ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
-                    : ''
-                } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
+                    pathname.substring(7) === surah.nomor.toString()
+                      ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
+                      : ''
+                  } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
                 >
-                <CardListSurah
-                  nomor={surah.nomor}
-                  namaLatin={surah.namaLatin}
-                  tempatTurun={surah.tempatTurun}
-                  jumlahAyat={surah.jumlahAyat}
-                  nama={surah.nama}
-                  audio={surah.audioFull["05"]}
-                />
+                  <CardListSurah
+                    nomor={surah.nomor}
+                    namaLatin={surah.namaLatin}
+                    tempatTurun={surah.tempatTurun}
+                    jumlahAyat={surah.jumlahAyat}
+                    nama={surah.nama}
+                    audio={surah.audioFull['05']}
+                  />
                 </Link>
               ))
             ) : (

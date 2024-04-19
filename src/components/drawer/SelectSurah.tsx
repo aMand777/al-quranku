@@ -3,6 +3,8 @@ import { usePathname } from 'next/navigation';
 import { TbCardsFilled } from 'react-icons/tb';
 import { Slide } from '@chakra-ui/react';
 import useOpenSurah from '@/hook/useOpenSurah';
+import { setLoading } from '@/redux/slice/detailSurah-slice';
+import { useAppDispatch } from '@/redux/store';
 import CardListSurah from '../card/CardListSurah';
 import { AllSurah } from '@/interface';
 import CardListSkeleton from '@/components/skeleton/CardListSkeleton';
@@ -11,10 +13,15 @@ interface SelectSurahProps {
   data: AllSurah;
 }
 
-function SelectSurah({ data }: SelectSurahProps)
-{
+function SelectSurah({ data }: SelectSurahProps) {
+  const dispatch = useAppDispatch();
   const pathname = usePathname();
   const { isOpenSurahOnMobile, setIsOpenSurahOnMobile } = useOpenSurah();
+
+  const handleClickSelectSurah = () => {
+    dispatch(setLoading(true));
+    setIsOpenSurahOnMobile(!isOpenSurahOnMobile);
+  };
 
   return (
     <>
@@ -35,7 +42,7 @@ function SelectSurah({ data }: SelectSurahProps)
             <Link
               key={surah.nomor}
               href={`/surah/${surah.nomor}`}
-              onClick={() => setIsOpenSurahOnMobile(!isOpenSurahOnMobile)}
+              onClick={handleClickSelectSurah}
               className={`${
                 pathname.substring(7) === surah.nomor.toString()
                   ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
