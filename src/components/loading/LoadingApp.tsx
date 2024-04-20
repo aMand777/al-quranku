@@ -20,7 +20,7 @@ function LoadingApp() {
           height={100}
           className="animate-pulse"
         />
-        <span className="loading loading-infinity loading-lg bg-primary"></span>
+        <span className="loading loading-dots loading-lg bg-primary"></span>
       </div>
     </div>
   );
