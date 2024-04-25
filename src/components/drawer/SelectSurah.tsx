@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { TbCardsFilled } from 'react-icons/tb';
@@ -7,7 +8,6 @@ import { setLoading } from '@/redux/slice/detailSurah-slice';
 import { useAppDispatch } from '@/redux/store';
 import CardListSurah from '../card/CardListSurah';
 import { AllSurah } from '@/interface';
-import CardListSkeleton from '@/components/skeleton/CardListSkeleton';
 
 interface SelectSurahProps {
   data: AllSurah;
@@ -37,7 +37,7 @@ function SelectSurah({ data }: SelectSurahProps) {
         style={{ zIndex: 10 }}
         className="block md:hidden h-screen bg-base-100 overflow-auto py-14"
       >
-        {data.length > 1 ? (
+        {data.length > 0 && (
           data.map((surah) => (
             <Link
               key={surah.nomor}
@@ -59,8 +59,6 @@ function SelectSurah({ data }: SelectSurahProps) {
               />
             </Link>
           ))
-        ) : (
-          <CardListSkeleton />
         )}
       </Slide>
     </>

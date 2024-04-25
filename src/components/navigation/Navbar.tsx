@@ -5,13 +5,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
-import useAllSurah from '@/hook/useAllSurah';
 import { Surah } from '@/interface';
-import SwitchTheme from '../toggle/SwitchTheme';
+import SwitchTheme from '@/components/toggle/SwitchTheme';
+import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 
 function Navbar() {
+  const { data: allSurah } = useGetAllSurahQuery(null);
   const router = useRouter();
-  const { data } = useAllSurah();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<Surah[]>([]);
@@ -20,8 +20,8 @@ function Navbar() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     const querySearch = event.target.value.toLowerCase();
-    const result = data.filter(
-      (surah) =>
+    const result = allSurah?.data.filter(
+      (surah: Surah) =>
         surah.namaLatin.toLowerCase().includes(querySearch) ||
         surah.nomor.toString().toLowerCase().includes(querySearch),
     );

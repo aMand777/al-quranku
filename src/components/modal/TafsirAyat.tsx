@@ -12,12 +12,12 @@ import {
 interface TafsirAyatProps {
   tafsir: string | undefined;
   namaLatin: string;
-  ayat: number;
+  nomorAyat: number;
   isOpen: boolean;
   onClose: () => void;
 }
 
-function TafsirAyat({ tafsir, namaLatin, ayat, isOpen, onClose }: TafsirAyatProps) {
+function TafsirAyat({ tafsir, namaLatin, nomorAyat, isOpen, onClose }: TafsirAyatProps) {
 
   return (
     <>
@@ -25,7 +25,7 @@ function TafsirAyat({ tafsir, namaLatin, ayat, isOpen, onClose }: TafsirAyatProp
         <ModalOverlay />
         <ModalContent>
           <ModalHeader className="text-center">
-            Tafsir {namaLatin} Ayat {ayat}
+            Tafsir {namaLatin} Ayat {nomorAyat}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
