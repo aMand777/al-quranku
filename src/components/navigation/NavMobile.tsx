@@ -1,14 +1,14 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import useAllSurah from '@/hook/useAllSurah';
 import { Surah } from '@/interface';
 import HamburgerMenu from '@/components/drawer/HamburgerMenu';
 import SwitchTheme from '@/components/toggle/SwitchTheme';
+import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 
 function NavMobile() {
+  const { data: allSurah } = useGetAllSurahQuery(null);
   const router = useRouter();
-  const { data } = useAllSurah();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<Surah[]>([]);
@@ -17,8 +17,8 @@ function NavMobile() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     const querySearch = event.target.value.toLowerCase();
-    const result = data.filter(
-      (surah) =>
+    const result = allSurah?.data.filter(
+      (surah: Surah) =>
         surah.namaLatin.toLowerCase().includes(querySearch) ||
         surah.nomor.toString().toLowerCase().includes(querySearch),
     );
