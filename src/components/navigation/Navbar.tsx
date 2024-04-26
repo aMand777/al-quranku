@@ -56,9 +56,6 @@ function Navbar() {
         <Link href="/" className="text-2xl font-bold cursor-default">
           Al-Quranku
         </Link>
-        {/* <div data-tip="Switch Theme" className="tooltip tooltip-right ml-3">
-          <SwitchTheme className="hover:text-secondary duration-400" />
-        </div> */}
       </div>
       <div className="flex w-1/4 gap-5 mx-5 text-black justify-end">
         <Link
@@ -69,7 +66,7 @@ function Navbar() {
           Bookmarks
         </Link>
         <div data-tip="Theme" className="tooltip tooltip-bottom">
-          <SwitchTheme className="hover:text-secondary duration-400" />
+          <SwitchTheme size="8" className="hover:text-secondary duration-400" />
         </div>
       </div>
       <div className="flex-none gap-3">

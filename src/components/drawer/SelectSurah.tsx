@@ -27,13 +27,14 @@ function SelectSurah({ data }: SelectSurahProps) {
 
   return (
     <>
-      <button
+      <span
         ref={btnRef}
         onClick={onOpen}
-        className="z-50 fixed bottom-5 right-5 block md:hidden duration-500 hover:rotate-12"
+        className="z-50 fixed bottom-5 right-5 md:hidden flex flex-col items-center"
       >
-        <TbCardsFilled size={40} className="text-primary" />
-      </button>
+        <TbCardsFilled size={40} className="text-primary hover:rotate-12 duration-500" />
+        <span className="text-[10px]">List</span>
+      </span>
       <Drawer
         isOpen={isOpen}
         placement="bottom"
@@ -42,9 +43,9 @@ function SelectSurah({ data }: SelectSurahProps) {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader className="bg-primary text-white">Select Surah</DrawerHeader>
-          <DrawerBody className="block md:hidden bg-base-100 overflow-auto">
+          <DrawerCloseButton className="text-black" />
+          <DrawerHeader className="bg-primary text-black">Select Surah</DrawerHeader>
+          <DrawerBody>
             {data.length > 0 &&
               data.map((surah) => (
                 <Link
@@ -55,7 +56,7 @@ function SelectSurah({ data }: SelectSurahProps) {
                     pathname.substring(7) === surah.nomor.toString()
                       ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
                       : ''
-                  } card w-full h-full bg-base-300 shadow-xl mx-auto my-5 py-5`}
+                  } card w-full bg-base-300 shadow-xl mx-auto my-5 py-5`}
                 >
                   <CardListSurah
                     nomor={surah.nomor}
