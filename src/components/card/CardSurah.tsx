@@ -39,20 +39,22 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah }: CardSurahProps) {
       </div>
       {!isArabicOnly && <p className="text-sm my-2">{arti}</p>}
       {!isArabicOnly && (
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-5 items-center mt-3">
           <button
-            data-tip="Bookmark"
+            // data-tip="Bookmark"
             onClick={() => router.push('/feature')}
-            className="tooltip hover:text-primary"
+            className="flex flex-col justify-center items-center"
           >
-            <MdBookmarkAdd size={30} />
+            <MdBookmarkAdd size={30} className="hover:text-primary" />
+            <span className="text-xs">Bookmark</span>
           </button>
           <button
-            data-tip="Tafsir"
+            // data-tip="Tafsir"
             onClick={handleClickTafsir}
-            className="tooltip hover:text-primary"
+            className="flex flex-col justify-center items-center"
           >
-            <TbReportSearch size={30} />
+            <TbReportSearch size={30} className="hover:text-primary" />
+            <span className="text-xs">Tafsir</span>
           </button>
           <TafsirAyat
             tafsir={tafsirAyat}
