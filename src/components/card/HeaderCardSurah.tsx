@@ -4,6 +4,7 @@ import { DetailSurah } from '@/interface';
 import IconNumber from '@/components/card/IconNumber';
 import InfoDetailSurah from '../popover/InfoDetailSurah';
 import SwitchLang from '../toggle/SwitchLang';
+import AudioPlayer from '@/components/audio/AudioPlayer';
 
 function HeaderCardSurah({ detailSurah }: {detailSurah: DetailSurah}) {
   const router = useRouter();
@@ -37,6 +38,7 @@ function HeaderCardSurah({ detailSurah }: {detailSurah: DetailSurah}) {
           </select>
         </div>
       </div>
+      <AudioPlayer src={detailSurah?.audioFull["05"]} />
     </div>
   );
 }

@@ -19,12 +19,14 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
 
   useEffect(() => {
-    dispatch(setPreload(false))
+    dispatch(setPreload(false));
     document.title = `${`${detailSurah?.namaLatin} |`} Al-Quranku`;
   }, [detailSurah?.namaLatin, dispatch]);
 
   return (
-    <div className={`${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-auto scroll-smooth`}>
+    <div
+      className={`${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-auto scroll-smooth`}
+    >
       <button
         className="hidden md:block tooltip tooltip-right absolute z-50 text-primary"
         data-tip={isOpenSurah ? 'Close list' : 'Open list'}

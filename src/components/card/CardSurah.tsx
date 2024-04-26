@@ -41,7 +41,6 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah }: CardSurahProps) {
       {!isArabicOnly && (
         <div className="flex gap-5 items-center mt-3">
           <button
-            // data-tip="Bookmark"
             onClick={() => router.push('/feature')}
             className="flex flex-col justify-center items-center"
           >
@@ -49,7 +48,6 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah }: CardSurahProps) {
             <span className="text-xs">Bookmark</span>
           </button>
           <button
-            // data-tip="Tafsir"
             onClick={handleClickTafsir}
             className="flex flex-col justify-center items-center"
           >
