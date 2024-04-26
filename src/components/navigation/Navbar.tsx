@@ -8,6 +8,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { Surah } from '@/interface';
 import SwitchTheme from '@/components/toggle/SwitchTheme';
 import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
+import { MdBookmark } from 'react-icons/md';
 
 function Navbar() {
   const { data: allSurah } = useGetAllSurahQuery(null);
@@ -51,23 +52,27 @@ function Navbar() {
 
   return (
     <div className="navbar bg-primary z-50 hidden md:flex">
-      <div className="flex-1 text-white">
+      <div className="flex-1 text-black">
         <Link href="/" className="text-2xl font-bold cursor-default">
           Al-Quranku
         </Link>
-        <div data-tip="Switch Theme" className="tooltip tooltip-right ml-3">
-          <SwitchTheme className="hover:text-secondary" />
-        </div>
+        {/* <div data-tip="Switch Theme" className="tooltip tooltip-right ml-3">
+          <SwitchTheme className="hover:text-secondary duration-400" />
+        </div> */}
       </div>
-      <div className="gap-5 mx-5 text-white">
-        <Link className="text-base hover:text-secondary" href="/feature">
+      <div className="flex w-1/4 gap-5 mx-5 text-black justify-end">
+        <Link
+          className="flex items-center text-base font-semibold hover:text-secondary duration-400 text-black mx-5"
+          href="/feature"
+        >
+          <MdBookmark size={30} />
           Bookmarks
         </Link>
-        <Link className="text-base hover:text-secondary" href="/feature">
-          Jadwal Sholat
-        </Link>
+        <div data-tip="Theme" className="tooltip tooltip-bottom">
+          <SwitchTheme className="hover:text-secondary duration-400" />
+        </div>
       </div>
-      <div className="flex-none gap-2">
+      <div className="flex-none gap-3">
         <div ref={searchContainerRef} className="form-control relative">
           <input
             onFocus={() => setInputFocused(true)}

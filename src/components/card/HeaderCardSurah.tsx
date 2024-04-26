@@ -32,8 +32,8 @@ function HeaderCardSurah({ detailSurah }: {detailSurah: DetailSurah}) {
           <SwitchLang />
         </div>
         <div className="flex items-center">
-          <span className="text-base md:text-lg text-black mr-1">Ayat:</span>
-          <select onChange={handleChangeSelect} className="select select-secondary w-full max-w-xs">
+          <label htmlFor="gotoAyat" className="text-base md:text-lg text-black mr-1">Ayat:</label>
+          <select id="gotoAyat" onChange={handleChangeSelect} className="select select-secondary w-full max-w-xs">
             {detailSurah?.ayat.length > 0 && detailSurah?.ayat.map((ayat) => <option key={ayat.nomorAyat}>{ayat.nomorAyat}</option>)}
           </select>
         </div>
