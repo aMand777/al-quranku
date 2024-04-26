@@ -38,9 +38,9 @@ function HamburgerMenu() {
         size="full"
       >
         <DrawerOverlay />
-        <DrawerContent className="pb-12">
+        <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Al-Quranku</DrawerHeader>
+          <DrawerHeader className="bg-primary text-white">Al-Quranku</DrawerHeader>
           <DrawerBody>
             <div className="avatar flex gap-5 items-center">
               <div className="w-16 rounded-full">
@@ -54,35 +54,31 @@ function HamburgerMenu() {
               <span className="text-xl font-semibold">Visit as Guest</span>
             </div>
             <div className="divider" />
-            <div className="flex flex-col gap-3 text-xl font-semibold">
+            <div className="flex flex-col gap-3 font-semibold">
               <Link
                 href="/"
                 onClick={onClose}
-                className={`btn btn-ghost ${pathname.includes('surah') ? 'bg-primary' : ''}`}
+                className={`btn btn-ghost text-lg ${pathname.includes('surah') ? 'text-primary' : ''}`}
               >
                 Home
               </Link>
               <Link
                 href="/feature"
                 onClick={onClose}
-                className={`btn btn-ghost ${pathname.includes('bookmarks') ? 'bg-primary' : ''}`}
+                className={`btn btn-ghost text-lg ${pathname.includes('bookmarks') ? 'text-primary' : ''}`}
               >
                 Bookmarks
               </Link>
-              <Link
-                href="/feature"
-                onClick={onClose}
-                className={`btn btn-ghost ${pathname.includes('jadwalsholat') ? 'bg-primary' : ''}`}
-              >
-                Jadwal Sholat
-              </Link>
             </div>
           </DrawerBody>
-          <DrawerFooter>
+          <DrawerFooter className="flex flex-col gap-7">
             <button onClick={handleClickButtonLogin} className="btn btn-info w-full">
               <span className="text-xl font-semibold text-white">Login</span>
               <RiLoginCircleLine size={30} className="text-white" />
             </button>
+            <div>
+              &copy; 2024 with <span className="animate-pulse text-error">&#10084;</span> by @aMand
+            </div>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import { Center } from '@chakra-ui/react';
 import IconNumber from './IconNumber';
-import AudioPlayer from '@/components/audio/AudioPlayer';
 
 interface CardListSurahProps {
   nomor: number;
@@ -10,7 +9,6 @@ interface CardListSurahProps {
   namaLatin: string;
   jumlahAyat: number;
   tempatTurun: string;
-  audio: string;
 }
 
 function CardListSurah({
@@ -19,7 +17,6 @@ function CardListSurah({
   namaLatin,
   jumlahAyat,
   tempatTurun,
-  audio,
 }: CardListSurahProps) {
   return (
     <>

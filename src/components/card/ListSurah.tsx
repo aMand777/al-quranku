@@ -38,7 +38,6 @@ function ListSurah({ data }: ListSurahProps) {
                 tempatTurun={surah.tempatTurun}
                 jumlahAyat={surah.jumlahAyat}
                 nama={surah.nama}
-                audio={surah.audioFull['05']}
               />
             </Link>
           ))

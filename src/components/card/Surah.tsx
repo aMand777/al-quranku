@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import useOpenSurah from '@/hook/useOpenSurah';
 import { DetailSurah, Ayat, TafsirSurah } from '@/interface';
@@ -24,9 +24,7 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
   }, [detailSurah?.namaLatin, dispatch]);
 
   return (
-    <div
-      className={`${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-auto scroll-smooth`}
-    >
+    <div className={`${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-auto scroll-smooth`}>
       <button
         className="hidden md:block tooltip tooltip-right absolute z-50 text-primary"
         data-tip={isOpenSurah ? 'Close list' : 'Open list'}
