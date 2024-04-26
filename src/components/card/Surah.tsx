@@ -25,8 +25,8 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
 
   return (
     <div className={`${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-auto scroll-smooth`}>
-      <button
-        className="hidden md:block tooltip tooltip-right absolute z-50 text-primary"
+      <span
+        className="hidden md:block tooltip tooltip-right absolute z-50 text-primary cursor-pointer"
         data-tip={isOpenSurah ? 'Close list' : 'Open list'}
         onClick={() => setIsOpenSurah(!isOpenSurah)}
       >
@@ -35,7 +35,7 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
         ) : (
           <MdKeyboardDoubleArrowRight size={30} />
         )}
-      </button>
+      </span>
       <div className="h-16 sticky top-0 z-40">
         <HeaderCardSurah detailSurah={detailSurah} />
       </div>

@@ -39,13 +39,11 @@ function SelectSurah({ data }: SelectSurahProps) {
         placement="bottom"
         onClose={onClose}
         finalFocusRef={btnRef}
-        size="lg"
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader className="bg-primary text-white">Select Surah</DrawerHeader>
-
           <DrawerBody className="block md:hidden bg-base-100 overflow-auto">
             {data.length > 0 &&
               data.map((surah) => (
@@ -57,7 +55,7 @@ function SelectSurah({ data }: SelectSurahProps) {
                     pathname.substring(7) === surah.nomor.toString()
                       ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
                       : ''
-                  } card w-full bg-base-300 shadow-xl mx-auto my-5 py-5`}
+                  } card w-full h-full bg-base-300 shadow-xl mx-auto my-5 py-5`}
                 >
                   <CardListSurah
                     nomor={surah.nomor}

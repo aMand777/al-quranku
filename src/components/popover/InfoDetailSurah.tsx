@@ -22,9 +22,9 @@ function InfoDetailSurah({ detailSurah }: { detailSurah: DetailSurah }) {
   return (
     <Popover>
       <PopoverTrigger>
-        <button className="p-5">
+        <div className="p-5 cursor-pointer">
           <BsInfoCircleFill size={20} className="text-info" />
-        </button>
+        </div>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
