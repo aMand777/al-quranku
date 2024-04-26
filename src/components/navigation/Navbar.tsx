@@ -57,7 +57,7 @@ function Navbar() {
           Al-Quranku
         </Link>
       </div>
-      <div className="flex w-1/4 gap-5 mx-5 text-black justify-end">
+      <div className="flex w-1/4 gap-5 mx-5 text-black justify-end items-center">
         <Link
           className="flex items-center text-base font-semibold hover:text-secondary duration-400 text-black mx-5"
           href="/feature"
@@ -66,7 +66,7 @@ function Navbar() {
           Bookmarks
         </Link>
         <div data-tip="Theme" className="tooltip tooltip-bottom">
-          <SwitchTheme size="8" className="hover:text-secondary duration-400" />
+          <SwitchTheme size="10" className="hover:text-secondary duration-400" />
         </div>
       </div>
       <div className="flex-none gap-3">

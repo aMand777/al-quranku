@@ -17,7 +17,12 @@ function SwitchTheme({ className, size }: SwitchThemeProps) {
 
   return (
     <label htmlFor="theme" className={`swap swap-rotate ${className}`}>
-      <input id="theme" type="checkbox" checked={theme === 'light'} onChange={handleInputCheckbox} />
+      <input
+        id="theme"
+        type="checkbox"
+        checked={theme === 'light'}
+        onChange={handleInputCheckbox}
+      />
       <svg
         className={`swap-on fill-current w-${size} h-${size}`}
         xmlns="http://www.w3.org/2000/svg"
