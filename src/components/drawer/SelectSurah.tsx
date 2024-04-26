@@ -6,16 +6,12 @@ import { TbCardsFilled } from 'react-icons/tb';
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
 } from '@chakra-ui/react'
-import useOpenSurah from '@/hook/useOpenSurah';
-import { setLoading } from '@/redux/slice/detailSurah-slice';
-import { useAppDispatch } from '@/redux/store';
 import CardListSurah from '../card/CardListSurah';
 import { AllSurah } from '@/interface';
 
@@ -24,14 +20,7 @@ interface SelectSurahProps {
 }
 
 function SelectSurah({ data }: SelectSurahProps) {
-  const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const { isOpenSurahOnMobile, setIsOpenSurahOnMobile } = useOpenSurah();
-
-  const handleClickSelectSurah = () => {
-    dispatch(setLoading(true));
-    setIsOpenSurahOnMobile(!isOpenSurahOnMobile);
-  };
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef(null)
@@ -50,7 +39,7 @@ function SelectSurah({ data }: SelectSurahProps) {
         placement="bottom"
         onClose={onClose}
         finalFocusRef={btnRef}
-        size="full"
+        size="lg"
       >
         <DrawerOverlay />
         <DrawerContent>
@@ -84,46 +73,6 @@ function SelectSurah({ data }: SelectSurahProps) {
       </Drawer>
     </>
   );
-
-  // return (
-  //   <>
-  //     <button
-  //       onClick={() => setIsOpenSurahOnMobile(!isOpenSurahOnMobile)}
-  //       className="z-50 fixed bottom-5 right-5 block md:hidden duration-500 hover:rotate-12"
-  //     >
-  //       <TbCardsFilled size={40} className="text-primary" />
-  //     </button>
-  //     <Slide
-  //       direction="bottom"
-  //       in={isOpenSurahOnMobile}
-  //       // style={{ zIndex: 10 }}
-  //       className="block md:hidden h-screen bg-base-100 overflow-auto py-14"
-  //     >
-  //       {data.length > 0 && (
-  //         data.map((surah) => (
-  //           <Link
-  //             key={surah.nomor}
-  //             href={`/surah/${surah.nomor}`}
-  //             onClick={handleClickSelectSurah}
-  //             className={`${
-  //               pathname.substring(7) === surah.nomor.toString()
-  //                 ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
-  //                 : ''
-  //             } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
-  //           >
-  //             <CardListSurah
-  //               nomor={surah.nomor}
-  //               namaLatin={surah.namaLatin}
-  //               jumlahAyat={surah.jumlahAyat}
-  //               nama={surah.nama}
-  //               tempatTurun={surah.tempatTurun}
-  //             />
-  //           </Link>
-  //         ))
-  //       )}
-  //     </Slide>
-  //   </>
-  // );
 }
 
 export default SelectSurah;

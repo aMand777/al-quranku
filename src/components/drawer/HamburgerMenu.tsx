@@ -35,7 +35,7 @@ function HamburgerMenu() {
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
-        size="full"
+        size="lg"
       >
         <DrawerOverlay />
         <DrawerContent>
