@@ -71,7 +71,7 @@ function NavMobile() {
         )}
       </div>
       <div className="flex gap-3">
-        <SwitchTheme className="text-white" />
+        <SwitchTheme size="10" className="text-black" />
         <HamburgerMenu />
       </div>
     </div>

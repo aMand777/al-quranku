@@ -27,20 +27,14 @@ function HamburgerMenu() {
   };
   return (
     <>
-      <button className="btn btn-circle" ref={btnRef} onClick={onOpen}>
+      <span className="btn btn-circle cursor-pointer" ref={btnRef} onClick={onOpen}>
         <FiMenu size={30} />
-      </button>
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        size="lg"
-      >
+      </span>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef} size="lg">
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader className="bg-primary text-white">Al-Quranku</DrawerHeader>
+          <DrawerCloseButton className="text-black" />
+          <DrawerHeader className="bg-primary text-black">Al-Quranku</DrawerHeader>
           <DrawerBody>
             <div className="avatar flex gap-5 items-center">
               <div className="w-16 rounded-full">
@@ -58,14 +52,18 @@ function HamburgerMenu() {
               <Link
                 href="/"
                 onClick={onClose}
-                className={`btn btn-ghost text-lg ${pathname.includes('surah') ? 'text-primary' : ''}`}
+                className={`btn btn-ghost text-lg ${
+                  pathname.includes('surah') ? 'text-primary' : ''
+                }`}
               >
                 Home
               </Link>
               <Link
                 href="/feature"
                 onClick={onClose}
-                className={`btn btn-ghost text-lg ${pathname.includes('bookmarks') ? 'text-primary' : ''}`}
+                className={`btn btn-ghost text-lg ${
+                  pathname.includes('bookmarks') ? 'text-primary' : ''
+                }`}
               >
                 Bookmarks
               </Link>
@@ -76,7 +74,7 @@ function HamburgerMenu() {
               <span className="text-xl font-semibold text-white">Login</span>
               <RiLoginCircleLine size={30} className="text-white" />
             </button>
-            <div>
+            <div className="text-xs">
               &copy; 2024 with <span className="animate-pulse text-error">&#10084;</span> by @aMand
             </div>
           </DrawerFooter>
