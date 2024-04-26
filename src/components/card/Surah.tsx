@@ -18,8 +18,7 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
   const dispatch = useAppDispatch();
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     dispatch(setPreload(false))
     document.title = `${`${detailSurah?.namaLatin} |`} Al-Quranku`;
   }, [detailSurah?.namaLatin, dispatch]);

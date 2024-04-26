@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Surah } from '@/interface';
 import PageSurah from '@/components/card/Surah';
 
