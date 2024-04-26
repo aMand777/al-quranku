@@ -34,7 +34,7 @@ function HamburgerMenu() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton className="text-black" />
-          <DrawerHeader className="bg-primary text-black">Al-Quranku</DrawerHeader>
+          <DrawerHeader className="bg-accent text-black">Al-Quranku</DrawerHeader>
           <DrawerBody>
             <div className="avatar flex gap-5 items-center">
               <div className="w-16 rounded-full">

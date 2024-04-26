@@ -35,16 +35,11 @@ function SelectSurah({ data }: SelectSurahProps) {
         <TbCardsFilled size={40} className="text-primary hover:rotate-12 duration-500" />
         <span className="text-[10px]">List</span>
       </span>
-      <Drawer
-        isOpen={isOpen}
-        placement="bottom"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
+      <Drawer isOpen={isOpen} placement="top" onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton className="text-black" />
-          <DrawerHeader className="bg-primary text-black">Select Surah</DrawerHeader>
+          <DrawerHeader className="bg-accent text-black">Select Surah</DrawerHeader>
           <DrawerBody>
             {data.length > 0 &&
               data.map((surah) => (
