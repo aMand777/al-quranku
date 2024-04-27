@@ -11,6 +11,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  DrawerFooter,
 } from '@chakra-ui/react'
 import CardListSurah from '../card/CardListSurah';
 import { AllSurah } from '@/interface';
@@ -33,7 +34,7 @@ function SelectSurah({ data }: SelectSurahProps) {
         className="z-50 fixed bottom-5 right-5 md:hidden flex flex-col items-center"
       >
         <TbCardsFilled size={40} className="text-primary hover:rotate-12 duration-500" />
-        <span className="text-[10px]">List</span>
+        <span className="text-[10px]">Surah</span>
       </span>
       <Drawer isOpen={isOpen} placement="top" onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
@@ -63,6 +64,11 @@ function SelectSurah({ data }: SelectSurahProps) {
                 </Link>
               ))}
           </DrawerBody>
+          <DrawerFooter>
+            <div className="text-xs text-center w-full">
+              &copy; 2024 | Al-Quranku
+            </div>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
