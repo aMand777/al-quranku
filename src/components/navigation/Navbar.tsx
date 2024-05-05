@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
@@ -9,8 +9,11 @@ import { Surah } from '@/interface';
 import SwitchTheme from '@/components/toggle/SwitchTheme';
 import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 import { MdBookmark } from 'react-icons/md';
+import { useSession, signOut } from 'next-auth/react';
 
 function Navbar() {
+  const pathname = usePathname();
+  const { data: session } = useSession();
   const { data: allSurah } = useGetAllSurahQuery(null);
   const router = useRouter();
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -51,16 +54,18 @@ function Navbar() {
   }, []);
 
   return (
-    <div className="navbar bg-primary z-50 hidden md:flex">
+    <div className="navbar sticky top-0 bg-primary z-50 hidden md:flex">
       <div className="flex-1 text-black">
-        <Link href="/" className="text-2xl font-bold cursor-default">
+        <Link href="/" className="text-2xl font-bold cursor-pointer">
           Al-Quranku
         </Link>
       </div>
       <div className="flex w-1/4 gap-5 mx-5 text-black justify-end items-center">
         <Link
-          className="flex items-center text-base font-semibold hover:text-secondary duration-400 text-black mx-5"
-          href="/feature"
+          className={`${
+            pathname.includes('bookmarks') ? 'text-secondary' : ''
+          } flex items-center text-base font-semibold hover:text-secondary duration-400 text-black mx-5`}
+          href="/bookmarks"
         >
           <MdBookmark size={30} />
           Bookmarks
@@ -81,7 +86,7 @@ function Navbar() {
           />
           {inputFocused && (
             <div className="absolute top-14 max-h-44 rounded-lg w-72 bg-base-100 overflow-y-auto p-3">
-              {searchResult.length > 0 ? (
+              {searchResult?.length > 0 ? (
                 searchResult.map((surah) => (
                   <div
                     onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
@@ -100,12 +105,18 @@ function Navbar() {
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <Image
-                src="https://ui-avatars.com/api/?name=Guest&background=random"
-                alt="avatar"
-                width={100}
-                height={100}
-              />
+              {session?.user?.image ? (
+                <Image src={session?.user.image} alt="avatar" width={100} height={100} />
+              ) : (
+                <Image
+                  src={`https://ui-avatars.com/api/?name=${
+                    session?.user?.name || 'Guest'
+                  }&background=random`}
+                  alt="avatar"
+                  width={100}
+                  height={100}
+                />
+              )}
             </div>
           </div>
           <ul
@@ -114,14 +125,25 @@ function Navbar() {
           >
             <li>
               <div className="justify-between hover:bg-base-100">
-                Visit as Guest
+                {/* Visit as Guest */}
+                {session ? session.user?.name : 'Visit as Guest'}
                 <FaUserCircle size={20} className="text-primary" />
               </div>
             </li>
             <li>
-              <button onClick={() => router.push('/feature')} className="justify-between">
-                Login
-                <RiLoginCircleLine size={20} className="text-info" />
+              <button
+                onClick={
+                  session ? () => signOut({ callbackUrl: '/' }) : () => router.push('/auth/login')
+                }
+                className="justify-between"
+              >
+                {/* Login */}
+                {session ? 'Logout' : 'Login'}
+                {session ? (
+                  <RiLogoutCircleRLine size={20} className="text-error" />
+                ) : (
+                  <RiLoginCircleLine size={20} className="text-info" />
+                )}
               </button>
             </li>
           </ul>

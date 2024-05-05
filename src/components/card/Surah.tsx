@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import useOpenSurah from '@/hook/useOpenSurah';
 import { DetailSurah, Ayat, TafsirSurah } from '@/interface';
@@ -42,7 +42,8 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
       {detailSurah?.ayat.length > 0 ? (
         detailSurah?.ayat.map((ayat: Ayat) => (
           <CardSurah
-            key={ayat.nomorAyat}
+            key={ ayat.nomorAyat }
+            namaLatin={detailSurah.namaLatin}
             tafsirSurah={tafsirSurah}
             teksArab={ayat.teksArab}
             arti={ayat.teksIndonesia}

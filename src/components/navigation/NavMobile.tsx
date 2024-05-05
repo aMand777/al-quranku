@@ -45,8 +45,9 @@ function NavMobile() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   return (
-    <div className="navbar bg-primary z-50 flex md:hidden justify-between">
+    <div className="navbar sticky top-0 bg-primary z-50 flex md:hidden justify-between">
       <div ref={searchContainerRef} className="form-control relative">
         <input
           onFocus={() => setInputFocused(true)}
@@ -58,7 +59,7 @@ function NavMobile() {
         />
         {inputFocused && (
           <div className="absolute top-14 max-h-44 rounded-lg w-64 bg-base-100 overflow-y-auto p-3">
-            {searchResult.length > 0 ? searchResult.map((surah) => (
+            {searchResult?.length > 0 ? searchResult.map((surah) => (
               <div
                 onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
                 key={surah.nomor}

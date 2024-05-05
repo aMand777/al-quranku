@@ -5,11 +5,12 @@ import { ThemeProvider } from 'next-themes';
 import NextTopLoader from 'nextjs-toploader';
 import StoreProvider from '@/redux/StoreProvider';
 import ChakraProvider from '@/app/ChakraProvider';
+import NextAuthProvider from '@/app/NextAuthProvider';
 import OpenSurahProvider from '@/context/OpenSurah';
 import LanguageProvider from '@/context/Language';
 import Navbar from '@/components/navigation/Navbar';
 import NavMobile from '@/components/navigation/NavMobile';
-import LoadingApp from '@/components/loading/LoadingApp';
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,14 +26,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <StoreProvider>
+      <body className={`bg-base-100 ${inter.className}`}>
+        <NextAuthProvider>
+          <StoreProvider>
             <LanguageProvider>
               <OpenSurahProvider>
                 <ThemeProvider>
                   <ChakraProvider>
                     <NextTopLoader color="#FEB714" height={4} showSpinner={false} />
-                    <LoadingApp />
+                    <Toaster />
                     <Navbar />
                     <NavMobile />
                     {children}
@@ -40,7 +42,8 @@ export default function RootLayout({
                 </ThemeProvider>
               </OpenSurahProvider>
             </LanguageProvider>
-        </StoreProvider>
+          </StoreProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

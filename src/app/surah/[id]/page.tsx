@@ -1,9 +1,8 @@
-import type { Metadata } from 'next';
 import { Surah } from '@/interface';
 import PageSurah from '@/components/card/Surah';
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/surat`);
+  const res = await fetch(`${process.env.BASE_API_URL}/surat`);
   const allSurah = await res.json();
 
   return allSurah.data.map((surah: Surah) => ({
@@ -12,14 +11,14 @@ export async function generateStaticParams() {
 }
 
 async function getDetailSurah(params: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/surat/${params}`);
+  const res = await fetch(`${process.env.BASE_API_URL}/surat/${params}`);
   const detailSurah = await res.json();
 
   return detailSurah;
 }
 
 async function getTafsirSurah(params: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/tafsir/${params}`);
+  const res = await fetch(`${process.env.BASE_API_URL}/tafsir/${params}`);
   const tafsirSurah = await res.json();
 
   return tafsirSurah;
