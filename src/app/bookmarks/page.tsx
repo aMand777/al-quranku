@@ -37,7 +37,7 @@ function Bookmark() {
               />
             ))
         : status === 'loading' && <CardBookmarkSkeleton />}
-      {status === 'authenticated' &&
+      {status === 'authenticated' ?
         bookmarks.filter((bookmark) => bookmark.owner === session?.user?.email).length < 1 && (
           <div role="alert" className="alert flex justify-center">
             <svg
@@ -55,7 +55,7 @@ function Bookmark() {
             </svg>
             <span>You don't have any bookmarks yet</span>
           </div>
-        )}
+        ) : status === 'loading' && <CardBookmarkSkeleton />}
     </div>
   );
 }

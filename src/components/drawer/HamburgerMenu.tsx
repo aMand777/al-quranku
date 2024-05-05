@@ -88,15 +88,15 @@ function HamburgerMenu() {
           <DrawerFooter className="flex flex-col gap-7">
             <button
               onClick={handleClickButtonAuth}
-              className={`${session ? 'btn-error' : 'btn-info'} btn btn-outline w-full`}
+              className={`${session ? 'btn-error' : 'btn-info'} btn btn-outline w-full group`}
             >
-              <span className="text-xl font-semibold text-white">
+              <span className="text-xl font-semibold">
                 {session ? 'Logout' : 'Login'}
               </span>
               {session ? (
-                <RiLogoutCircleRLine size={20} className="text-error" />
+                <RiLogoutCircleRLine size={20} className="text-error group-hover:text-black" />
               ) : (
-                <RiLoginCircleLine size={20} className="text-info" />
+                <RiLoginCircleLine size={20} className="text-info group-hover:text-black" />
               )}
             </button>
             <div className="text-xs">
