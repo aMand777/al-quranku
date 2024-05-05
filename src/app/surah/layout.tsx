@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import SelectSurah from '@/components/drawer/SelectSurah';
 import ListSurah from '@/components/card/ListSurah';
-import LoadingApp from '@/components/loading/LoadingApp';
 
 async function getAllSurah() {
   const res = await fetch(`${process.env.BASE_API_URL}/surat`);
@@ -14,14 +13,11 @@ async function SurahLayout({ children }: { children: ReactNode }) {
   const allSurah = await getAllSurah();
 
   return (
-    <>
-      <LoadingApp />
-      <div className="flex mx-auto h-screen absolute top-0 left-0 right-0 -z-10 pt-16">
-        <ListSurah data={allSurah?.data} />
-        {children}
-        <SelectSurah data={allSurah?.data} />
-      </div>
-    </>
+    <div className="flex mx-auto h-screen absolute top-0 left-0 right-0 -z-10 pt-16">
+      <ListSurah data={allSurah?.data} />
+      {children}
+      <SelectSurah data={allSurah?.data} />
+    </div>
   );
 }
 

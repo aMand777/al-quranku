@@ -53,6 +53,7 @@ export const { setBookmarks } = bookmarksSlice.actions;
 export const postBookmarksAsync = createAsyncThunk(
   'postBookmarks',
   async (data: PostBookmark, { dispatch }) => {
+    toast.loading('Waiting...', { duration: 3000 });
     try {
       const response = await postBookmarks(data);
       if (response.status === 201) {
@@ -70,6 +71,7 @@ export const postBookmarksAsync = createAsyncThunk(
 export const deleteBookmarksAsync = createAsyncThunk(
   'deleteBookmarks',
   async (id: string | undefined, { dispatch }) => {
+    toast.loading('Waiting...', { duration: 3000 });
     try {
       const response = await deleteBookmark(id);
       if (response.status === 200) {
