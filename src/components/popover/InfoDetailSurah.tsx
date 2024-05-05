@@ -16,45 +16,28 @@ import {
   AccordionPanel,
 } from '@chakra-ui/react';
 import { BsInfoCircleFill } from 'react-icons/bs';
+import { DetailSurah } from '@/interface';
 
-interface DetailSurahProps {
-  nomor: number;
-  nama: string;
-  namaLatin: string;
-  jumlahAyat: number;
-  tempatTurun: string;
-  arti: string;
-  deskripsi: string;
-}
-
-function DetailSurah({
-  nomor,
-  nama,
-  tempatTurun,
-  namaLatin,
-  jumlahAyat,
-  arti,
-  deskripsi,
-}: DetailSurahProps) {
+function InfoDetailSurah({ detailSurah }: { detailSurah: DetailSurah }) {
   return (
     <Popover>
       <PopoverTrigger>
-        <button className="p-5">
+        <div className="p-5 cursor-pointer">
           <BsInfoCircleFill size={20} className="text-info" />
-        </button>
+        </div>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverHeader className="text-xl text-center">
-          {namaLatin} | {nama}
+          {detailSurah?.namaLatin} | {detailSurah?.nama}
         </PopoverHeader>
         <PopoverBody>
           <p className="text-center">
-            Surah ke <span className="text-highlight">{nomor}</span>dalam al-quran<br />yang
-            diturunkan di<span className="text-highlight">{tempatTurun}</span><br/>dengan jumlah
-            <span className="text-highlight">{jumlahAyat} ayat</span><br/>memiliki arti
-            <span className="text-highlight">{arti}</span>
+            Surah ke <span className="text-highlight">{detailSurah?.nomor}</span>dalam al-quran<br />yang
+            diturunkan di<span className="text-highlight">{detailSurah?.tempatTurun}</span><br/>dengan jumlah
+            <span className="text-highlight">{detailSurah?.jumlahAyat} ayat</span><br/>memiliki arti
+            <span className="text-highlight">{detailSurah?.arti}</span>
           </p>
         </PopoverBody>
         <Accordion allowMultiple>
@@ -68,7 +51,7 @@ function DetailSurah({
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4} className="overflow-y-scroll h-64 text-justify whitespace-break-spaces">
-              {parse(deskripsi)}
+              {detailSurah && parse(detailSurah?.deskripsi)}
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
@@ -77,4 +60,4 @@ function DetailSurah({
   );
 }
 
-export default DetailSurah;
+export default InfoDetailSurah;

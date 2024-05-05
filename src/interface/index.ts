@@ -31,7 +31,7 @@ export interface Ayat {
   teksIndonesia: string;
 }
 
-interface Tafsir {
+export interface Tafsir {
   ayat: number;
   teks: string;
 }

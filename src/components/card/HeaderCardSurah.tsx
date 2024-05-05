@@ -1,33 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import useDetailSurah from '@/hook/useDetailSurah';
-import { Ayat } from '@/interface';
+import { DetailSurah } from '@/interface';
 import IconNumber from '@/components/card/IconNumber';
-import DetailSurah from '../popover/DetailSurah';
+import InfoDetailSurah from '../popover/InfoDetailSurah';
 import SwitchLang from '../toggle/SwitchLang';
+import AudioPlayer from '@/components/audio/AudioPlayer';
 
-interface HeaderCardSurah {
-  ayat: Ayat[];
-  nomor: number;
-  nama: string;
-  namaLatin: string;
-  jumlahAyat: number;
-  tempatTurun: string;
-  arti: string;
-  deskripsi: string;
-}
-
-function HeaderCardSurah({
-  ayat,
-  nomor,
-  nama,
-  namaLatin,
-  jumlahAyat,
-  tempatTurun,
-  arti,
-  deskripsi,
-}: HeaderCardSurah) {
-  const { isLoading } = useDetailSurah();
+function HeaderCardSurah({ detailSurah }: {detailSurah: DetailSurah}) {
   const router = useRouter();
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -39,36 +18,27 @@ function HeaderCardSurah({
     <div className="w-full">
       <div className="mx-auto bg-accent w-11/12 h-full rounded-lg flex justify-around items-center">
         <div className="flex items-center">
-          {!isLoading && <IconNumber number={nomor.toString()} className="text-black" />}
+          <IconNumber number={detailSurah?.nomor.toString()} className="text-black" />
           <h2 className="text-base md:text-xl flex items-center gap-1 text-black">
-            {isLoading ? <div className="skeleton h-4 w-16 bg-secondary" /> : namaLatin}{' '}
+            {detailSurah?.namaLatin}
             <span className="hidden md:block">|</span>
             <span
-              className={`hidden md:block ${isLoading ? 'skeleton w-16 h-4 bg-secondary' : ''}`}
+              className='hidden md:block'
             >
-              {isLoading ? '' : nama}
+              {detailSurah?.nama}
             </span>
           </h2>
-          <DetailSurah
-            nomor={nomor}
-            nama={nama}
-            namaLatin={namaLatin}
-            jumlahAyat={jumlahAyat}
-            tempatTurun={tempatTurun}
-            arti={arti}
-            deskripsi={deskripsi}
-          />
+          <InfoDetailSurah detailSurah={detailSurah} />
           <SwitchLang />
         </div>
         <div className="flex items-center">
-          <span className="text-base md:text-lg text-black mr-1">Ayat:</span>
-          <select onChange={handleChangeSelect} className="select select-secondary w-full max-w-xs">
-            {ayat.map((ayat) => (
-              <option key={ayat.nomorAyat}>{ayat.nomorAyat}</option>
-            ))}
+          <label htmlFor="gotoAyat" className="text-base md:text-lg text-black mr-1">Ayat:</label>
+          <select id="gotoAyat" onChange={handleChangeSelect} className="select select-secondary w-full max-w-xs">
+            {detailSurah?.ayat.length > 0 && detailSurah?.ayat.map((ayat) => <option key={ayat.nomorAyat}>{ayat.nomorAyat}</option>)}
           </select>
         </div>
       </div>
+      <AudioPlayer src={detailSurah?.audioFull["05"]} />
     </div>
   );
 }

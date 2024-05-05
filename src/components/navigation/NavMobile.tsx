@@ -1,14 +1,14 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import useAllSurah from '@/hook/useAllSurah';
 import { Surah } from '@/interface';
 import HamburgerMenu from '@/components/drawer/HamburgerMenu';
 import SwitchTheme from '@/components/toggle/SwitchTheme';
+import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 
 function NavMobile() {
+  const { data: allSurah } = useGetAllSurahQuery(null);
   const router = useRouter();
-  const { data } = useAllSurah();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<Surah[]>([]);
@@ -17,8 +17,8 @@ function NavMobile() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     const querySearch = event.target.value.toLowerCase();
-    const result = data.filter(
-      (surah) =>
+    const result = allSurah?.data.filter(
+      (surah: Surah) =>
         surah.namaLatin.toLowerCase().includes(querySearch) ||
         surah.nomor.toString().toLowerCase().includes(querySearch),
     );
@@ -45,8 +45,9 @@ function NavMobile() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   return (
-    <div className="navbar bg-primary z-50 flex md:hidden justify-between">
+    <div className="navbar sticky top-0 bg-primary z-50 flex md:hidden justify-between">
       <div ref={searchContainerRef} className="form-control relative">
         <input
           onFocus={() => setInputFocused(true)}
@@ -58,7 +59,7 @@ function NavMobile() {
         />
         {inputFocused && (
           <div className="absolute top-14 max-h-44 rounded-lg w-64 bg-base-100 overflow-y-auto p-3">
-            {searchResult.length > 0 ? searchResult.map((surah) => (
+            {searchResult?.length > 0 ? searchResult.map((surah) => (
               <div
                 onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
                 key={surah.nomor}
@@ -71,7 +72,7 @@ function NavMobile() {
         )}
       </div>
       <div className="flex gap-3">
-        <SwitchTheme className="text-white" />
+        <SwitchTheme size="10" className="text-black" />
         <HamburgerMenu />
       </div>
     </div>

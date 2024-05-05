@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { Center } from '@chakra-ui/react';
 import IconNumber from './IconNumber';
-import AudioPlayer from '../audio/AudioPlayer';
 
 interface CardListSurahProps {
   nomor: number;
@@ -11,7 +9,6 @@ interface CardListSurahProps {
   namaLatin: string;
   jumlahAyat: number;
   tempatTurun: string;
-  audio: string;
 }
 
 function CardListSurah({
@@ -20,10 +17,7 @@ function CardListSurah({
   namaLatin,
   jumlahAyat,
   tempatTurun,
-  audio,
 }: CardListSurahProps) {
-  const pathname = usePathname();
-
   return (
     <>
       <div className="w-full flex gap-3 items-center">
@@ -40,7 +34,6 @@ function CardListSurah({
         </div>
         <Image src="/icon-lampion.png" width={50} height={50} alt="icon-lampion" />
       </div>
-      {pathname.substring(7) === nomor.toString() && <AudioPlayer src={audio} />}
     </>
   );
 }

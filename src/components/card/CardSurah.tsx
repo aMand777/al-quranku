@@ -1,60 +1,106 @@
-import { useRouter } from 'next/navigation';
+'use client';
+import { useRouter, usePathname } from 'next/navigation';
 import { TbReportSearch } from 'react-icons/tb';
 import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
 import useLanguage from '@/hook/useLanguage';
 import IconNumber from './IconNumber';
 import TafsirAyat from '../modal/TafsirAyat';
-import { getTafsirSurahAsync } from '@/redux/slice/tafsirSurah-slice';
+import { TafsirSurah } from '@/interface';
+import { useSession } from 'next-auth/react';
+import { useToast } from '@chakra-ui/react';
+import { postBookmarksAsync, deleteBookmarksAsync } from '@/redux/slice/bookmarks-slice';
 import { useAppDispatch } from '@/redux/store';
-import useTafsirSurah from '@/hook/useTafsirSurah';
+import useBookmarks from '@/hook/useBookmarks';
 
 interface CardSurahProps {
-  nomorSurah: number;
+  tafsirSurah: TafsirSurah;
   teksArab: string;
   arti: string;
-  ayat: number;
+  nomorAyat: number;
+  namaLatin: string;
 }
 
-function CardSurah({ nomorSurah, teksArab, arti, ayat }: CardSurahProps) {
-  const router = useRouter();
+function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSurahProps) {
+  const { bookmarks } = useBookmarks();
   const dispatch = useAppDispatch();
-  const { data } = useTafsirSurah();
+  const pathname = usePathname();
+  const NumberSurah = pathname.substring(7);
+  const toast = useToast();
+  const { data: session } = useSession();
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isArabicOnly } = useLanguage();
 
   const handleClickTafsir = () => {
-    dispatch(getTafsirSurahAsync(nomorSurah.toString()));
     onOpen();
   };
 
-  const tafsirAyat = data.tafsir.find((tafsir) => tafsir.ayat === ayat)?.teks;
+  const tafsirAyat = tafsirSurah.tafsir.find((tafsir) => tafsir.ayat === nomorAyat)?.teks;
+  const isBookmarked = bookmarks
+    .filter((bookmark) => bookmark.owner === session?.user?.email)
+    .filter((bookmark) => bookmark.surah === namaLatin)
+    .map((bookmark) => bookmark.ayat)
+    .includes(nomorAyat.toString());
+
+  const handleClickBookmark = async (ayat: string, surah: string) => {
+    const idBookmarked = bookmarks
+      .filter((bookmark) => bookmark.owner === session?.user?.email)
+      .filter((bookmark) => bookmark.surah === surah)
+      .find((bookmark) => bookmark.ayat === ayat)?.id;
+    const data = {
+      owner: session?.user?.email,
+      surah: namaLatin,
+      number: NumberSurah,
+      ayat: nomorAyat.toString(),
+    };
+    if (session && isBookmarked) {
+      await dispatch(deleteBookmarksAsync(idBookmarked));
+    } else if (session && !isBookmarked) {
+      await dispatch(postBookmarksAsync(data));
+    } else {
+      toast({
+        position: 'top',
+        title: 'Please login first',
+        status: 'error',
+        isClosable: true,
+      });
+    }
+  };
 
   return (
-    <div id={`ayat-${ayat.toString()}`} className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3">
+    <div
+      id={`ayat-${nomorAyat.toString()}`}
+      className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3"
+    >
       <div dir="rtl" className="text-2xl leading-loose">
         {teksArab}
         <span className="inline-block -mb-3 text-xs">
-          <IconNumber number={`${ayat.toString()}`} size="40" />
+          <IconNumber number={`${nomorAyat.toString()}`} size="40" />
         </span>
       </div>
       {!isArabicOnly && <p className="text-sm my-2">{arti}</p>}
       {!isArabicOnly && (
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-5 items-center mt-3">
           <button
-            data-tip="Bookmark"
-            onClick={() => router.push("/feature")}
-            className="tooltip hover:text-primary"
+            onClick={() => handleClickBookmark(nomorAyat.toString(), namaLatin)}
+            className="flex flex-col justify-center items-center"
           >
-            <MdBookmarkAdd size={30} />
+            {isBookmarked ? (
+              <MdBookmarkAdded size={30} className="text-primary" />
+            ) : (
+              <MdBookmarkAdd size={30} className="hover:text-primary" />
+            )}
+            <span className="text-[9px]">Bookmark</span>
           </button>
-          <button data-tip="Tafsir" onClick={handleClickTafsir} className="tooltip hover:text-primary">
-            <TbReportSearch size={30} />
+          <button onClick={handleClickTafsir} className="flex flex-col justify-center items-center">
+            <TbReportSearch size={30} className="hover:text-primary" />
+            <span className="text-[9px]">Tafsir</span>
           </button>
           <TafsirAyat
             tafsir={tafsirAyat}
-            namaLatin={data.namaLatin}
-            ayat={ayat}
+            namaLatin={tafsirSurah.namaLatin}
+            nomorAyat={nomorAyat}
             isOpen={isOpen}
             onClose={onClose}
           />

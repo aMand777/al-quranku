@@ -1,68 +1,76 @@
+'use client';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { TbCardsFilled } from 'react-icons/tb';
-import { Slide } from '@chakra-ui/react';
-import useOpenSurah from '@/hook/useOpenSurah';
-import { setLoading } from '@/redux/slice/detailSurah-slice';
-import { useAppDispatch } from '@/redux/store';
+import {
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  useDisclosure,
+  DrawerFooter,
+} from '@chakra-ui/react'
 import CardListSurah from '../card/CardListSurah';
 import { AllSurah } from '@/interface';
-import CardListSkeleton from '@/components/skeleton/CardListSkeleton';
 
 interface SelectSurahProps {
   data: AllSurah;
 }
 
 function SelectSurah({ data }: SelectSurahProps) {
-  const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const { isOpenSurahOnMobile, setIsOpenSurahOnMobile } = useOpenSurah();
 
-  const handleClickSelectSurah = () => {
-    dispatch(setLoading(true));
-    setIsOpenSurahOnMobile(!isOpenSurahOnMobile);
-  };
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = React.useRef(null)
 
   return (
     <>
-      <button
-        onClick={() => setIsOpenSurahOnMobile(!isOpenSurahOnMobile)}
-        className="z-50 fixed bottom-5 right-5 block md:hidden duration-500 hover:rotate-12"
+      <span
+        ref={btnRef}
+        onClick={onOpen}
+        className="z-50 fixed bottom-5 right-5 md:hidden flex flex-col items-center"
       >
-        <TbCardsFilled size={40} className="text-primary" />
-      </button>
-      <Slide
-        direction="bottom"
-        in={isOpenSurahOnMobile}
-        style={{ zIndex: 10 }}
-        className="block md:hidden h-screen bg-base-100 overflow-auto py-14"
-      >
-        {data.length > 1 ? (
-          data.map((surah) => (
-            <Link
-              key={surah.nomor}
-              href={`/surah/${surah.nomor}`}
-              onClick={handleClickSelectSurah}
-              className={`${
-                pathname.substring(7) === surah.nomor.toString()
-                  ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
-                  : ''
-              } card w-11/12 bg-base-300 shadow-xl mx-auto my-5 py-5`}
-            >
-              <CardListSurah
-                nomor={surah.nomor}
-                namaLatin={surah.namaLatin}
-                jumlahAyat={surah.jumlahAyat}
-                nama={surah.nama}
-                tempatTurun={surah.tempatTurun}
-                audio={surah.audioFull['05']}
-              />
-            </Link>
-          ))
-        ) : (
-          <CardListSkeleton />
-        )}
-      </Slide>
+        <TbCardsFilled size={40} className="text-primary hover:rotate-12 duration-500" />
+        <span className="text-[10px]">Surah</span>
+      </span>
+      <Drawer isOpen={isOpen} placement="top" onClose={onClose} finalFocusRef={btnRef}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton className="text-black" />
+          <DrawerHeader className="bg-accent text-black">Select Surah</DrawerHeader>
+          <DrawerBody>
+            {data.length > 0 &&
+              data.map((surah) => (
+                <Link
+                  key={surah.nomor}
+                  href={`/surah/${surah.nomor}`}
+                  onClick={onClose}
+                  className={`${
+                    pathname.substring(7) === surah.nomor.toString()
+                      ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
+                      : ''
+                  } card w-full bg-base-300 shadow-xl mx-auto my-5 py-5`}
+                >
+                  <CardListSurah
+                    nomor={surah.nomor}
+                    namaLatin={surah.namaLatin}
+                    jumlahAyat={surah.jumlahAyat}
+                    nama={surah.nama}
+                    tempatTurun={surah.tempatTurun}
+                  />
+                </Link>
+              ))}
+          </DrawerBody>
+          <DrawerFooter>
+            <div className="text-xs text-center w-full">
+              &copy; 2024 | Al-Quranku
+            </div>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 }

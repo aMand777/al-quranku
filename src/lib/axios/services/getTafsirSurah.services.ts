@@ -1,8 +1,8 @@
-import instanceApi from '@/lib/axios';
+import { instanceApiBaseUrl } from '@/lib/axios/axios';
 
 const getTafsirSurah = async (surah: string) => {
   try {
-    const { data } = await instanceApi.get(`/tafsir/${surah}`);
+    const { data } = await instanceApiBaseUrl.get(`/tafsir/${surah}`);
     return data;
   } catch (error) {
     throw error;

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -14,75 +15,93 @@ import {
   DrawerCloseButton,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useSession, signOut } from 'next-auth/react';
 
 function HamburgerMenu() {
+  const { data: session } = useSession();
   const pathname = usePathname();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef(null);
 
-  const handleClickButtonLogin = () => {
+  const handleClickButtonAuth = () => {
     onClose();
-    router.push('/feature');
+    if (session) {
+      signOut({ callbackUrl: '/' });
+    } else {
+      router.push('/auth/login');
+    }
   };
+
   return (
     <>
-      <button className="btn btn-circle" ref={btnRef} onClick={onOpen}>
+      <span className="btn btn-circle cursor-pointer" ref={btnRef} onClick={onOpen}>
         <FiMenu size={30} />
-      </button>
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        size="full"
-      >
+      </span>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef} size="lg">
         <DrawerOverlay />
-        <DrawerContent className="pb-12">
-          <DrawerCloseButton />
-          <DrawerHeader>Al-Quranku</DrawerHeader>
+        <DrawerContent>
+          <DrawerCloseButton className="text-black" />
+          <DrawerHeader className="bg-accent text-black">Al-Quranku</DrawerHeader>
           <DrawerBody>
             <div className="avatar flex gap-5 items-center">
               <div className="w-16 rounded-full">
-                <Image
-                  src="https://ui-avatars.com/api/?name=Guest&background=random"
-                  alt="avatar"
-                  width={100}
-                  height={100}
-                />
+                {session?.user?.image ? (
+                  <Image src={session?.user.image} alt="avatar" width={100} height={100} />
+                ) : (
+                  <Image
+                    src={`https://ui-avatars.com/api/?name=${
+                      session?.user?.name || 'Guest'
+                    }&background=random`}
+                    alt="avatar"
+                    width={100}
+                    height={100}
+                  />
+                )}
               </div>
-              <span className="text-xl font-semibold">Visit as Guest</span>
+              <span className="text-xl font-semibold">
+                {session ? session.user?.name : 'Visit as Guest'}
+              </span>
             </div>
             <div className="divider" />
-            <div className="flex flex-col gap-3 text-xl font-semibold">
+            <div className="flex flex-col gap-3 font-semibold">
               <Link
                 href="/"
                 onClick={onClose}
-                className={`btn btn-ghost ${pathname.includes('surah') ? 'bg-primary' : ''}`}
+                className={`btn btn-ghost text-lg ${
+                  pathname.includes('surah') ? 'text-primary' : ''
+                }`}
               >
                 Home
               </Link>
               <Link
-                href="/feature"
+                href="/bookmarks"
                 onClick={onClose}
-                className={`btn btn-ghost ${pathname.includes('bookmarks') ? 'bg-primary' : ''}`}
+                className={`btn btn-ghost text-lg ${
+                  pathname.includes('bookmarks') ? 'text-primary' : ''
+                }`}
               >
                 Bookmarks
               </Link>
-              <Link
-                href="/feature"
-                onClick={onClose}
-                className={`btn btn-ghost ${pathname.includes('jadwalsholat') ? 'bg-primary' : ''}`}
-              >
-                Jadwal Sholat
-              </Link>
             </div>
           </DrawerBody>
-          <DrawerFooter>
-            <button onClick={handleClickButtonLogin} className="btn btn-info w-full">
-              <span className="text-xl font-semibold text-white">Login</span>
-              <RiLoginCircleLine size={30} className="text-white" />
+          <DrawerFooter className="flex flex-col gap-7">
+            <button
+              onClick={handleClickButtonAuth}
+              className={`${session ? 'btn-error' : 'btn-info'} btn btn-outline w-full`}
+            >
+              <span className="text-xl font-semibold text-white">
+                {session ? 'Logout' : 'Login'}
+              </span>
+              {session ? (
+                <RiLogoutCircleRLine size={20} className="text-error" />
+              ) : (
+                <RiLoginCircleLine size={20} className="text-info" />
+              )}
             </button>
+            <div className="text-xs">
+              &copy; 2024 with <span className="animate-pulse text-error">&#10084;</span> by @aMand
+            </div>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
