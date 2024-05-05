@@ -89,12 +89,12 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSu
             {isBookmarked ? (
               <MdBookmarkAdded size={30} className="text-primary" />
             ) : (
-              <MdBookmarkAdd size={30} className="hover:text-primary" />
+              <MdBookmarkAdd size={30} />
             )}
             <span className="text-[9px]">Bookmark</span>
           </button>
           <button onClick={handleClickTafsir} className="flex flex-col justify-center items-center">
-            <TbReportSearch size={30} className="hover:text-primary" />
+            <TbReportSearch size={30} />
             <span className="text-[9px]">Tafsir</span>
           </button>
           <TafsirAyat
