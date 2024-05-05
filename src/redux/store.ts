@@ -1,24 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import preloadReducer from '@/redux/slice/preload-slice';
-// import allSurahReducer from '@/redux/slice/allSurah-slice';
-// import detailSurahReducer from '@/redux/slice/detailSurah-slice';
-// import tafsirSurahReducer from '@/redux/slice/tafsirSurah-slice';
 import { getAllSurah } from '@/redux/services/getAllSurah';
-// import { getDetailSurah } from '@/redux/services/getDetailSurah';
+import bookmarksReducer from '@/redux/slice/bookmarks-slice';
 
 const store = configureStore({
   reducer: {
     preload: preloadReducer,
-    // allSurah: allSurahReducer,
-    // detailSurah: detailSurahReducer,
-    // tafsirSurah: tafsirSurahReducer,
+    bookmarks: bookmarksReducer,
     [getAllSurah.reducerPath]: getAllSurah.reducer,
-    // [getDetailSurah.reducerPath]: getDetailSurah.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-  .concat(getAllSurah.middleware)
-  // .concat(getDetailSurah.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(getAllSurah.middleware)
 });
 
 type RootState = ReturnType<typeof store.getState>;

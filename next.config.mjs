@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     unoptimized: true,
-    domains: ['ui-avatars.com'],
+    domains: ['ui-avatars.com', 'lh3.googleusercontent.com'],
   },
 };
 
