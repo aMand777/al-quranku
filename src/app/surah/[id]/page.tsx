@@ -24,15 +24,11 @@ async function getTafsirSurah(params: string) {
   return tafsirSurah;
 }
 
-async function Page({ params }: { params: { id: string } }) {;
+async function Page({ params }: { params: { id: string } }) {
   const detailSurah = await getDetailSurah(params.id);
   const tafsirSurah = await getTafsirSurah(params.id);
 
-  return (
-    <>
-      <PageSurah detailSurah={detailSurah?.data} tafsirSurah={tafsirSurah?.data} />
-    </>
-  );
+  return <PageSurah detailSurah={detailSurah?.data} tafsirSurah={tafsirSurah?.data} />;
 }
 
 export default Page;
