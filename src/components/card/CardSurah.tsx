@@ -1,5 +1,5 @@
 'use client';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { TbReportSearch } from 'react-icons/tb';
 import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
@@ -28,7 +28,6 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSu
   const NumberSurah = pathname.substring(7);
   const toast = useToast();
   const { data: session } = useSession();
-  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isArabicOnly } = useLanguage();
 
