@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         status: 201,
         statusText: 'success',
-        message: 'added successfully',
+        message: 'added bookmark',
       });
     }
 
