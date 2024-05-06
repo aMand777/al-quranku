@@ -8,7 +8,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     return NextResponse.json({
       status: 200,
       statusText: 'success',
-      message: 'deleted successfully',
+      message: 'deleted bookmark',
     });
   } else {
     return NextResponse.json({
