@@ -85,7 +85,7 @@ function Navbar() {
             className="input input-bordered w-72"
           />
           {inputFocused && (
-            <div className="absolute top-14 max-h-44 rounded-lg w-72 bg-base-100 overflow-y-auto p-3">
+            <div className="absolute top-14 max-h-44 rounded-lg w-72 bg-base-200 overflow-y-auto p-3">
               {searchResult?.length > 0 ? (
                 searchResult.map((surah) => (
                   <div
@@ -125,7 +125,6 @@ function Navbar() {
           >
             <li>
               <div className="justify-between hover:bg-base-100">
-                {/* Visit as Guest */}
                 {session ? session.user?.name : 'Visit as Guest'}
                 <FaUserCircle size={20} className="text-primary" />
               </div>
@@ -137,7 +136,6 @@ function Navbar() {
                 }
                 className="justify-between"
               >
-                {/* Login */}
                 {session ? 'Logout' : 'Login'}
                 {session ? (
                   <RiLogoutCircleRLine size={20} className="text-error" />
