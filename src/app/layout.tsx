@@ -17,6 +17,18 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Al-Quranku',
   description: 'Mari membaca al-quran',
+  verification: {
+    google: 'MAXtWBxxXZkoRkz3NpzxYcSs5PPm2mRQZuxrpGVaZbI',
+  },
+  authors: [{ name: 'amand', url: 'https://al-quranku-v1.vercel.app' }],
+  openGraph: {
+    type: 'website',
+    url: 'https://al-quranku-v1.vercel.app',
+    title: 'al-quranku',
+    description: 'Website baca al-quran',
+    siteName: 'Al-Quranku',
+    images: [{ url: 'https://al-quranku-v1.vercel.app/icon-512.png' }],
+  },
 };
 
 export default function RootLayout({
