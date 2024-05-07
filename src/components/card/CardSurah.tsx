@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { TbReportSearch } from 'react-icons/tb';
 import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
@@ -41,8 +42,10 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSu
     .filter((bookmark) => bookmark.surah === namaLatin)
     .map((bookmark) => bookmark.ayat)
     .includes(nomorAyat.toString());
+  const [bookmark, setBookmark] = useState<boolean>(isBookmarked);
 
   const handleClickBookmark = async (ayat: string, surah: string) => {
+    session ? setBookmark((prevState) => !prevState) : null;
     const idBookmarked = bookmarks
       .filter((bookmark) => bookmark.owner === session?.user?.email)
       .filter((bookmark) => bookmark.surah === surah)
@@ -53,9 +56,9 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSu
       number: NumberSurah,
       ayat: nomorAyat.toString(),
     };
-    if (session && isBookmarked) {
+    if (session && bookmark) {
       await dispatch(deleteBookmarksAsync(idBookmarked));
-    } else if (session && !isBookmarked) {
+    } else if (session && !bookmark) {
       await dispatch(postBookmarksAsync(data));
     } else {
       toast({
@@ -85,7 +88,7 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSu
             onClick={() => handleClickBookmark(nomorAyat.toString(), namaLatin)}
             className="flex flex-col justify-center items-center"
           >
-            {isBookmarked ? (
+            {bookmark ? (
               <MdBookmarkAdded size={30} className="text-primary" />
             ) : (
               <MdBookmarkAdd size={30} />

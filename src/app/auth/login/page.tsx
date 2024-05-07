@@ -74,7 +74,7 @@ function LoginPage() {
     });
     if (login?.ok) {
       setLoadingWithCredentials(false);
-      toast.success('User logged in successfully');
+      toast.success('User logged in success');
       replace('/');
     } else {
       setLoadingWithCredentials(false);
