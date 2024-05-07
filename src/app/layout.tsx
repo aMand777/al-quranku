@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   verification: {
     google: 'MAXtWBxxXZkoRkz3NpzxYcSs5PPm2mRQZuxrpGVaZbI',
   },
+  manifest: '/manifest.json',
   authors: [{ name: 'amand', url: 'https://al-quranku-v1.vercel.app' }],
   openGraph: {
     type: 'website',
