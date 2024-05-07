@@ -1,8 +1,8 @@
 {
   "name": "Al-Quranku",
   "short_name": "al-quranku",
-  "theme_color": "#FFFFFF",
-  "background_color": "#FFFFFF",
+  "theme_color": "#4EA95D",
+  "background_color": "#4EA95D",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
