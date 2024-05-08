@@ -1,34 +1,29 @@
-import { Surah } from '@/interface';
-import PageSurah from '@/components/card/Surah';
+'use client';
+import useOpenSurah from '@/hook/useOpenSurah';
+import Loading from '@/app/surah/[id]/loading';
+import CardListSkeleton from '@/components/skeleton/CardListSkeleton';
+import NavMobile from '@/components/navigation/NavMobile';
+import Navbar from '@/components/navigation/Navbar';
 
-export async function generateStaticParams() {
-  const res = await fetch(`${process.env.BASE_API_URL}/surat`);
-  const allSurah = await res.json();
+function Offline() {
+  const { isOpenSurah } = useOpenSurah();
 
-  return allSurah.data.map((surah: Surah) => ({
-    id: surah.nomor.toString(),
-  }));
-}
-
-async function getDetailSurah(params: string) {
-  const res = await fetch(`${process.env.BASE_API_URL}/surat/${params}`);
-  const detailSurah = await res.json();
-
-  return detailSurah;
-}
-
-async function getTafsirSurah(params: string) {
-  const res = await fetch(`${process.env.BASE_API_URL}/tafsir/${params}`);
-  const tafsirSurah = await res.json();
-
-  return tafsirSurah;
-}
-
-async function Offline({ params }: { params: { id: string } }) {
-  const detailSurah = await getDetailSurah(params.id);
-  const tafsirSurah = await getTafsirSurah(params.id);
-
-  return <PageSurah detailSurah={detailSurah?.data} tafsirSurah={tafsirSurah?.data} />;
+  return (
+    <>
+      <Navbar />
+      <NavMobile />
+      <div className="flex mx-auto h-screen w-screen absolute top-0 left-0 right-0 -z-10 pt-16">
+        <div
+          className={`hidden bg-base-100 md:block transition overflow-auto duration-500 border-2 border-base-300 ${
+            isOpenSurah ? 'w-1/3 translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <CardListSkeleton />
+        </div>
+        <Loading />
+      </div>
+    </>
+  );
 }
 
 export default Offline;
