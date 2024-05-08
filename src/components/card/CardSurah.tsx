@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { TbReportSearch } from 'react-icons/tb';
 import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
@@ -32,10 +32,6 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSu
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isArabicOnly } = useLanguage();
 
-  const handleClickTafsir = () => {
-    onOpen();
-  };
-
   const tafsirAyat = tafsirSurah.tafsir.find((tafsir) => tafsir.ayat === nomorAyat)?.teks;
   const isBookmarked = bookmarks
     .filter((bookmark) => bookmark.owner === session?.user?.email)
@@ -43,6 +39,7 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSu
     .map((bookmark) => bookmark.ayat)
     .includes(nomorAyat.toString());
   const [bookmark, setBookmark] = useState<boolean>(isBookmarked);
+  useEffect(() => {}, [bookmark]);
 
   const handleClickBookmark = async (ayat: string, surah: string) => {
     session ? setBookmark((prevState) => !prevState) : null;
@@ -95,7 +92,7 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSu
             )}
             <span className="text-[9px]">Bookmark</span>
           </button>
-          <button onClick={handleClickTafsir} className="flex flex-col justify-center items-center">
+          <button onClick={onOpen} className="flex flex-col justify-center items-center">
             <TbReportSearch size={30} />
             <span className="text-[9px]">Tafsir</span>
           </button>

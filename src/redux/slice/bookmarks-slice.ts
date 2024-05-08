@@ -5,7 +5,6 @@ import {
   deleteBookmark,
 } from '@/lib/axios/services/bookmarks.services';
 import toast from 'react-hot-toast';
-import { Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
 
 interface PostBookmark {
   owner: string | null | undefined;
@@ -53,7 +52,6 @@ export const { setBookmarks } = bookmarksSlice.actions;
 export const postBookmarksAsync = createAsyncThunk(
   'postBookmarks',
   async (data: PostBookmark, { dispatch }) => {
-    toast.loading('Waiting...', { duration: 3000 });
     try {
       const response = await postBookmarks(data);
       if (response.status === 201) {
@@ -71,14 +69,10 @@ export const postBookmarksAsync = createAsyncThunk(
 export const deleteBookmarksAsync = createAsyncThunk(
   'deleteBookmarks',
   async (id: string | undefined, { dispatch }) => {
-    toast.loading('Waiting...', { duration: 3000 });
     try {
       const response = await deleteBookmark(id);
       if (response.status === 200) {
         await dispatch(getBookmarksAsync());
-        toast.success(response.message);
-      } else {
-        toast.error(response.message);
       }
     } catch (error) {
       return error;
