@@ -1,7 +1,7 @@
 import React from 'react';
 import IconNumber from '../card/IconNumber';
 import { MdBookmarkAdd } from 'react-icons/md';
-import { BiDetail } from 'react-icons/bi';
+import { TbReportSearch } from 'react-icons/tb';
 
 function CardSurahSkeleton() {
   const loop = new Array(7).fill(null);
@@ -31,7 +31,7 @@ function CardSurahSkeleton() {
               <MdBookmarkAdd size={30} className="skeleton text-base-200" />
             </button>
             <button className="skeleton">
-              <BiDetail size={30} className="skeleton text-base-200" />
+              <TbReportSearch size={30} className="skeleton text-base-200" />
             </button>
           </div>
         </div>
