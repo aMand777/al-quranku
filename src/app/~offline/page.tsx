@@ -7,14 +7,10 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   Alert,
   AlertIcon,
   ModalCloseButton,
-  Button,
-  Text,
 } from '@chakra-ui/react';
 
 function Offline() {
@@ -31,16 +27,14 @@ function Offline() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalBody pb={6}>
-            <Alert status="error" className="rounded-lg">
-              <AlertIcon />
-              No Connection
+          <ModalBody className="p-0">
+            <Alert status="error" className="rounded-lg w-full flex justify-between items-center">
+              <div className="w-11/12 flex items-center gap-1">
+                <AlertIcon />
+                No Connection
+              </div>
+              <ModalCloseButton />
             </Alert>
-            <div className="w-full flex justify-end mt-2">
-              <button className="btn btn-outline btn-error btn-sm" onClick={() => setIsOpen(false)}>
-                Close
-              </button>
-            </div>
           </ModalBody>
         </ModalContent>
       </Modal>
