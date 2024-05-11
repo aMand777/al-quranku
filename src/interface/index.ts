@@ -1,4 +1,4 @@
-interface AudioFull {
+interface Audio {
   '01': string;
   '02': string;
   '03': string;
@@ -21,7 +21,7 @@ export interface Surah {
   tempatTurun: string;
   arti: string;
   deskripsi: string;
-  audioFull: AudioFull;
+  audioFull: Audio;
 }
 
 export interface Ayat {
@@ -29,6 +29,7 @@ export interface Ayat {
   teksArab: string;
   teksLatin: string;
   teksIndonesia: string;
+  audio: Audio;
 }
 
 export interface Tafsir {
@@ -46,7 +47,7 @@ export interface DetailSurah {
   tempatTurun: string;
   arti: string;
   deskripsi: string;
-  audioFull: AudioFull;
+  audioFull: Audio;
   ayat: Ayat[];
   suratSelanjutnya: nextPrevSurah;
   suratSebelumnya: nextPrevSurah;
@@ -60,7 +61,7 @@ export interface TafsirSurah {
   tempatTurun: string;
   arti: string;
   deskripsi: string;
-  audioFull: AudioFull;
+  audioFull: Audio;
   tafsir: Tafsir[];
   suratSelanjutnya: nextPrevSurah;
   suratSebelumnya: nextPrevSurah;
