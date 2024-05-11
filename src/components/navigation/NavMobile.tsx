@@ -63,7 +63,7 @@ function NavMobile({session}: NavbarProps) {
           className="input input-bordered w-64"
         />
         {inputFocused && (
-          <div className="absolute top-14 max-h-44 rounded-lg w-64 bg-base-200 overflow-y-auto p-3">
+          <div className="absolute top-14 max-h-60 rounded-lg w-64 bg-base-200 overflow-y-auto p-3">
             {searchResult?.length > 0 ? searchResult.map((surah) => (
               <div
                 onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
