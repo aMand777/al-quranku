@@ -8,9 +8,9 @@ const useBookmarks = () => {
     dispatch(getBookmarksAsync());
   }, [dispatch])
   
-  const { data } = useAppSelector(({ bookmarks }) => bookmarks);
+  const { data, isLoading } = useAppSelector(({ bookmarks }) => bookmarks);
 
-  return { bookmarks: data };
+  return { bookmarks: data , isLoading};
 };
 
 export default useBookmarks;

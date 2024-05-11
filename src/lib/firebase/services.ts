@@ -19,15 +19,21 @@ export async function getBookmarks(collectionName: string) {
   const snapshot = await getDocs(collection(firestore, collectionName));
   const data = snapshot.docs.map((doc) => ({
     id: doc.id,
+    owner: doc.data().owner,
     ...doc.data(),
   }));
 
   return data;
 }
 
-export async function getBookmarksById(collectionName: string, id: string) {
-  const snapshot = await getDoc(doc(firestore, collectionName, id));
-  const data = snapshot.data();
+export async function getBookmarksByOwner(collectionName: string, owner: string) {
+  console.log(owner);
+  const snapshot = await getDocs(collection(firestore, collectionName));
+  const data = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  console.log(data);
   return data;
 }
 
@@ -52,11 +58,12 @@ export async function register(data: { username: string; email: string; password
   }
 }
 
-export async function loginWithCredentials(data: { email: string }) {
-  const q = query(collection(firestore, 'users'), where('email', '==', data.email));
+export async function loginWithCredentials(email: string) {
+  const q = query(collection(firestore, 'users'), where('email', '==', email));
   const snapshot = await getDocs(q);
   const user = snapshot.docs.map((doc) => ({
     id: doc.id,
+    password: doc.data().password,
     ...doc.data(),
   }));
   if (user.length > 0) {
@@ -70,8 +77,8 @@ export async function loginWithGoogle(data: {
   username: string;
   email: string;
   picture: string;
-  type: string;
 }) {
+  console.log(data)
   const q = query(collection(firestore, 'users'), where('email', '==', data.email));
   const snapshot = await getDocs(q);
   const user = snapshot.docs.map((doc) => ({

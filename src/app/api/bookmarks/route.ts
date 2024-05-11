@@ -1,53 +1,64 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  addToBookmarks,
-  getBookmarks,
-  getBookmarksById,
-} from '@/lib/firebase/services';
+import { addToBookmarks, getBookmarks } from '@/lib/firebase/services';
+import { options } from '@/app/api/auth/[...nextauth]/options';
+import { getServerSession } from 'next-auth';
 
 export async function POST(request: NextRequest) {
+  const session = await getServerSession(options);
   const req = await request.json();
-  const res = await addToBookmarks(req);
+  const bookmark = { owner: session?.user?.id, ...req };
+
+  if (!session) {
+    return NextResponse.json({
+      status: 401,
+      statusText: 'failed',
+      message: 'Unauthorized',
+    });
+  } else {
+    const res = await addToBookmarks(bookmark);
     if (res.statusCode === 201) {
       return NextResponse.json({
         status: 201,
         statusText: 'success',
         message: 'added bookmark',
       });
-    }
-
-    return NextResponse.json({
-      status: 200,
-      statusText: 'failed',
-      message: 'Surah and ayat already exist'
-    });
-}
-
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id');
-
-  if (id) {
-    const detail = await getBookmarksById('bookmarks', id);
-    if (detail) {
+    } else {
       return NextResponse.json({
         status: 200,
-        message: 'success',
-        data: detail,
+        statusText: 'failed',
+        message: 'Surah and ayat already exist',
       });
     }
-
-    return NextResponse.json({
-      status: 404,
-      message: 'not found',
-      data: {},
-    });
   }
+}
 
-  const bookmarks = await getBookmarks('bookmarks');
-  return NextResponse.json({
-    status: 200,
-    message: 'success',
-    data: bookmarks,
-  });
+export async function GET(req: NextRequest) {
+  const session = await getServerSession(options);
+
+  if (!session) {
+    return NextResponse.json({
+      status: 401,
+      statusText: 'failed',
+      message: 'Unauthorized',
+      data: null,
+    });
+  } else {
+    const bookmarks = await getBookmarks('bookmarks');
+    const bookmarksByOwner = bookmarks.filter((bookmark) => bookmark.owner === session?.user?.id);
+    if (bookmarksByOwner) {
+      return NextResponse.json({
+        status: 200,
+        statusText: 'success',
+        message: 'data retrieved',
+        data: bookmarksByOwner,
+      });
+    } else {
+      return NextResponse.json({
+        status: 404,
+        statusText: 'failed',
+        message: 'not found',
+        data: {},
+      });
+    }
+  }
 }

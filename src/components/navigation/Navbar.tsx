@@ -9,11 +9,15 @@ import { Surah } from '@/interface';
 import SwitchTheme from '@/components/toggle/SwitchTheme';
 import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 import { MdBookmark } from 'react-icons/md';
-import { useSession, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { User } from '@/interface';
 
-function Navbar() {
+interface NavbarProps {
+  session: User | null;
+}
+
+function Navbar({ session }: NavbarProps) {
   const pathname = usePathname();
-  const { data: session } = useSession();
   const { data: allSurah } = useGetAllSurahQuery(null);
   const router = useRouter();
   const searchContainerRef = useRef<HTMLDivElement>(null);

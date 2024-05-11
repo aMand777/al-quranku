@@ -15,10 +15,14 @@ import {
   DrawerCloseButton,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useSession, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { User } from '@/interface';
 
-function HamburgerMenu() {
-  const { data: session } = useSession();
+interface NavbarProps {
+  session: User | null;
+}
+
+function HamburgerMenu({ session }: NavbarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -90,9 +94,7 @@ function HamburgerMenu() {
               onClick={handleClickButtonAuth}
               className={`${session ? 'btn-error' : 'btn-info'} btn btn-outline w-full group`}
             >
-              <span className="text-xl font-semibold">
-                {session ? 'Logout' : 'Login'}
-              </span>
+              <span className="text-xl font-semibold">{session ? 'Logout' : 'Login'}</span>
               {session ? (
                 <RiLogoutCircleRLine size={20} className="text-error group-hover:text-black" />
               ) : (

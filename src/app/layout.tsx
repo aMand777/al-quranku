@@ -11,6 +11,8 @@ import LanguageProvider from '@/context/Language';
 import Navbar from '@/components/navigation/Navbar';
 import NavMobile from '@/components/navigation/NavMobile';
 import { Toaster } from 'react-hot-toast';
+import { options } from '@/app/api/auth/[...nextauth]/options';
+import { getServerSession } from 'next-auth';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,11 +34,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(options);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`bg-base-100 ${inter.className}`}>
@@ -48,8 +52,8 @@ export default function RootLayout({
                   <ChakraProvider>
                     <NextTopLoader color="#FEB714" height={4} showSpinner={false} />
                     <Toaster />
-                    <Navbar />
-                    <NavMobile />
+                    <Navbar session={session} />
+                    <NavMobile session={ session } />
                     {children}
                   </ChakraProvider>
                 </ThemeProvider>

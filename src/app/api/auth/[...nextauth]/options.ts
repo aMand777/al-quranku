@@ -24,7 +24,7 @@ export const options: NextAuthOptions = {
           email: string;
           password: string;
         };
-        const user: any = await loginWithCredentials({ email });
+        const user: any = await loginWithCredentials(email);
         if (user) {
           const passwordConfirm = await compare(password, user.password);
           if (passwordConfirm) {

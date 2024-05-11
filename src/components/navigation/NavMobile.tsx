@@ -5,10 +5,15 @@ import { Surah } from '@/interface';
 import HamburgerMenu from '@/components/drawer/HamburgerMenu';
 import SwitchTheme from '@/components/toggle/SwitchTheme';
 import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
+import { User } from '@/interface';
 
-function NavMobile() {
-  const { data: allSurah } = useGetAllSurahQuery(null);
+interface NavbarProps {
+  session: User | null;
+}
+
+function NavMobile({session}: NavbarProps) {
   const router = useRouter();
+  const { data: allSurah } = useGetAllSurahQuery(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<Surah[]>([]);
@@ -73,7 +78,7 @@ function NavMobile() {
       </div>
       <div className="flex gap-3">
         <SwitchTheme size="10" className="text-black" />
-        <HamburgerMenu />
+        <HamburgerMenu session={session} />
       </div>
     </div>
   );
