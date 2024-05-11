@@ -14,6 +14,7 @@ import {
   DrawerFooter,
 } from '@chakra-ui/react'
 import CardListSurah from '../card/CardListSurah';
+import useLanguage from '@/hook/useLanguage';
 import { AllSurah } from '@/interface';
 
 interface SelectSurahProps {
@@ -22,6 +23,7 @@ interface SelectSurahProps {
 
 function SelectSurah({ data }: SelectSurahProps) {
   const pathname = usePathname();
+  const { isArabicOnly } = useLanguage();
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef(null)
@@ -31,7 +33,9 @@ function SelectSurah({ data }: SelectSurahProps) {
       <span
         ref={btnRef}
         onClick={onOpen}
-        className="z-50 fixed bottom-5 right-5 md:hidden flex flex-col items-center"
+        className={`z-50 fixed bottom-5 md:hidden flex flex-col items-center ${
+          isArabicOnly ? 'translate-x-full duration-500' : 'right-5 duration-500'
+        }`}
       >
         <TbCardsFilled size={40} className="text-primary hover:rotate-12 duration-500" />
         <span className="text-[10px]">Surah</span>
@@ -65,9 +69,7 @@ function SelectSurah({ data }: SelectSurahProps) {
               ))}
           </DrawerBody>
           <DrawerFooter>
-            <div className="text-xs text-center w-full">
-              &copy; 2024 | Al-Quranku
-            </div>
+            <div className="text-xs text-center w-full">&copy; 2024 | Al-Quranku</div>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
