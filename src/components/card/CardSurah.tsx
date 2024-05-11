@@ -9,7 +9,6 @@ import IconNumber from './IconNumber';
 import TafsirAyat from '../modal/TafsirAyat';
 import { TafsirSurah } from '@/interface';
 import { useSession } from 'next-auth/react';
-import { useToast } from '@chakra-ui/react';
 import { postBookmarksAsync, deleteBookmarksAsync } from '@/redux/slice/bookmarks-slice';
 import { useAppDispatch } from '@/redux/store';
 import useBookmarks from '@/hook/useBookmarks';
@@ -23,47 +22,39 @@ interface CardSurahProps {
 }
 
 function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin }: CardSurahProps) {
-  const { bookmarks } = useBookmarks();
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const NumberSurah = pathname.substring(7);
-  const toast = useToast();
   const { data: session } = useSession();
+  const { bookmarks } = useBookmarks();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isArabicOnly } = useLanguage();
+  const [bookmark, setBookmark] = useState<boolean>();
 
   const tafsirAyat = tafsirSurah.tafsir.find((tafsir) => tafsir.ayat === nomorAyat)?.teks;
-  const isBookmarked = bookmarks
-    .filter((bookmark) => bookmark.owner === session?.user?.email)
-    .filter((bookmark) => bookmark.surah === namaLatin)
-    .map((bookmark) => bookmark.ayat)
-    .includes(nomorAyat.toString());
-  const [bookmark, setBookmark] = useState<boolean>(isBookmarked);
-  useEffect(() => {}, [bookmark]);
+  useEffect(() => {
+    const isBookmarked = bookmarks
+      .filter((bookmark) => bookmark.surah === namaLatin)
+      .map((bookmark) => bookmark.ayat)
+      .includes(nomorAyat.toString());
+    setBookmark(isBookmarked);
+  }, [bookmarks, namaLatin, nomorAyat]);
 
   const handleClickBookmark = async (ayat: string, surah: string) => {
     session ? setBookmark((prevState) => !prevState) : null;
     const idBookmarked = bookmarks
-      .filter((bookmark) => bookmark.owner === session?.user?.email)
       .filter((bookmark) => bookmark.surah === surah)
       .find((bookmark) => bookmark.ayat === ayat)?.id;
     const data = {
-      owner: session?.user?.email,
       surah: namaLatin,
       number: NumberSurah,
       ayat: nomorAyat.toString(),
     };
-    if (session && bookmark) {
+
+    if (bookmark) {
       await dispatch(deleteBookmarksAsync(idBookmarked));
-    } else if (session && !bookmark) {
-      await dispatch(postBookmarksAsync(data));
     } else {
-      toast({
-        position: 'top',
-        title: 'Please login first',
-        status: 'error',
-        isClosable: true,
-      });
+      await dispatch(postBookmarksAsync(data));
     }
   };
 

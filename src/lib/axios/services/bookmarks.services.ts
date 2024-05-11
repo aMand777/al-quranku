@@ -1,7 +1,6 @@
 import { instanceApiRouteHandler } from '@/lib/axios/axios';
 
 interface Bookmark {
-  owner: string | null | undefined;
   surah: string;
   number: string;
   ayat: string;
@@ -19,15 +18,6 @@ export const postBookmarks = async (bookmark: Bookmark) => {
 export const getBookmarks = async () => {
   try {
     const { data } = await instanceApiRouteHandler.get('/bookmarks');
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getBookmarksById = async (id: string) => {
-  try {
-    const { data } = await instanceApiRouteHandler.get(`/bookmarks/${id}`);
     return data;
   } catch (error) {
     throw error;

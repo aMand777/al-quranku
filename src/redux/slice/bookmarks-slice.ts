@@ -7,7 +7,6 @@ import {
 import toast from 'react-hot-toast';
 
 interface PostBookmark {
-  owner: string | null | undefined;
   surah: string;
   number: string;
   ayat: string;
@@ -22,10 +21,12 @@ interface Bookmark {
 }
 
 interface InitialBookmarks {
+  isLoading: boolean;
   data: Bookmark[];
 }
 
 const initialState: InitialBookmarks = {
+  isLoading: true,
   data: [
     {
       id: '',
@@ -33,7 +34,7 @@ const initialState: InitialBookmarks = {
       surah: '',
       number: '',
       ayat: '',
-    },
+    }
   ],
 };
 
@@ -42,6 +43,7 @@ const bookmarksSlice = createSlice({
   initialState,
   reducers: {
     setBookmarks(state, action: PayloadAction<Bookmark[]>) {
+      state.isLoading = false;
       state.data = action.payload;
     },
   },
@@ -57,6 +59,8 @@ export const postBookmarksAsync = createAsyncThunk(
       if (response.status === 201) {
         await dispatch(getBookmarksAsync());
         toast.success(response.message);
+      } else if (response.status === 401) {
+        toast.error('Please login first');
       } else {
         toast.error(response.message);
       }

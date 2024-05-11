@@ -1,10 +1,15 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL('/surah/1', request.url));
+export async function middleware(req: NextRequest) {
+  const token = await getToken({ req });
+  const isAuthenticated = !!token;
+  if (!isAuthenticated) {
+    return NextResponse.redirect(new URL('/auth/login', req.url));
+  }
 }
 
 export const config = {
-  matcher: ['/']
+  matcher: ['/bookmarks'],
 };

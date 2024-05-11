@@ -65,3 +65,14 @@ export interface TafsirSurah {
   suratSelanjutnya: nextPrevSurah;
   suratSebelumnya: nextPrevSurah;
 }
+
+interface Data {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+}
+
+export interface User {
+  user: Data
+}
