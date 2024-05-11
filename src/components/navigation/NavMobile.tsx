@@ -11,7 +11,7 @@ interface NavbarProps {
   session: User | null;
 }
 
-function NavMobile({session}: NavbarProps) {
+function NavMobile({ session }: NavbarProps) {
   const router = useRouter();
   const { data: allSurah } = useGetAllSurahQuery(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ function NavMobile({session}: NavbarProps) {
     const result = allSurah?.data.filter(
       (surah: Surah) =>
         surah.namaLatin.toLowerCase().includes(querySearch) ||
-        surah.nomor.toString().toLowerCase().includes(querySearch),
+        surah.nomor === (Number(querySearch)),
     );
     setSearchResult(result);
   };
@@ -64,15 +64,19 @@ function NavMobile({session}: NavbarProps) {
         />
         {inputFocused && (
           <div className="absolute top-14 max-h-60 rounded-lg w-64 bg-base-200 overflow-y-auto p-3">
-            {searchResult?.length > 0 ? searchResult.map((surah) => (
-              <div
-                onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
-                key={surah.nomor}
-                className="p-1 rounded-md cursor-pointer hover:bg-base-300"
-              >
-                {surah.namaLatin}
-              </div>
-            )) : <div>No Result</div>}
+            {searchResult?.length > 0 ? (
+              searchResult.map((surah) => (
+                <div
+                  onClick={() => handleClickSurah(surah.nomor.toString(), surah.namaLatin)}
+                  key={surah.nomor}
+                  className="p-1 rounded-md cursor-pointer hover:bg-base-300"
+                >
+                  {surah.namaLatin}
+                </div>
+              ))
+            ) : (
+              <div>No Result</div>
+            )}
           </div>
         )}
       </div>

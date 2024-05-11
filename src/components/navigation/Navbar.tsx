@@ -31,7 +31,7 @@ function Navbar({ session }: NavbarProps) {
     const result = allSurah?.data.filter(
       (surah: Surah) =>
         surah.namaLatin.toLowerCase().includes(querySearch) ||
-        surah.nomor.toString().toLowerCase().includes(querySearch),
+        surah.nomor === (Number(querySearch)),
     );
     setSearchResult(result);
   };
@@ -74,9 +74,7 @@ function Navbar({ session }: NavbarProps) {
           <MdBookmark size={30} />
           Bookmarks
         </Link>
-        <div data-tip="Theme" className="tooltip tooltip-bottom">
-          <SwitchTheme size="10" className="hover:text-secondary duration-400" />
-        </div>
+        <SwitchTheme size="10" className="hover:text-secondary duration-400" />
       </div>
       <div className="flex-none gap-3">
         <div ref={searchContainerRef} className="form-control relative">
