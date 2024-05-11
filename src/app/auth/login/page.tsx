@@ -26,7 +26,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
-import { postLoginWithCredentials, postLoginWithGoogle } from '@/lib/axios/services/login.services'
 
 type Inputs = {
   email: string;
@@ -93,7 +92,7 @@ function LoginPage() {
       <Toaster />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mockup-window border w-11/12 max-w-sm mx-auto p-5 flex flex-col justify-center"
+        className="mockup-window border w-11/12 max-w-sm mx-auto p-5 flex flex-col justify-center shadow-2xl border-neutral"
       >
         <div className="flex justify-between items-center">
           <Text fontSize="lg" className="font-semibold underline">
