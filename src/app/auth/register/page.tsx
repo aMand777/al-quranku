@@ -83,7 +83,7 @@ function RegisterPage() {
   return (
     <div className="absolute w-screen h-screen top-0 bg-base-100 flex flex-col justify-center items-center z-[1600]">
       <Toaster />
-      <div className="mockup-window border w-11/12 max-w-sm mx-auto p-5 flex flex-col justify-center">
+      <div className="mockup-window border w-11/12 max-w-sm mx-auto p-5 flex flex-col justify-center shadow-2xl border-neutral">
         <div className="flex justify-between items-center">
           <Text fontSize="lg" className="font-semibold underline">
             Register
