@@ -180,7 +180,7 @@ function LoginPage() {
             <FcGoogle size={20} className="bg-white rounded-full" />
             Continue with Google
           </button>
-          <Link href="/" className="btn btn-primary">
+          <Link href="/surah/1" className="btn btn-primary">
             <BsIncognito size={20} className="bg-white rounded-full" />
             Continue as Guest
           </Link>
