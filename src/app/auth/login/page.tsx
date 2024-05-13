@@ -24,7 +24,6 @@ import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 
 type Inputs = {
@@ -45,7 +44,6 @@ const FormSchema = z.object({
 });
 
 function LoginPage() {
-  const { replace } = useRouter();
   const [loadingWithCredentials, setLoadingWithCredentials] = useState<boolean>(false);
   const [loadingWithGoogle, setLoadingWithGoogle] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -75,7 +73,7 @@ function LoginPage() {
     if (login?.ok) {
       setLoadingWithCredentials(false);
       toast.success('User logged in success');
-      replace('/');
+      window.location.href = '/surah/1'
     } else {
       setLoadingWithCredentials(false);
       toast.error('Incorrect email or password');

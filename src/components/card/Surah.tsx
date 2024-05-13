@@ -16,7 +16,7 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
   const { isOpenSurah, setIsOpenSurah } = useOpenSurah();
 
   useEffect(() => {
-    document.title = `${`${detailSurah?.namaLatin} |`} Al-Quranku`;
+    document.title = `${`${detailSurah?.namaLatin} |`} al-quranku`;
   }, [detailSurah?.namaLatin]);
 
   return (
