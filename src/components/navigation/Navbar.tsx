@@ -60,8 +60,8 @@ function Navbar({ session }: NavbarProps) {
   return (
     <div className="navbar sticky top-0 bg-primary z-50 hidden md:flex">
       <div className="flex-1 text-black">
-        <Link href="/" className="text-2xl font-bold cursor-pointer">
-          Al-Quranku
+        <Link href="/surah/1" className="text-2xl font-bold cursor-pointer">
+          al-quranku
         </Link>
       </div>
       <div className="flex w-1/4 gap-5 mx-5 text-black justify-end items-center">
