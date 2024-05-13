@@ -34,7 +34,7 @@ const initialState: InitialBookmarks = {
       surah: '',
       number: '',
       ayat: '',
-    }
+    },
   ],
 };
 
@@ -64,6 +64,7 @@ export const postBookmarksAsync = createAsyncThunk(
       } else {
         toast.error(response.message);
       }
+      return response;
     } catch (error) {
       return error;
     }
@@ -77,7 +78,9 @@ export const deleteBookmarksAsync = createAsyncThunk(
       const response = await deleteBookmark(id);
       if (response.status === 200) {
         await dispatch(getBookmarksAsync());
+        toast.success(response.message);
       }
+      return response;
     } catch (error) {
       return error;
     }

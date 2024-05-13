@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { TbReportSearch } from 'react-icons/tb';
-import { MdBookmarkAdd, MdBookmarkAdded } from 'react-icons/md';
+import { MdBookmarkAdd, MdBookmarkAdded, MdBookmark } from 'react-icons/md';
 import { useDisclosure } from '@chakra-ui/react';
 import useLanguage from '@/hook/useLanguage';
 import IconNumber from './IconNumber';
@@ -32,6 +32,7 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isArabicOnly } = useLanguage();
   const [bookmark, setBookmark] = useState<boolean>();
+  const [disableButton, setDisableButton] = useState<boolean>(false);
 
   const tafsirAyat = tafsirSurah.tafsir.find((tafsir) => tafsir.ayat === nomorAyat)?.teks;
   useEffect(() => {
@@ -44,6 +45,7 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
 
   const handleClickBookmark = async (ayat: string, surah: string) => {
     session ? setBookmark((prevState) => !prevState) : null;
+    setDisableButton(true);
     const idBookmarked = bookmarks
       .filter((bookmark) => bookmark.surah === surah)
       .find((bookmark) => bookmark.ayat === ayat)?.id;
@@ -54,9 +56,11 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
     };
 
     if (bookmark) {
-      await dispatch(deleteBookmarksAsync(idBookmarked));
+      const res = await dispatch(deleteBookmarksAsync(idBookmarked));
+      res.payload.statusText === 'success' && setDisableButton(false);
     } else {
-      await dispatch(postBookmarksAsync(data));
+      const res = await dispatch(postBookmarksAsync(data));
+      res.payload.statusText === 'success' && setDisableButton(false);
     }
   };
 
@@ -76,10 +80,16 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
         {!isArabicOnly && (
           <div className="flex gap-7 items-center mt-3">
             <button
+              disabled={disableButton}
               onClick={() => handleClickBookmark(nomorAyat.toString(), namaLatin)}
               className="flex flex-col justify-center items-center"
             >
-              {bookmark ? (
+              {disableButton ? (
+                <div className="relative">
+                  <MdBookmark size={30} className="cursor-wait" />
+                  <span className="loading text-primary loading-spinner loading-xs absolute -top-1 right-0"></span>
+                </div>
+              ) : bookmark ? (
                 <MdBookmarkAdded size={30} className="text-primary" />
               ) : (
                 <MdBookmarkAdd size={30} />
