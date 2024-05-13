@@ -70,7 +70,7 @@ function HamburgerMenu({ session }: NavbarProps) {
             <div className="divider" />
             <div className="flex flex-col gap-3 font-semibold">
               <Link
-                href="/"
+                href="/surah/1"
                 onClick={onClose}
                 className={`btn btn-ghost text-lg ${
                   pathname.includes('surah') ? 'text-primary' : ''
