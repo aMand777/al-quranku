@@ -17,10 +17,10 @@ import { getServerSession } from 'next-auth';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Al-Quranku',
+  title: 'al-quranku',
   description: 'Mari membaca al-quran',
   verification: {
-    google: 'MAXtWBxxXZkoRkz3NpzxYcSs5PPm2mRQZuxrpGVaZbI',
+    google: process.env.GOOGLE_VERIFICATION,
   },
   manifest: '/manifest.json',
   authors: [{ name: 'amand', url: 'https://al-quranku-v1.vercel.app' }],
