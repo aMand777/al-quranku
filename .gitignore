@@ -37,3 +37,4 @@ next-env.d.ts
 
 # my rules
 /public/service-worker.js
+package-lock.json

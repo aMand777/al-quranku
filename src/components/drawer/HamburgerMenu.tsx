@@ -46,7 +46,7 @@ function HamburgerMenu({ session }: NavbarProps) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton className="text-black" />
-          <DrawerHeader className="bg-accent text-black">Al-Quranku</DrawerHeader>
+          <DrawerHeader className="bg-accent text-black">al-quranku</DrawerHeader>
           <DrawerBody>
             <div className="avatar flex gap-5 items-center">
               <div className="w-16 rounded-full">
