@@ -57,8 +57,7 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
 
     if (bookmark) {
       const res = await dispatch(deleteBookmarksAsync(idBookmarked));
-      console.log(res.payload);
-      res.payload.status === 200 && setDisableButton(false)
+      res.payload.status === 200 && setDisableButton(false);
     } else {
       const res = await dispatch(postBookmarksAsync(data));
       res.payload.status === 201 && setDisableButton(false);
