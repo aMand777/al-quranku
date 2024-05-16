@@ -68,13 +68,13 @@ function Navbar({ session }: NavbarProps) {
         <Link
           className={`${
             pathname.includes('bookmarks') ? 'text-secondary' : ''
-          } flex items-center text-base font-semibold hover:text-secondary duration-400 text-black mx-5`}
+          } flex items-center text-base font-semibold text-black mx-5`}
           href="/bookmarks"
         >
           <MdBookmark size={30} />
           Bookmarks
         </Link>
-        <SwitchTheme size="10" className="hover:text-secondary duration-400" />
+        <SwitchTheme size="10" />
       </div>
       <div className="flex-none gap-3">
         <div ref={searchContainerRef} className="form-control relative">
