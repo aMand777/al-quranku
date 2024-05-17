@@ -1,6 +1,14 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const allSurah = new Array(114).fill(null);
+  const surahData = allSurah.map((_, surah) => ({
+    url: `https://al-quranku-v1.vercel.app/surah/${surah+1}`,
+    lastModified: new Date(),
+    changeFrequency: 'yearly' as const,
+    priority: 1,
+  }));
+
   return [
     {
       url: 'https://al-quranku-v1.vercel.app',
@@ -8,11 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 1,
     },
-    {
-      url: 'https://al-quranku-v1.vercel.app/bookmarks',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
+    ...surahData,
   ];
 }
