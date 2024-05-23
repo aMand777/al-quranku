@@ -12,6 +12,7 @@ import { useSession } from 'next-auth/react';
 import { postBookmarksAsync, deleteBookmarksAsync } from '@/redux/slice/bookmarks-slice';
 import { useAppDispatch } from '@/redux/store';
 import useBookmarks from '@/hook/useBookmarks';
+import useSelectFontSize from '@/hook/useSelectFontSize';
 import AudioPlayAyat from '@/components/audio/AudioPlayAyat';
 
 interface CardSurahProps {
@@ -24,6 +25,7 @@ interface CardSurahProps {
 }
 
 function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }: CardSurahProps) {
+  const { fontSize } = useSelectFontSize();
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const NumberSurah = pathname.substring(7);
@@ -71,13 +73,24 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
         id={`ayat-${nomorAyat.toString()}`}
         className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3"
       >
-        <div dir="rtl" className="text-2xl leading-loose">
+        <div dir="rtl" className={`text-${fontSize} leading-loose`}>
           {teksArab}
-          <span className="inline-block -mb-3 text-xs">
-            <IconNumber number={`${nomorAyat.toString()}`} size="40" />
+          <span className={`inline-block -mb-3 text-${fontSize === '3xl' || fontSize === '4xl' ? 'sm' : 'xl'}`}>
+            <IconNumber
+              number={`${nomorAyat.toString()}`}
+              size={
+                fontSize === '3xl' || fontSize === '4xl' ? '40' : fontSize === '5xl' ? '50' : '60'
+              }
+            />
           </span>
         </div>
-        {!isArabicOnly && <p className="text-sm my-2">{arti}</p>}
+        {!isArabicOnly && (
+          <p
+            className={`text-${fontSize === '3xl' ? 'sm' : fontSize === '4xl' ? 'xl' : '3xl'} my-2`}
+          >
+            {arti}
+          </p>
+        )}
         {!isArabicOnly && (
           <div className="flex gap-7 items-center mt-3">
             <button

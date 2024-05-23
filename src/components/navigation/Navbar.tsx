@@ -74,7 +74,7 @@ function Navbar({ session }: NavbarProps) {
           <MdBookmark size={30} />
           Bookmarks
         </Link>
-        <SwitchTheme size="10" />
+        <SwitchTheme />
       </div>
       <div className="flex-none gap-3">
         <div ref={searchContainerRef} className="form-control relative">
