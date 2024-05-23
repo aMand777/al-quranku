@@ -9,9 +9,9 @@ function SwitchTheme({ className, size }: SwitchThemeProps) {
   const { theme, setTheme } = useTheme();
   const handleInputCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      setTheme('light');
-    } else {
       setTheme('dark');
+    } else {
+      setTheme('light');
     }
   };
 
@@ -20,7 +20,7 @@ function SwitchTheme({ className, size }: SwitchThemeProps) {
       <input
         id="theme"
         type="checkbox"
-        checked={theme === 'light'}
+        checked={theme === 'dark'}
         onChange={handleInputCheckbox}
       />
       <svg
