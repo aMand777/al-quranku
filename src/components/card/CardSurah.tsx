@@ -73,23 +73,22 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
         id={`ayat-${nomorAyat.toString()}`}
         className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3"
       >
-        <div dir="rtl" className={`text-${fontSize} leading-loose`}>
+        <div
+          dir="rtl"
+          className={`${
+            fontSize === 'small' ? 'text-3xl' : fontSize === 'medium' ? 'text-4xl' : 'text-6xl'
+          } leading-loose`}
+        >
           {teksArab}
-          <span className={`inline-block -mb-3 text-${fontSize === '3xl' || fontSize === '4xl' ? 'sm' : 'xl'}`}>
+          <span className={`inline-block -mb-3 ${fontSize === 'small' ? 'text-sm' : 'text-lg'}`}>
             <IconNumber
               number={`${nomorAyat.toString()}`}
-              size={
-                fontSize === '3xl' || fontSize === '4xl' ? '40' : fontSize === '5xl' ? '50' : '60'
-              }
+              size={fontSize === '3xl' ? '40' : '50'}
             />
           </span>
         </div>
         {!isArabicOnly && (
-          <p
-            className={`text-${fontSize === '3xl' ? 'sm' : fontSize === '4xl' ? 'xl' : '3xl'} my-2`}
-          >
-            {arti}
-          </p>
+          <p className={`${fontSize === 'small' ? 'text-sm' : 'text-lg'} my-2`}>{arti}</p>
         )}
         {!isArabicOnly && (
           <div className="flex gap-7 items-center mt-3">

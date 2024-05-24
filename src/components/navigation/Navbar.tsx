@@ -11,6 +11,9 @@ import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 import { MdBookmark } from 'react-icons/md';
 import { signOut } from 'next-auth/react';
 import { User } from '@/interface';
+import { IoSettingsSharp } from 'react-icons/io5';
+import SwitchLang from '@/components/toggle/SwitchLang';
+import SelectFontSize from '@/components/select/FontSize';
 
 interface NavbarProps {
   session: User | null;
@@ -30,8 +33,7 @@ function Navbar({ session }: NavbarProps) {
     const querySearch = event.target.value.toLowerCase();
     const result = allSurah?.data.filter(
       (surah: Surah) =>
-        surah.namaLatin.toLowerCase().includes(querySearch) ||
-        surah.nomor === (Number(querySearch)),
+        surah.namaLatin.toLowerCase().includes(querySearch) || surah.nomor === Number(querySearch),
     );
     setSearchResult(result);
   };
@@ -59,22 +61,51 @@ function Navbar({ session }: NavbarProps) {
 
   return (
     <div className="navbar sticky top-0 bg-primary z-50 hidden md:flex">
-      <div className="flex-1 text-black">
+      <div className="flex-1">
         <Link href="/surah/1" className="text-2xl font-bold cursor-pointer">
           al-quranku
         </Link>
       </div>
-      <div className="flex w-1/4 gap-5 mx-5 text-black justify-end items-center">
+      <div className="flex w-1/4 gap-5 mx-5 justify-end items-center">
         <Link
+          data-tip="Bookmarks"
           className={`${
             pathname.includes('bookmarks') ? 'text-secondary' : ''
-          } flex items-center text-base font-semibold text-black mx-5`}
+          } tooltip tooltip-bottom flex items-center text-base font-semibold  mx-5`}
           href="/bookmarks"
         >
           <MdBookmark size={30} />
-          Bookmarks
         </Link>
-        <SwitchTheme />
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button">
+            <button className="w-full flex flex-col justify-center items-center">
+              <IoSettingsSharp size={30} className="active:rotate-90 duration-500" />
+            </button>
+          </div>
+          <ul
+            tabIndex={0}
+            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
+          >
+            <li>
+              <button type="button" className="justify-between">
+                Switch Theme
+                <SwitchTheme />
+              </button>
+            </li>
+            <li>
+              <button type="button" className="justify-between">
+                Focus Mode
+                <SwitchLang />
+              </button>
+            </li>
+            <li>
+              <button type="button" className="justify-between">
+                Font Size
+                <SelectFontSize />
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
       <div className="flex-none gap-3">
         <div ref={searchContainerRef} className="form-control relative">

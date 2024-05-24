@@ -1,22 +1,29 @@
+'use client';
 import React from 'react';
 import { MdBookmark } from 'react-icons/md';
-import { TbCardsFilled } from 'react-icons/tb';
 import { IoSettingsSharp } from 'react-icons/io5';
 import SwitchTheme from '@/components/toggle/SwitchTheme';
 import SwitchLang from '@/components/toggle/SwitchLang';
 import SelectFontSize from '@/components/select/FontSize';
+import Link from 'next/link';
+import SelectSurah from '@/components/drawer/SelectSurah';
+import { AllSurah } from '@/interface';
 
-function BottomNav() {
+interface BottomNavProps {
+  data: AllSurah;
+}
+
+function BottomNav({ data }: BottomNavProps) {
   return (
     <div className="btm-nav md:hidden">
       <button className="">
-        <TbCardsFilled size={30} />
+        <SelectSurah data={data} />
         <span className="btm-nav-label">Surah</span>
       </button>
-      <button className="active ">
+      <Link href="/bookmarks">
         <MdBookmark size={30} />
         <span className="btm-nav-label">Bookmarks</span>
-      </button>
+      </Link>
       <div className="mt-2 dropdown dropdown-end">
         <button className="w-full flex flex-col justify-center items-center">
           <IoSettingsSharp size={30} className="active:rotate-90 duration-500" />
@@ -26,7 +33,7 @@ function BottomNav() {
           tabIndex={0}
           className="-mt-48 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
         >
-          <li className='flex'>
+          <li className="flex">
             <button type="button" className="justify-between">
               Switch Theme
               <SwitchTheme />

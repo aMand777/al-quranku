@@ -7,15 +7,15 @@ interface FontSizeContext {
 }
 
 const initialFontSizeContext: FontSizeContext = {
-  fontSize: '3xl',
+  fontSize: 'small',
   setFontSize: () => {},
 };
 
 export const FontSizeContext = createContext(initialFontSizeContext);
 
 const FontSizeProvider = ({ children }: { children: ReactNode }) => {
-  const [size, setSize] = useState<string>('2xl');
-
+  const [size, setSize] = useState<string>('small');
+  
   const contextValue = useMemo(
     () => ({
       fontSize: size,

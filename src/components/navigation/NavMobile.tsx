@@ -2,8 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Surah } from '@/interface';
-import HamburgerMenu from '@/components/drawer/HamburgerMenu';
-import SwitchTheme from '@/components/toggle/SwitchTheme';
 import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 import { User } from '@/interface';
 import Image from 'next/image';
@@ -85,8 +83,6 @@ function NavMobile({ session }: NavbarProps) {
         )}
       </div>
       <div className="flex gap-3">
-        {/* <SwitchTheme className="text-black" /> */}
-        {/* <HamburgerMenu session={session} /> */}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
