@@ -14,6 +14,13 @@ import { User } from '@/interface';
 import { IoSettingsSharp } from 'react-icons/io5';
 import SwitchLang from '@/components/toggle/SwitchLang';
 import SelectFontSize from '@/components/select/FontSize';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+} from '@chakra-ui/react';
 
 interface NavbarProps {
   session: User | null;
@@ -76,36 +83,30 @@ function Navbar({ session }: NavbarProps) {
         >
           <MdBookmark size={30} />
         </Link>
-        <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button">
-            <button className="w-full flex flex-col justify-center items-center">
-              <IoSettingsSharp size={30} className="active:rotate-90 duration-500" />
-            </button>
-          </div>
-          <ul
-            tabIndex={0}
-            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
-          >
-            <li>
-              <button type="button" className="justify-between">
-                Switch Theme
-                <SwitchTheme />
-              </button>
-            </li>
-            <li>
-              <button type="button" className="justify-between">
-                Focus Mode
-                <SwitchLang />
-              </button>
-            </li>
-            <li>
-              <button type="button" className="justify-between">
-                Font Size
-                <SelectFontSize />
-              </button>
-            </li>
-          </ul>
-        </div>
+        <Popover>
+        <PopoverTrigger>
+          <button type="button">
+            <IoSettingsSharp size={30} className="active:rotate-90 duration-500" />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="mt-1">
+          <PopoverArrow />
+          <PopoverBody>
+            <div className="flex justify-between">
+              Switch Theme
+              <SwitchTheme />
+            </div>
+            <div className="flex justify-between my-5">
+              Focus Mode
+              <SwitchLang />
+            </div>
+            <div className="flex justify-between">
+              Font Size
+              <SelectFontSize />
+            </div>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
       </div>
       <div className="flex-none gap-3">
         <div ref={searchContainerRef} className="form-control relative">

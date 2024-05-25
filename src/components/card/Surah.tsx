@@ -32,9 +32,7 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
           <MdKeyboardDoubleArrowRight size={30} />
         )}
       </span>
-      <div className="h-16 sticky top-0 z-40">
-        <HeaderCardSurah detailSurah={detailSurah} />
-      </div>
+      <HeaderCardSurah detailSurah={detailSurah} />
       {detailSurah?.ayat.length > 0 ? (
         detailSurah?.ayat.map((ayat: Ayat) => (
           <CardSurah

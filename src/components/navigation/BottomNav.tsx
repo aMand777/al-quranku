@@ -6,53 +6,89 @@ import SwitchTheme from '@/components/toggle/SwitchTheme';
 import SwitchLang from '@/components/toggle/SwitchLang';
 import SelectFontSize from '@/components/select/FontSize';
 import Link from 'next/link';
-import SelectSurah from '@/components/drawer/SelectSurah';
 import { AllSurah } from '@/interface';
+import CardListSurah from '../card/CardListSurah';
+import { usePathname } from 'next/navigation';
+import { TbCardsFilled } from 'react-icons/tb';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+} from '@chakra-ui/react';
 
 interface BottomNavProps {
   data: AllSurah;
 }
 
 function BottomNav({ data }: BottomNavProps) {
+  const pathname = usePathname();
   return (
     <div className="btm-nav md:hidden">
-      <button className="">
-        <SelectSurah data={data} />
-        <span className="btm-nav-label">Surah</span>
-      </button>
-      <Link href="/bookmarks" className='my-3'>
+      <Popover>
+        <PopoverTrigger>
+          <button type="button">
+            <TbCardsFilled size={30} className="active:rotate-45 duration-500" />
+            <span className="btm-nav-label">Surah</span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="mb-[100vh]">
+          <PopoverBody className="w-screen h-screen bg-base-100 -mb-20">
+            <div className="w-full h-full overflow-auto pt-28 p-2">
+              {data.length > 0 &&
+                data.map((surah) => (
+                  <Link
+                    key={surah.nomor}
+                    href={`/surah/${surah.nomor}`}
+                    className={`${
+                      pathname.substring(7) === surah.nomor.toString()
+                        ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
+                        : ''
+                    } card w-full bg-base-300 shadow-xl mx-auto my-5 py-5`}
+                  >
+                    <CardListSurah
+                      nomor={surah.nomor}
+                      namaLatin={surah.namaLatin}
+                      jumlahAyat={surah.jumlahAyat}
+                      nama={surah.nama}
+                      tempatTurun={surah.tempatTurun}
+                    />
+                  </Link>
+                ))}
+            </div>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+      <Link href="/bookmarks" className="my-3">
         <MdBookmark size={30} className="active:rotate-45 duration-500" />
         <span className="btm-nav-label">Bookmarks</span>
       </Link>
-      <div className="mt-2 dropdown dropdown-end">
-        <button className="w-full flex flex-col justify-center items-center">
-          <IoSettingsSharp size={30} className="active:rotate-45 duration-500" />
-          <span className="btm-nav-label">Settings</span>
-        </button>
-        <ul
-          tabIndex={0}
-          className="-mt-48 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52"
-        >
-          <li className="flex">
-            <button type="button" className="justify-between">
+      <Popover>
+        <PopoverTrigger>
+          <button type="button">
+            <IoSettingsSharp size={30} className="active:rotate-45 duration-500" />
+            <span className="btm-nav-label">Settings</span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="mb-20">
+          <PopoverArrow />
+          <PopoverBody>
+            <div className="flex justify-between">
               Switch Theme
               <SwitchTheme />
-            </button>
-          </li>
-          <li>
-            <button type="button" className="justify-between">
+            </div>
+            <div className="flex justify-between my-5">
               Focus Mode
               <SwitchLang />
-            </button>
-          </li>
-          <li>
-            <button type="button" className="justify-between">
+            </div>
+            <div className="flex justify-between">
               Font Size
               <SelectFontSize />
-            </button>
-          </li>
-        </ul>
-      </div>
+            </div>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }
