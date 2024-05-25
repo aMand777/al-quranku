@@ -20,13 +20,13 @@ function BottomNav({ data }: BottomNavProps) {
         <SelectSurah data={data} />
         <span className="btm-nav-label">Surah</span>
       </button>
-      <Link href="/bookmarks">
-        <MdBookmark size={30} />
+      <Link href="/bookmarks" className='my-3'>
+        <MdBookmark size={30} className="active:rotate-45 duration-500" />
         <span className="btm-nav-label">Bookmarks</span>
       </Link>
       <div className="mt-2 dropdown dropdown-end">
         <button className="w-full flex flex-col justify-center items-center">
-          <IoSettingsSharp size={30} className="active:rotate-90 duration-500" />
+          <IoSettingsSharp size={30} className="active:rotate-45 duration-500" />
           <span className="btm-nav-label">Settings</span>
         </button>
         <ul

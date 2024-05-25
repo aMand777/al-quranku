@@ -29,7 +29,7 @@ function SelectSurah({ data }: SelectSurahProps) {
   return (
     <>
       <span ref={btnRef} onClick={onOpen}>
-        <TbCardsFilled size={30} />
+        <TbCardsFilled size={30} className="active:rotate-45 duration-500" />
       </span>
       <Drawer isOpen={isOpen} placement="top" onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
@@ -60,7 +60,7 @@ function SelectSurah({ data }: SelectSurahProps) {
               ))}
           </DrawerBody>
           <DrawerFooter>
-            <div className="text-xs text-center w-full">&copy; 2024 | Al-Quranku</div>
+            <div className="text-xs text-center w-full">&copy; 2024 | al-quranku</div>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
