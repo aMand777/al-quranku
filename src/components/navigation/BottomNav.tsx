@@ -1,61 +1,96 @@
-import React from 'react'
+'use client';
+import React from 'react';
+import { MdBookmark } from 'react-icons/md';
+import { IoSettingsSharp } from 'react-icons/io5';
+import SwitchTheme from '@/components/toggle/SwitchTheme';
+import SwitchLang from '@/components/toggle/SwitchLang';
+import SelectFontSize from '@/components/select/FontSize';
+import Link from 'next/link';
+import { AllSurah } from '@/interface';
+import CardListSurah from '../card/CardListSurah';
+import { usePathname } from 'next/navigation';
+import { TbCardsFilled } from 'react-icons/tb';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+} from '@chakra-ui/react';
 
-function BottomNav() {
+interface BottomNavProps {
+  data: AllSurah;
+}
+
+function BottomNav({ data }: BottomNavProps) {
+  const pathname = usePathname();
   return (
-    <div className="btm-nav lg:hidden">
-      <button className="bg-pink-200 text-pink-600">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-          />
-        </svg>
-        <span className="btm-nav-label">Home</span>
-      </button>
-      <button className="active bg-blue-200 text-blue-600 border-blue-600">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span className="btm-nav-label">Warnings</span>
-      </button>
-      <button className="bg-teal-200 text-teal-600">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-          />
-        </svg>
-        <span className="btm-nav-label">Statics</span>
-      </button>
+    <div className="btm-nav md:hidden">
+      <Popover>
+        <PopoverTrigger>
+          <button type="button">
+            <TbCardsFilled size={30} className="active:rotate-45 duration-500" />
+            <span className="btm-nav-label">Surah</span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="mb-[100vh]">
+          <PopoverBody className="w-screen h-screen bg-base-100 -mb-20">
+            <div className="w-full h-full overflow-auto pt-32 p-2">
+              {data.length > 0 &&
+                data.map((surah) => (
+                  <Link
+                    key={surah.nomor}
+                    href={`/surah/${surah.nomor}`}
+                    className={`${
+                      pathname.substring(7) === surah.nomor.toString()
+                        ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
+                        : ''
+                    } card w-full bg-base-300 shadow-xl mx-auto my-5 py-5`}
+                  >
+                    <CardListSurah
+                      nomor={surah.nomor}
+                      namaLatin={surah.namaLatin}
+                      jumlahAyat={surah.jumlahAyat}
+                      nama={surah.nama}
+                      tempatTurun={surah.tempatTurun}
+                    />
+                  </Link>
+                ))}
+            </div>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+      <Link href="/bookmarks" className="my-3">
+        <MdBookmark size={30} className="active:rotate-45 duration-500" />
+        <span className="btm-nav-label">Bookmarks</span>
+      </Link>
+      <Popover>
+        <PopoverTrigger>
+          <button type="button">
+            <IoSettingsSharp size={30} className="active:rotate-45 duration-500" />
+            <span className="btm-nav-label">Settings</span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="mb-20">
+          <PopoverArrow />
+          <PopoverBody>
+            <div className="flex justify-between">
+              Switch Theme
+              <SwitchTheme />
+            </div>
+            <div className="flex justify-between my-5">
+              Focus Mode
+              <SwitchLang />
+            </div>
+            <div className="flex justify-between">
+              Font Size
+              <SelectFontSize />
+            </div>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }
 
-export default BottomNav
+export default BottomNav;

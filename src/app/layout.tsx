@@ -13,6 +13,7 @@ import NavMobile from '@/components/navigation/NavMobile';
 import { Toaster } from 'react-hot-toast';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
+import FontSizeProvider from '@/context/FontSize';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -46,19 +47,21 @@ export default async function RootLayout({
       <body className={`bg-base-100 ${inter.className}`}>
         <NextAuthProvider>
           <StoreProvider>
-            <LanguageProvider>
-              <OpenSurahProvider>
-                <ThemeProvider>
-                  <ChakraProvider>
-                    <NextTopLoader color="#FEB714" height={4} showSpinner={false} />
-                    <Toaster />
-                    <Navbar session={session} />
-                    <NavMobile session={ session } />
-                    {children}
-                  </ChakraProvider>
-                </ThemeProvider>
-              </OpenSurahProvider>
-            </LanguageProvider>
+            <FontSizeProvider>
+              <LanguageProvider>
+                <OpenSurahProvider>
+                  <ThemeProvider>
+                    <ChakraProvider>
+                      <NextTopLoader color="#FEB714" height={4} showSpinner={false} />
+                      <Toaster />
+                      <Navbar session={session} />
+                      <NavMobile session={session} />
+                      {children}
+                    </ChakraProvider>
+                  </ThemeProvider>
+                </OpenSurahProvider>
+              </LanguageProvider>
+            </FontSizeProvider>
           </StoreProvider>
         </NextAuthProvider>
       </body>

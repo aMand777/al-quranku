@@ -11,6 +11,16 @@ import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 import { MdBookmark } from 'react-icons/md';
 import { signOut } from 'next-auth/react';
 import { User } from '@/interface';
+import { IoSettingsSharp } from 'react-icons/io5';
+import SwitchLang from '@/components/toggle/SwitchLang';
+import SelectFontSize from '@/components/select/FontSize';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+} from '@chakra-ui/react';
 
 interface NavbarProps {
   session: User | null;
@@ -30,8 +40,7 @@ function Navbar({ session }: NavbarProps) {
     const querySearch = event.target.value.toLowerCase();
     const result = allSurah?.data.filter(
       (surah: Surah) =>
-        surah.namaLatin.toLowerCase().includes(querySearch) ||
-        surah.nomor === (Number(querySearch)),
+        surah.namaLatin.toLowerCase().includes(querySearch) || surah.nomor === Number(querySearch),
     );
     setSearchResult(result);
   };
@@ -59,22 +68,46 @@ function Navbar({ session }: NavbarProps) {
 
   return (
     <div className="navbar sticky top-0 bg-primary z-50 hidden md:flex">
-      <div className="flex-1 text-black">
+      <div className="flex-1 gap-3 text-black">
         <Link href="/surah/1" className="text-2xl font-bold cursor-pointer">
           al-quranku
         </Link>
+        <Image src='/icon-512.png' alt='icon' width={40} height={40}  />
       </div>
-      <div className="flex w-1/4 gap-5 mx-5 text-black justify-end items-center">
+      <div className="flex w-1/4 gap-5 mx-5 justify-end items-center">
         <Link
+          data-tip="Bookmarks"
           className={`${
             pathname.includes('bookmarks') ? 'text-secondary' : ''
-          } flex items-center text-base font-semibold text-black mx-5`}
+          } tooltip tooltip-bottom flex items-center text-base font-semibold  mx-5`}
           href="/bookmarks"
         >
           <MdBookmark size={30} />
-          Bookmarks
         </Link>
-        <SwitchTheme size="10" />
+        <Popover>
+        <PopoverTrigger>
+          <button type="button">
+            <IoSettingsSharp size={30} className="active:rotate-90 duration-500" />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="mt-1">
+          <PopoverArrow />
+          <PopoverBody>
+            <div className="flex justify-between">
+              Switch Theme
+              <SwitchTheme />
+            </div>
+            <div className="flex justify-between my-5">
+              Focus Mode
+              <SwitchLang />
+            </div>
+            <div className="flex justify-between">
+              Font Size
+              <SelectFontSize />
+            </div>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
       </div>
       <div className="flex-none gap-3">
         <div ref={searchContainerRef} className="form-control relative">

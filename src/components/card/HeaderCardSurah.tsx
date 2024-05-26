@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { DetailSurah } from '@/interface';
 import IconNumber from '@/components/card/IconNumber';
 import InfoDetailSurah from '../popover/InfoDetailSurah';
-import SwitchLang from '../toggle/SwitchLang';
 import AudioPlayer from '@/components/audio/AudioPlayer';
 
 function HeaderCardSurah({ detailSurah }: {detailSurah: DetailSurah}) {
@@ -29,7 +28,6 @@ function HeaderCardSurah({ detailSurah }: {detailSurah: DetailSurah}) {
             </span>
           </h2>
           <InfoDetailSurah detailSurah={detailSurah} />
-          <SwitchLang />
         </div>
         <div className="flex items-center">
           <label htmlFor="gotoAyat" className="text-base md:text-lg text-black mr-1">Ayat:</label>
