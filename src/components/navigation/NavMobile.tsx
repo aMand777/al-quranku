@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { FaUserCircle } from 'react-icons/fa';
 import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
 import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 
 interface NavbarProps {
   session: User | null;
@@ -55,7 +56,7 @@ function NavMobile({ session }: NavbarProps) {
 
   return (
     <div className="navbar bg-primary flex md:hidden justify-between">
-      <div ref={searchContainerRef} className="form-control relative">
+      <div ref={searchContainerRef} className="form-control relative flex flex-row">
         <input
           onFocus={() => setInputFocused(true)}
           value={value}
@@ -81,6 +82,9 @@ function NavMobile({ session }: NavbarProps) {
             )}
           </div>
         )}
+      <Link href='/surah/1'>
+        <Image src='/icon-512.png' alt='icon' width={40} height={40}  />
+      </Link>
       </div>
       <div className="flex gap-3">
         <div className="dropdown dropdown-end">

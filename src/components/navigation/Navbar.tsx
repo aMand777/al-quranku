@@ -68,10 +68,11 @@ function Navbar({ session }: NavbarProps) {
 
   return (
     <div className="navbar sticky top-0 bg-primary z-50 hidden md:flex">
-      <div className="flex-1 text-black">
+      <div className="flex-1 gap-3 text-black">
         <Link href="/surah/1" className="text-2xl font-bold cursor-pointer">
           al-quranku
         </Link>
+        <Image src='/icon-512.png' alt='icon' width={40} height={40}  />
       </div>
       <div className="flex w-1/4 gap-5 mx-5 justify-end items-center">
         <Link
