@@ -7,7 +7,7 @@ import SwitchLang from '@/components/toggle/SwitchLang';
 import SelectFontSize from '@/components/select/FontSize';
 import Link from 'next/link';
 import { AllSurah } from '@/interface';
-import CardListSurah from '../card/CardListSurah';
+import CardListSurah from '@/components/card/CardListSurah';
 import { usePathname } from 'next/navigation';
 import { TbCardsFilled } from 'react-icons/tb';
 import {
@@ -35,7 +35,7 @@ function BottomNav({ data }: BottomNavProps) {
         </PopoverTrigger>
         <PopoverContent className="mb-[100vh]">
           <PopoverBody className="w-screen h-screen bg-base-100 -mb-20">
-            <div className="w-full h-full overflow-auto pt-32 p-2">
+            <div className="w-full h-full overflow-auto p-2 pt-44">
               {data.length > 0 &&
                 data.map((surah) => (
                   <Link
