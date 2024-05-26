@@ -20,7 +20,7 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
   }, [detailSurah?.namaLatin]);
 
   return (
-    <div className={`mb-16 md:mb-0 ${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-auto scroll-smooth`}>
+    <div className={`mb-16 md:mb-0 ${isOpenSurah ? 'w-full md:w-2/3' : 'w-full'} overflow-auto scroll-smooth -z-50`}>
       <span
         className="hidden md:block tooltip tooltip-right absolute z-50 text-primary cursor-pointer"
         data-tip={isOpenSurah ? 'Close list' : 'Open list'}
@@ -32,7 +32,9 @@ function Surah({ detailSurah, tafsirSurah }: SurahProps) {
           <MdKeyboardDoubleArrowRight size={30} />
         )}
       </span>
-      <HeaderCardSurah detailSurah={detailSurah} />
+      <div className='sticky top-0 z-0'>
+        <HeaderCardSurah detailSurah={detailSurah} />
+      </div>
       {detailSurah?.ayat.length > 0 ? (
         detailSurah?.ayat.map((ayat: Ayat) => (
           <CardSurah

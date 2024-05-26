@@ -27,8 +27,7 @@ function NavMobile({ session }: NavbarProps) {
     const querySearch = event.target.value.toLowerCase();
     const result = allSurah?.data.filter(
       (surah: Surah) =>
-        surah.namaLatin.toLowerCase().includes(querySearch) ||
-        surah.nomor === (Number(querySearch)),
+        surah.namaLatin.toLowerCase().includes(querySearch) || surah.nomor === Number(querySearch),
     );
     setSearchResult(result);
   };
@@ -82,9 +81,9 @@ function NavMobile({ session }: NavbarProps) {
             )}
           </div>
         )}
-      <Link href='/surah/1'>
-        <Image src='/icon-512.png' alt='icon' width={40} height={40}  />
-      </Link>
+        <Link href="/surah/1">
+          <Image src="/icon-512.png" alt="icon" width={40} height={40} />
+        </Link>
       </div>
       <div className="flex gap-3">
         <div className="dropdown dropdown-end">
