@@ -67,7 +67,7 @@ function Navbar({ session }: NavbarProps) {
   }, []);
 
   return (
-    <div className="navbar sticky top-0 bg-primary z-50 hidden md:flex">
+    <div className="navbar sticky top-0 bg-primary z-40 hidden md:flex">
       <div className="flex-1 gap-3 text-black">
         <Link href="/surah/1" className="text-2xl font-bold cursor-pointer">
           al-quranku

@@ -54,7 +54,7 @@ function NavMobile({ session }: NavbarProps) {
   }, []);
 
   return (
-    <div className="navbar bg-primary flex md:hidden justify-between">
+    <div className="navbar sticky top-0 bg-primary flex md:hidden justify-between z-40">
       <div ref={searchContainerRef} className="form-control relative flex flex-row">
         <input
           onFocus={() => setInputFocused(true)}
