@@ -24,6 +24,7 @@ interface BottomNavProps {
 
 function BottomNav({ data }: BottomNavProps) {
   const pathname = usePathname();
+
   return (
     <div className="btm-nav md:hidden">
       <Popover>
