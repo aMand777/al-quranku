@@ -68,11 +68,8 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
   };
 
   return (
-    <>
-      <div
-        id={`ayat-${nomorAyat.toString()}`}
-        className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3 -z-50"
-      >
+    <div id={`ayat-${nomorAyat.toString()}`}>
+      <div className="card w-11/12 bg-base-300 shadow-xl mx-auto my-5 p-3 -z-50">
         <div
           dir="rtl"
           className={`${
@@ -124,7 +121,7 @@ function CardSurah({ teksArab, arti, nomorAyat, tafsirSurah, namaLatin, audio }:
         isOpen={isOpen}
         onClose={onClose}
       />
-    </>
+    </div>
   );
 }
 
