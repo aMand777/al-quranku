@@ -16,7 +16,7 @@ function ListSurah({ data }: ListSurahProps) {
 
   return (
     <div
-      className={`hidden bg-base-100 md:block transition overflow-auto duration-500 border-2 border-base-300 ${
+      className={`hidden bg-base-100 md:block transition overflow-auto duration-500 border-2 border-base-300 scroll-smooth ${
         isOpenSurah ? 'w-1/3 translate-x-0' : '-translate-x-full'
       }`}
     >
@@ -24,6 +24,7 @@ function ListSurah({ data }: ListSurahProps) {
         {data.length > 1 && (
           data.map((surah: Surah) => (
             <Link
+              id={surah.namaLatin}
               key={surah.nomor}
               href={`/surah/${surah.nomor}`}
               className={`${

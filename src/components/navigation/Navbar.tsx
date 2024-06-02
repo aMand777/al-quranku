@@ -45,7 +45,7 @@ function Navbar({ session }: NavbarProps) {
     setSearchResult(result);
   };
   const handleClickSurah = (nomorSurah: string, namaLatin: string) => {
-    router.push(`/surah/${nomorSurah}`);
+    router.push(`/surah/${nomorSurah}#${namaLatin}`);
     setInputFocused(false);
     setValue(namaLatin);
   };
