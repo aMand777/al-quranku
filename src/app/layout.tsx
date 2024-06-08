@@ -35,12 +35,20 @@ export const metadata: Metadata = {
   },
 };
 
+async function getAllSurah() {
+  const res = await fetch(`${process.env.BASE_API_URL}/surat`);
+  const allSurah = await res.json();
+
+  return allSurah;
+}
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(options);
+  const allSurah = await getAllSurah();
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -54,8 +62,8 @@ export default async function RootLayout({
                     <ChakraProvider>
                       <NextTopLoader color="#FEB714" height={4} showSpinner={false} />
                       <Toaster />
-                      <Navbar session={session} />
-                      <NavMobile session={session} />
+                      <Navbar session={session} allSurah={allSurah?.data} />
+                      <NavMobile session={session} allSurah={allSurah?.data} />
                       {children}
                     </ChakraProvider>
                   </ThemeProvider>
