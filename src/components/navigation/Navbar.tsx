@@ -7,7 +7,6 @@ import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
 import { Surah } from '@/interface';
 import SwitchTheme from '@/components/toggle/SwitchTheme';
-import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 import { MdBookmark } from 'react-icons/md';
 import { signOut } from 'next-auth/react';
 import { User } from '@/interface';
@@ -24,11 +23,11 @@ import {
 
 interface NavbarProps {
   session: User | null;
+  allSurah: Surah[];
 }
 
-function Navbar({ session }: NavbarProps) {
+function Navbar({ session, allSurah }: NavbarProps) {
   const pathname = usePathname();
-  const { data: allSurah } = useGetAllSurahQuery(null);
   const router = useRouter();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
@@ -38,7 +37,7 @@ function Navbar({ session }: NavbarProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     const querySearch = event.target.value.toLowerCase();
-    const result = allSurah?.data.filter(
+    const result = allSurah.filter(
       (surah: Surah) =>
         surah.namaLatin.toLowerCase().includes(querySearch) || surah.nomor === Number(querySearch),
     );

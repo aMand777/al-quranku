@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Surah } from '@/interface';
-import { useGetAllSurahQuery } from '@/redux/services/getAllSurah';
 import { User } from '@/interface';
 import Image from 'next/image';
 import { FaUserCircle } from 'react-icons/fa';
@@ -12,11 +11,11 @@ import Link from 'next/link';
 
 interface NavbarProps {
   session: User | null;
+  allSurah: Surah[];
 }
 
-function NavMobile({ session }: NavbarProps) {
+function NavMobile({ session, allSurah }: NavbarProps) {
   const router = useRouter();
-  const { data: allSurah } = useGetAllSurahQuery(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<Surah[]>([]);
@@ -25,7 +24,7 @@ function NavMobile({ session }: NavbarProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     const querySearch = event.target.value.toLowerCase();
-    const result = allSurah?.data.filter(
+    const result = allSurah?.filter(
       (surah: Surah) =>
         surah.namaLatin.toLowerCase().includes(querySearch) || surah.nomor === Number(querySearch),
     );
