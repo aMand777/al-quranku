@@ -36,7 +36,7 @@ function BottomNav({ data }: BottomNavProps) {
         </PopoverTrigger>
         <PopoverContent className="mb-[100vh]">
           <PopoverBody className="w-screen h-screen bg-base-100 -mb-20 z-50">
-            <div className="w-full h-full overflow-auto p-2 pt-44">
+            <div className="w-full h-full overflow-auto p-2 pt-44 scroll-smooth">
               {data.length > 0 &&
                 data.map((surah) => (
                   <Link
