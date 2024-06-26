@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/bookmarks/']
     },
-    sitemap: 'https://al-quranku-v1.vercel.app/sitemap.ts',
+    sitemap: 'https://al-quranku-v1.vercel.app/sitemap.xml',
   };
 }
